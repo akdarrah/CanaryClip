@@ -19,6 +19,16 @@ class SchematicsController < ApplicationController
     end
   end
 
+  def download
+    @schematic = Schematic.find_by_permalink(params[:id])
+
+    if @schematic.present?
+      send_file @schematic.file.path
+    else
+      render :nothing => true, :status => :not_found
+    end
+  end
+
   private
 
   def create_params
