@@ -21,6 +21,11 @@ class Schematic < ActiveRecord::Base
   after_save :delete_temporary_file
   after_create :set_permalink
 
+  def analysis
+    data = NBTFile.load(File.read(file.path)).last
+    data.slice("Width", "Length", "Height")
+  end
+
   def to_param
     permalink
   end
