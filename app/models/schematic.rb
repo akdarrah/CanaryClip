@@ -1,5 +1,6 @@
 class Schematic < ActiveRecord::Base
   belongs_to :profile
+  has_many :images, dependent: :destroy
 
   has_attached_file :file
 
