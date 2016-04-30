@@ -26,18 +26,6 @@ class Schematic < ActiveRecord::Base
     data.slice("Width", "Length", "Height")
   end
 
-  # http://stackoverflow.com/questions/18184848/calculate-pitch-and-yaw-between-two-unknown-points
-  def self.camera_pitch_and_yaw(block_coordinate, camera_coordinate)
-    dX = block_coordinate[:x] - camera_coordinate[:x]
-    dY = block_coordinate[:y] - camera_coordinate[:y]
-    dZ = block_coordinate[:z] - camera_coordinate[:z]
-
-    {
-      yaw:   Math.atan2(dZ, dX),
-      pitch: Math.atan2(Math.sqrt(dZ * dZ + dX * dX), dY) + Math::PI
-    }
-  end
-
   def to_param
     permalink
   end
@@ -49,6 +37,10 @@ class Schematic < ActiveRecord::Base
     File.open(filepath, "r"){|file| self.file = file}
 
     self.temporary_file = filepath
+  end
+
+  def tmp_world_path
+    Rails.root + "tmp/worlds/#{id}"
   end
 
   private
