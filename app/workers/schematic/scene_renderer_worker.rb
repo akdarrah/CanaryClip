@@ -14,7 +14,7 @@ class Schematic::SceneRendererWorker
 
     config_path  = tmp_scene_path + CONFIG_FILE_NAME
     scene_config = JSON.parse(File.read(config_path))
-    scene_config["world"]["path"] = tmp_world_path
+    scene_config["world"]["path"] = tmp_world_path.to_s
     File.open(config_path, "w") do |f|
       f.write(scene_config.to_json)
     end
