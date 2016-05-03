@@ -3,7 +3,7 @@ class Schematic::CreateWorldWorker
 
   TEMPLATE_WORLD_PATH = Rails.root + "private/Blank188"
   MCE_PY_PATH         = "/Users/user/Developer/minebuild/pymclevel/mce.py"
-  DEST_COORDINATES    = "1159, 4, 744"
+  DEST_COORDINATES    = "#{SceneDirector::PASTE_X}, #{SceneDirector::PASTE_Y}, #{SceneDirector::PASTE_Z}"
 
   def perform(schematic_id)
     @schematic = Schematic.find schematic_id

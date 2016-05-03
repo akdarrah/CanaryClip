@@ -1,6 +1,10 @@
 class SceneDirector
   attr_accessor :schematic, :template_config
 
+  PASTE_X = 1159
+  PASTE_Y = 4
+  PASTE_Z = 744
+
   def initialize(schematic, template_config)
     self.schematic       = schematic
     self.template_config = template_config
