@@ -20,5 +20,7 @@ class Schematic::SceneRendererWorker
     File.open(config_path, "w"){|f| f.write(scene_director.to_json)}
     system "java -jar #{CHUNKY_LAUNCHER_PATH} -scene-dir #{tmp_scene_path} -render Blank188"
     Image.create!(schematic: @schematic, file: File.open(image_path))
+  ensure
+    FileUtils.rm_r tmp_scene_path
   end
 end
