@@ -34,9 +34,16 @@ class SceneDirector
       :z => (PASTE_Z - CAMERA_DISTANCE)
     }
 
+    optimistic_view_height = CAMERA_Y + CAMERA_VIEW_DELTA
+    focus_height = if optimistic_view_height < @schematic.analysis["Height"]
+                     optimistic_view_height
+                   else
+                     @schematic.analysis["Height"]
+                   end
+
     focus_coordinate = {
       :x => camera_coordinate[:x],
-      :y => CAMERA_Y + CAMERA_VIEW_DELTA,
+      :y => focus_height,
       :z => PASTE_Z
     }
 
