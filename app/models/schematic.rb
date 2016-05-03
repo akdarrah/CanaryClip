@@ -23,8 +23,8 @@ class Schematic < ActiveRecord::Base
   after_create :set_permalink
 
   def analysis
-    data = NBTFile.load(File.read(file.path)).last
-    data.slice("Width", "Length", "Height")
+    @analysis ||= NBTFile.load(File.read(file.path)).last
+    @analysis.slice("Width", "Length", "Height")
   end
 
   def to_param

@@ -5,11 +5,16 @@ class SceneDirector
   PASTE_Y = 4
   PASTE_Z = 744
 
+  CAMERA_DISTANCE   = 10
+  CAMERA_VIEW_DELTA = 5
+  CAMERA_Y          = 6
+
   def initialize(schematic, template_config)
     self.schematic       = schematic
     self.template_config = template_config
 
     set_world_path!
+    set_camera_position_and_orientation!
   end
 
   def to_json
@@ -20,6 +25,28 @@ class SceneDirector
 
   def set_world_path!
     template_config["world"]["path"] = @schematic.tmp_world_path.to_s
+  end
+
+  def set_camera_position_and_orientation!
+    camera_coordinate = {
+      :x => PASTE_X + (@schematic.analysis['Width'] / 2),
+      :y => CAMERA_Y,
+      :z => (PASTE_Z - CAMERA_DISTANCE)
+    }
+
+    focus_coordinate = {
+      :x => camera_coordinate[:x],
+      :y => CAMERA_Y + CAMERA_VIEW_DELTA,
+      :z => PASTE_Z
+    }
+
+    pitch_and_yaw = camera_pitch_and_yaw(focus_coordinate, camera_coordinate)
+
+    template_config['camera']['position']['x']        = camera_coordinate[:x]
+    template_config['camera']['position']['y']        = camera_coordinate[:y]
+    template_config['camera']['position']['z']        = camera_coordinate[:z]
+    template_config['camera']['orientation']['pitch'] = pitch_and_yaw[:pitch]
+    template_config['camera']['orientation']['yaw']   = pitch_and_yaw[:yaw]
   end
 
   # http://stackoverflow.com/questions/18184848/calculate-pitch-and-yaw-between-two-unknown-points
