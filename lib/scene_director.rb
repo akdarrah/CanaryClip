@@ -28,26 +28,10 @@ class SceneDirector
   end
 
   def set_camera_position_and_orientation!
-    camera_coordinate = {
-      :x => PASTE_X + (@schematic.analysis['Width'] / 2),
-      :y => CAMERA_Y,
-      :z => (PASTE_Z - CAMERA_DISTANCE)
-    }
-
-    optimistic_view_height = CAMERA_Y + CAMERA_VIEW_DELTA
-    focus_height = if optimistic_view_height < @schematic.analysis["Height"]
-                     optimistic_view_height
-                   else
-                     @schematic.analysis["Height"]
-                   end
-
-    focus_coordinate = {
-      :x => camera_coordinate[:x],
-      :y => focus_height,
-      :z => PASTE_Z
-    }
-
-    pitch_and_yaw = camera_pitch_and_yaw(focus_coordinate, camera_coordinate)
+    camera_angles     = CameraAngles::PlayerFront.new(@schematic).camera_and_focus_coordinates
+    camera_coordinate = camera_angles[:camera_coordinate]
+    focus_coordinate  = camera_angles[:focus_coordinate]
+    pitch_and_yaw     = camera_pitch_and_yaw(focus_coordinate, camera_coordinate)
 
     template_config['camera']['position']['x']        = camera_coordinate[:x]
     template_config['camera']['position']['y']        = camera_coordinate[:y]
