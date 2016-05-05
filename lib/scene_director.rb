@@ -28,7 +28,7 @@ class SceneDirector
   end
 
   def set_camera_position_and_orientation!
-    camera_angles     = CameraAngles::PlayerRight.new(@schematic).camera_and_focus_coordinates
+    camera_angles     = CameraAngles::SkyLeft.new(@schematic).camera_and_focus_coordinates
     camera_coordinate = camera_angles[:camera_coordinate]
     focus_coordinate  = camera_angles[:focus_coordinate]
     pitch_and_yaw     = camera_pitch_and_yaw(focus_coordinate, camera_coordinate)
