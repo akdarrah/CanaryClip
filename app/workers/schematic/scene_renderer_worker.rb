@@ -4,7 +4,7 @@ class Schematic::SceneRendererWorker
   TEMPLATE_SCENE_PATH  = Rails.root + "private/scene"
   CHUNKY_LAUNCHER_PATH = "/Users/user/Desktop/ChunkyLauncher.jar"
   CONFIG_FILE_NAME     = "Blank188.json"
-  IMAGE_FILE_NAME      = "Blank188-100.png"
+  IMAGE_FILE_NAME      = "Blank188-30.png"
 
   def perform(schematic_id)
     @schematic     = Schematic.find schematic_id

@@ -8,7 +8,7 @@
   "outputMode": "PNG",
   "renderTime": 277,
   "spp": 0,
-  "sppTarget": 100,
+  "sppTarget": 30,
   "rayDepth": 5,
   "pathTrace": false,
   "dumpFrequency": 500,
@@ -86,7 +86,7 @@
     ]
   },
   "cameraPresets": {
-    
+
   },
   "chunkList": [
     [
