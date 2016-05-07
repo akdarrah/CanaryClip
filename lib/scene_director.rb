@@ -5,10 +5,6 @@ class SceneDirector
   PASTE_Y = 4
   PASTE_Z = 744
 
-  CAMERA_DISTANCE   = 10
-  CAMERA_VIEW_DELTA = 5
-  CAMERA_Y          = 6
-
   def initialize(schematic, template_config)
     self.schematic       = schematic
     self.template_config = template_config
@@ -28,7 +24,7 @@ class SceneDirector
   end
 
   def set_camera_position_and_orientation!
-    camera_angles     = CameraAngles::TopDown.new(@schematic).camera_and_focus_coordinates
+    camera_angles     = CameraAngles::SkyRight.new(@schematic).camera_and_focus_coordinates
     camera_coordinate = camera_angles[:camera_coordinate]
     focus_coordinate  = camera_angles[:focus_coordinate]
     pitch_and_yaw     = camera_pitch_and_yaw(focus_coordinate, camera_coordinate)
