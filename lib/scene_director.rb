@@ -24,27 +24,12 @@ class SceneDirector
   end
 
   def set_camera_position_and_orientation!
-    camera_angles     = CameraAngles::SkyRight.new(@schematic).camera_and_focus_coordinates
-    camera_coordinate = camera_angles[:camera_coordinate]
-    focus_coordinate  = camera_angles[:focus_coordinate]
-    pitch_and_yaw     = camera_pitch_and_yaw(focus_coordinate, camera_coordinate)
+    camera = CameraAngles::SkyRight.new(@schematic).camera
 
-    template_config['camera']['position']['x']        = camera_coordinate[:x]
-    template_config['camera']['position']['y']        = camera_coordinate[:y]
-    template_config['camera']['position']['z']        = camera_coordinate[:z]
-    template_config['camera']['orientation']['pitch'] = pitch_and_yaw[:pitch]
-    template_config['camera']['orientation']['yaw']   = pitch_and_yaw[:yaw]
-  end
-
-  # http://stackoverflow.com/questions/18184848/calculate-pitch-and-yaw-between-two-unknown-points
-  def camera_pitch_and_yaw(block_coordinate, camera_coordinate)
-    dX = block_coordinate[:x] - camera_coordinate[:x]
-    dY = block_coordinate[:y] - camera_coordinate[:y]
-    dZ = block_coordinate[:z] - camera_coordinate[:z]
-
-    {
-      yaw:   Math.atan2(dZ, dX),
-      pitch: Math.atan2(Math.sqrt(dZ * dZ + dX * dX), dY) + Math::PI
-    }
+    template_config['camera']['position']['x']        = camera[:x]
+    template_config['camera']['position']['y']        = camera[:y]
+    template_config['camera']['position']['z']        = camera[:z]
+    template_config['camera']['orientation']['pitch'] = camera[:pitch]
+    template_config['camera']['orientation']['yaw']   = camera[:yaw]
   end
 end

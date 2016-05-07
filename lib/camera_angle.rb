@@ -19,7 +19,7 @@ class CameraAngle
     calculate_schematic_positions
   end
 
-  def camera_and_focus_coordinates
+  def camera
     raise NotImplementedError
   end
 
@@ -58,6 +58,23 @@ class CameraAngle
       else
         optimistic_sky_cam_y
       end
+  end
+
+  # http://stackoverflow.com/questions/18184848/calculate-pitch-and-yaw-between-two-unknown-points
+  def pitch(point1, point2)
+    dX = point1[:x] - point2[:x]
+    dY = point1[:y] - point2[:y]
+    dZ = point1[:z] - point2[:z]
+
+    Math.atan2(Math.sqrt(dZ * dZ + dX * dX), dY) + Math::PI
+  end
+
+  def yaw(point1, point2)
+    dX = point1[:x] - point2[:x]
+    dY = point1[:y] - point2[:y]
+    dZ = point1[:z] - point2[:z]
+
+    Math.atan2(dZ, dX)
   end
 
 end

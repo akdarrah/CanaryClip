@@ -1,16 +1,23 @@
 class CameraAngles::SkyFront < CameraAngle
-  def camera_and_focus_coordinates
+  def camera
+    camera_coordinate = {
+      :x => middle_x,
+      :y => sky_cam_height,
+      :z => close_z - CAMERA_DISTANCE_FROM_SCHEMATIC
+    }
+
+    focus_coordinate = {
+      :x => middle_x,
+      :y => sky_cam_y,
+      :z => close_z
+    }
+
     {
-      :focus_coordinate  => {
-        :x => middle_x,
-        :y => sky_cam_y,
-        :z => close_z
-      },
-      :camera_coordinate => {
-        :x => middle_x,
-        :y => sky_cam_height,
-        :z => close_z - CAMERA_DISTANCE_FROM_SCHEMATIC
-      }
+      :x     => camera_coordinate[:x],
+      :y     => camera_coordinate[:y],
+      :z     => camera_coordinate[:z],
+      :pitch => pitch(focus_coordinate, camera_coordinate),
+      :yaw   => yaw(focus_coordinate, camera_coordinate)
     }
   end
 end

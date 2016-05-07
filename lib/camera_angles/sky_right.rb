@@ -1,5 +1,5 @@
 class CameraAngles::SkyRight < CameraAngle
-  def camera_and_focus_coordinates
+  def camera
     camera_coordinate = {
       :x => right_x - CAMERA_DISTANCE_FROM_SCHEMATIC,
       :y => sky_cam_height,
@@ -12,10 +12,12 @@ class CameraAngles::SkyRight < CameraAngle
       :z => middle_z
     }
 
-    # Reversed for left/right axis
     {
-      :focus_coordinate  => camera_coordinate,
-      :camera_coordinate => focus_coordinate
+      :x     => camera_coordinate[:x],
+      :y     => camera_coordinate[:y],
+      :z     => camera_coordinate[:z],
+      :pitch => pitch(camera_coordinate, focus_coordinate),
+      :yaw   => yaw(camera_coordinate, focus_coordinate)
     }
   end
 end
