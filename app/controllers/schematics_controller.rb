@@ -12,6 +12,7 @@ class SchematicsController < ApplicationController
 
     respond_to do |format|
       if @schematic.save
+        @schematic.create_world!
         format.text { render text: @schematic.permalink, status: :ok }
       else
         format.text { render nothing: true, status: :unprocessable_entity }

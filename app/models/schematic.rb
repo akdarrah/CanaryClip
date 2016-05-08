@@ -19,8 +19,25 @@ class Schematic < ActiveRecord::Base
   attr_accessor :temporary_file
 
   before_create :sync_name_to_file
-  after_save :delete_temporary_file
+  after_create :delete_temporary_file
   after_create :set_permalink
+
+  state_machine :state, :initial => :new do
+    before_transition :new => :creating_world, :do => :schedule_world_creation
+    before_transition :creating_world => :rendering, :do => :schedule_scene_renderings
+
+    event :create_world do
+      transition :new => :creating_world
+    end
+
+    event :schedule_renders do
+      transition :creating_world => :rendering
+    end
+
+    event :publish do
+      transition :rendering => :published
+    end
+  end
 
   def analysis
     @analysis ||= NBTFile.load(File.read(file.path)).last
@@ -60,6 +77,16 @@ class Schematic < ActiveRecord::Base
   # an id to generate the hashid
   def set_permalink
     update_column :permalink, HASHIDS.encode(id)
+  end
+
+  def schedule_world_creation
+    Schematic::CreateWorldWorker.perform_async(id)
+  end
+
+  def schedule_scene_renderings
+    CameraAngle::AVAILABLE.each do |camera_angle|
+      Schematic::SceneRendererWorker.perform_async(id, camera_angle)
+    end
   end
 
 end
