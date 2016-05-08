@@ -73,6 +73,10 @@ class Schematic < ActiveRecord::Base
     end
   end
 
+  def delete_tmp_world
+    FileUtils.rm_r tmp_world_path
+  end
+
   # This has to be in an after_create since we need
   # an id to generate the hashid
   def set_permalink
