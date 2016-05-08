@@ -8,7 +8,7 @@ class Schematic::SceneRendererWorker
 
   def perform(schematic_id, camera_angle_sym)
     @schematic     = Schematic.find schematic_id
-    tmp_scene_path = Rails.root + "tmp/scenes/#{@schematic.id}"
+    tmp_scene_path = Rails.root + "tmp/scenes/#{@schematic.id}-#{camera_angle_sym}"
 
     FileUtils.cp_r TEMPLATE_SCENE_PATH, tmp_scene_path
 
