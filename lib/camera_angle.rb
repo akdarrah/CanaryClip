@@ -16,7 +16,7 @@ class CameraAngle
   attr_accessor :right_x, :middle_x, :left_x
   attr_accessor :bottom_y, :middle_y, :top_y
   attr_accessor :close_z, :middle_z, :far_z
-  attr_accessor :player_pov_y, :sky_cam_height, :sky_cam_y
+  attr_accessor :player_pov_y, :sky_cam_height
 
   def initialize(schematic)
     self.schematic = schematic
@@ -44,7 +44,6 @@ class CameraAngle
     self.far_z    = SceneDirector::PASTE_Z + @schematic.analysis['Length']
 
     optimistic_player_pov_y = PLAYER_POV_HEIGHT + CAMERA_DELTA
-    optimistic_sky_cam_y    = @schematic.analysis["Height"] - CAMERA_DELTA
 
     self.player_pov_y = if optimistic_player_pov_y < @schematic.analysis["Height"]
         optimistic_player_pov_y
@@ -56,13 +55,7 @@ class CameraAngle
         MIN_SKY_POV
       else
         @schematic.analysis["Height"]
-      end
-
-    self.sky_cam_y = if optimistic_sky_cam_y < bottom_y
-        @schematic.analysis["Height"]
-      else
-        optimistic_sky_cam_y
-      end
+      end * 0.65
   end
 
   # http://stackoverflow.com/questions/18184848/calculate-pitch-and-yaw-between-two-unknown-points

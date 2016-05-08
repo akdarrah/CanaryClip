@@ -8,7 +8,7 @@ class CameraAngles::SkyFront < CameraAngle
 
     focus_coordinate = {
       :x => middle_x,
-      :y => sky_cam_y,
+      :y => middle_y,
       :z => close_z
     }
 
