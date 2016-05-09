@@ -13,6 +13,7 @@ gem 'nbtfile'
 gem 'sidekiq'
 gem 'sinatra', '>= 1.3.0', :require => nil
 gem 'state_machine'
+gem 'jquery-rails'
 
 group :development do
   gem "better_errors"

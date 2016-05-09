@@ -1,0 +1,11 @@
+!!! Strict
+%html{ xmlns: 'http://www.w3.org/1999/xhtml' }
+  %head
+    %title Minebuild
+    = stylesheet_link_tag 'application', media: 'all'
+    = csrf_meta_tags
+    = yield :head
+  %body
+    = yield
+    = javascript_include_tag "application"
+    = yield :script

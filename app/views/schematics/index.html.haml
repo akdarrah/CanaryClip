@@ -1,0 +1,14 @@
+%table
+  %thead
+    %tr
+      %th Name
+      %th Permalink
+      %th State
+      %th Render Count
+  %tbody
+    - @schematics.all.each do |schematic|
+      %tr
+        %td= link_to schematic.name, schematic_path(schematic)
+        %td= schematic.permalink
+        %td= schematic.state
+        %td= schematic.renders.count

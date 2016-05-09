@@ -4,6 +4,14 @@ class SchematicsController < ApplicationController
   # is from a legit game server...
   protect_from_forgery :only => []
 
+  def index
+    @schematics = Schematic.all
+  end
+
+  def show
+    @schematic = Schematic.find_by_permalink(params[:id])
+  end
+
   def create
     @schematic = Schematic.new(create_params)
 

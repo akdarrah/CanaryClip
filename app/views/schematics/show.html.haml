@@ -1,0 +1,6 @@
+%h1= @schematic.name
+%p= link_to "Download", download_schematic_path(@schematic)
+
+- @schematic.renders.each do |render|
+  %p= render.camera_angle
+  = image_tag(render.file.url)

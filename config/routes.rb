@@ -5,7 +5,9 @@ Minebuild::Application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
 
-  resources :schematics, only: [:create] do
+  root :to => 'schematics#index'
+
+  resources :schematics, only: [:index, :show, :create] do
     member do
       get :download
     end
