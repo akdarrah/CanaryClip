@@ -32,6 +32,6 @@ class Schematic::SceneRendererWorker
       @schematic.publish!
     end
   ensure
-    FileUtils.rm_r tmp_scene_path
+    FileUtils.rm_r(tmp_scene_path) rescue nil
   end
 end
