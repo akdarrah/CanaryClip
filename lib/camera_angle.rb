@@ -3,10 +3,12 @@ class CameraAngle
   # optimize the amount of the schematic that is visible.
   CAMERA_DISTANCE_FROM_SCHEMATIC = 15
 
-  AVAILABLE = [
+  PRIMARY   = 'sky_front'
+  SECONDARY = [
     'player_back', 'player_front', 'player_left', 'player_right',
-    'sky_back', 'sky_front', 'sky_left', 'sky_right', 'top_down'
+    'sky_back', 'sky_left', 'sky_right', 'top_down'
   ]
+  AVAILABLE = Array(PRIMARY) + SECONDARY
 
   CAMERA_DELTA      = 5
   PLAYER_POV_HEIGHT = 6

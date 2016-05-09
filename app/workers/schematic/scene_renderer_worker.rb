@@ -27,6 +27,10 @@ class Schematic::SceneRendererWorker
       :camera_angle      => camera_angle_sym,
       :file              => File.open(image_path)
     })
+
+    if CameraAngle::PRIMARY == camera_angle_sym
+      @schematic.publish!
+    end
   ensure
     FileUtils.rm_r tmp_scene_path
   end

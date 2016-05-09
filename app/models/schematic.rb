@@ -24,18 +24,19 @@ class Schematic < ActiveRecord::Base
 
   state_machine :state, :initial => :new do
     before_transition :new => :creating_world, :do => :schedule_world_creation
-    before_transition :creating_world => :rendering, :do => :schedule_scene_renderings
+    before_transition :creating_world => :rendering_primary_camera_angle, :do => :schedule_primary_render
+    before_transition :rendering_primary_camera_angle => :published, :do => :schedule_secondary_renderings
 
     event :create_world do
       transition :new => :creating_world
     end
 
-    event :schedule_renders do
-      transition :creating_world => :rendering
+    event :world_created do
+      transition :creating_world => :rendering_primary_camera_angle
     end
 
     event :publish do
-      transition :rendering => :published
+      transition :rendering_primary_camera_angle => :published
     end
   end
 
@@ -87,8 +88,12 @@ class Schematic < ActiveRecord::Base
     Schematic::CreateWorldWorker.perform_async(id)
   end
 
-  def schedule_scene_renderings
-    CameraAngle::AVAILABLE.each do |camera_angle|
+  def schedule_primary_render
+    Schematic::SceneRendererWorker.perform_async(id, CameraAngle::PRIMARY)
+  end
+
+  def schedule_secondary_renderings
+    CameraAngle::SECONDARY.each do |camera_angle|
       Schematic::SceneRendererWorker.perform_async(id, camera_angle)
     end
   end
