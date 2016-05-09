@@ -10,6 +10,6 @@ class Schematic::CreateWorldWorker
 
     FileUtils.cp_r TEMPLATE_WORLD_PATH, @schematic.tmp_world_path
     system "python #{MCE_PY_PATH} #{@schematic.tmp_world_path} import #{@schematic.file.path} #{DEST_COORDINATES}"
-    @schematic.schedule_renders!
+    @schematic.world_created!
   end
 end
