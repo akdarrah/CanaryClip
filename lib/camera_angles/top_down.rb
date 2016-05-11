@@ -2,7 +2,7 @@ class CameraAngles::TopDown < CameraAngle
   def camera
     camera_coordinate = {
       :x => middle_x,
-      :y => top_y + CAMERA_DISTANCE_FROM_SCHEMATIC,
+      :y => (top_y + width_or_length_distance),
       :z => middle_z
     }
 

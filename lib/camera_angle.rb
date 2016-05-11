@@ -3,10 +3,14 @@ class CameraAngle
   # optimize the amount of the schematic that is visible.
   CAMERA_DISTANCE_FROM_SCHEMATIC = 15
 
-  PRIMARY   = 'sky_front'
+  # 70 is fov angle (in degrees) from chunky
+  FOV_RADIAN = (70 * Math::PI / 180)
+
+  CAPTURE_PERCENTAGE = 0.85
+
+  PRIMARY   = 'player_front'
   SECONDARY = [
-    'player_back', 'player_front', 'player_left', 'player_right',
-    'sky_back', 'sky_left', 'sky_right', 'top_down'
+    'full_front', 'full_back', 'full_left', 'full_right', 'top_down'
   ]
   AVAILABLE = Array(PRIMARY) + SECONDARY
 
@@ -19,6 +23,7 @@ class CameraAngle
   attr_accessor :bottom_y, :middle_y, :top_y
   attr_accessor :close_z, :middle_z, :far_z
   attr_accessor :player_pov_y, :sky_cam_height
+  attr_accessor :width_or_height_distance, :length_or_height_distance, :width_or_length_distance
 
   def initialize(schematic)
     self.schematic = schematic
@@ -58,6 +63,15 @@ class CameraAngle
       else
         @schematic.analysis["Height"]
       end * 0.65
+
+    width_or_height = ([@schematic.analysis["Height"], @schematic.analysis["Width"]].max * CAPTURE_PERCENTAGE)
+    self.width_or_height_distance = (width_or_height / 2) / Math::tan(FOV_RADIAN / 2)
+
+    length_or_height = ([@schematic.analysis["Height"], @schematic.analysis["Length"]].max * CAPTURE_PERCENTAGE)
+    self.length_or_height_distance = (length_or_height / 2) / Math::tan(FOV_RADIAN / 2)
+
+    width_or_length = ([@schematic.analysis["Width"], @schematic.analysis["Length"]].max * CAPTURE_PERCENTAGE)
+    self.width_or_length_distance = (width_or_length / 2) / Math::tan(FOV_RADIAN / 2)
   end
 
   # http://stackoverflow.com/questions/18184848/calculate-pitch-and-yaw-between-two-unknown-points

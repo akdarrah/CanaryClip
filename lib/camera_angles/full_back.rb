@@ -1,14 +1,14 @@
-class CameraAngles::PlayerBack < CameraAngle
+class CameraAngles::FullBack < CameraAngle
   def camera
     camera_coordinate = {
       :x => middle_x,
-      :y => PLAYER_POV_HEIGHT,
-      :z => far_z + CAMERA_DISTANCE_FROM_SCHEMATIC
+      :y => middle_y,
+      :z => (far_z + width_or_height_distance)
     }
 
     focus_coordinate = {
       :x => middle_x,
-      :y => player_pov_y,
+      :y => middle_y,
       :z => far_z
     }
 

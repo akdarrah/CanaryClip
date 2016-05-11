@@ -1,13 +1,13 @@
-class CameraAngles::SkyLeft < CameraAngle
+class CameraAngles::FullRight < CameraAngle
   def camera
     camera_coordinate = {
-      :x => left_x + CAMERA_DISTANCE_FROM_SCHEMATIC,
-      :y => sky_cam_height,
+      :x => (right_x - length_or_height_distance),
+      :y => middle_y,
       :z => middle_z
     }
 
     focus_coordinate = {
-      :x => left_x,
+      :x => right_x,
       :y => middle_y,
       :z => middle_z
     }
