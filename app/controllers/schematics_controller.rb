@@ -46,7 +46,7 @@ class SchematicsController < ApplicationController
   end
 
   def find_or_create_character
-    @character = Character.find_or_create_by_uuid!(params[:schematic][:character_uuid])
+    @character = Character.find_or_create_by!(uuid: params[:schematic][:character_uuid])
   end
 
 end
