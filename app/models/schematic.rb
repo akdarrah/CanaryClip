@@ -1,5 +1,5 @@
 class Schematic < ActiveRecord::Base
-  belongs_to :profile
+  belongs_to :character
   has_many :renders, dependent: :destroy
 
   has_attached_file :file
@@ -12,7 +12,7 @@ class Schematic < ActiveRecord::Base
   validates_attachment_content_type :file, content_type: ['application/x-gzip', 'application/gzip']
   validates_attachment_file_name :file, :matches => [/schematic\Z/]
 
-  # validates :name, :profile, presence: true
+  validates :name, :character, presence: true
   validates :name, presence: true
   validates :permalink, uniqueness: true, allow_blank: true
 

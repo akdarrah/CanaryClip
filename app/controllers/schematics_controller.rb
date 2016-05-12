@@ -1,5 +1,7 @@
 class SchematicsController < ApplicationController
 
+  before_filter :find_or_create_character, only: [:create]
+
   # We should come up with some way of verifying this request
   # is from a legit game server...
   protect_from_forgery :only => []
@@ -14,9 +16,7 @@ class SchematicsController < ApplicationController
 
   def create
     @schematic = Schematic.new(create_params)
-
-    # TODO: Fix this...
-    @schematic.profile_id = 0
+    @schematic.character = @character
 
     respond_to do |format|
       if @schematic.save
@@ -43,6 +43,10 @@ class SchematicsController < ApplicationController
   def create_params
     params.require(:schematic)
       .permit(:raw_schematic_data, :name)
+  end
+
+  def find_or_create_character
+    @character = Character.find_or_create_by_uuid!(params[:schematic][:character_uuid])
   end
 
 end
