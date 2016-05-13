@@ -21,9 +21,9 @@ class SchematicsController < ApplicationController
     respond_to do |format|
       if @schematic.save
         @schematic.create_world!
-        format.text { render text: @schematic.permalink, status: :ok }
+        format.text { render json: ["Schematic permalink: #{@schematic.permalink}"], status: :ok }
       else
-        format.text { render nothing: true, status: :unprocessable_entity }
+        format.text { render json: ["Schematic upload failed. Please try again."], status: :ok }
       end
     end
   end
