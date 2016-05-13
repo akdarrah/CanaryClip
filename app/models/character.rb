@@ -4,7 +4,8 @@ class Character < ActiveRecord::Base
   validates :uuid, presence: true
   validates :uuid, uniqueness: true
 
-  has_attached_file :avatar
+  has_attached_file :avatar,
+    :default_url => "/assets/default_avatar.png"
   validates_attachment :avatar,
     content_type: { content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif"] }
 

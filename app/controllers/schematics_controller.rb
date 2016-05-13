@@ -46,7 +46,11 @@ class SchematicsController < ApplicationController
   end
 
   def find_or_create_character
-    @character = Character.find_or_create_by!(uuid: params[:schematic][:character_uuid])
+    character_uuid     = params[:schematic].delete(:character_uuid)
+    character_username = params[:schematic].delete(:character_username)
+
+    @character = Character.find_or_create_by!(uuid: character_uuid)
+    @character.update_column :username, character_username
   end
 
 end
