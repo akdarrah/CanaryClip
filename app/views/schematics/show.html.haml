@@ -6,6 +6,6 @@
       = "By: #{@schematic.character}"
       = image_tag @schematic.character.avatar.url
 
-    - @schematic.renders.each do |render|
+    - @schematic.renders.camera_angle_order.each do |render|
       %p= render.camera_angle
       = image_tag(render.file.url, class: 'img-fluid')

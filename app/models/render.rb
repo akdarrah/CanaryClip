@@ -8,4 +8,8 @@ class Render < ActiveRecord::Base
   has_attached_file :file
   validates_attachment_content_type :file, content_type: /\Aimage\/.*\Z/
   validates :file, attachment_presence: true
+
+  scope :camera_angle_order, (lambda do
+    order(CameraAngle::AVAILABLE.map{|angle| "renders.camera_angle = '#{angle}' DESC"}.join(', '))
+  end)
 end
