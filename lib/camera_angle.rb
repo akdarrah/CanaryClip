@@ -10,7 +10,7 @@ class CameraAngle
 
   PRIMARY   = 'player_front'
   SECONDARY = [
-    'full_front', 'full_back', 'full_left', 'full_right', 'top_down'
+    'full_front', 'full_left', 'full_right', 'full_back'
   ]
   AVAILABLE = Array(PRIMARY) + SECONDARY
 
