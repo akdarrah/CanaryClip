@@ -1,16 +1,4 @@
 .row
-  .col-xs-24
-    %table
-      %thead
-        %tr
-          %th Name
-          %th Permalink
-          %th State
-          %th Render Count
-      %tbody
-        - @schematics.all.each do |schematic|
-          %tr
-            %td= link_to schematic.name, schematic_path(schematic)
-            %td= schematic.permalink
-            %td= schematic.state
-            %td= schematic.renders.count
+  - @schematics.each do |schematic|
+    .col-xs-12.col-sm-6.col-md-3
+      = link_to image_tag(schematic.primary_render.file.url, class: 'img-responsive'), schematic_path(schematic)

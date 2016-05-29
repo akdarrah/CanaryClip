@@ -20,6 +20,8 @@ class Schematic < ActiveRecord::Base
   validates :name, presence: true
   validates :permalink, uniqueness: true, allow_blank: true
 
+  scope :published, -> { where(state: :published) }
+
   attr_accessor :temporary_file
 
   before_create :sync_name_to_file
