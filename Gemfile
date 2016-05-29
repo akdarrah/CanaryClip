@@ -4,7 +4,7 @@ gem 'rails', '4.0.11'
 
 gem 'pg'
 gem 'awesome_print', :require => false
-gem 'haml', '~> 3.1.7'
+gem 'haml', '~> 4.0.7'
 gem 'paperclip'
 gem 'uuid'
 gem "font-awesome-rails"
@@ -14,6 +14,9 @@ gem 'sidekiq'
 gem 'sinatra', '>= 1.3.0', :require => nil
 gem 'state_machine'
 gem 'jquery-rails'
+
+gem 'bootstrap-sass', '~> 3.3.6'
+gem 'sass-rails', '>= 3.2'
 
 group :development do
   gem "better_errors"
