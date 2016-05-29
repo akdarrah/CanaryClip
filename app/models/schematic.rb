@@ -21,6 +21,7 @@ class Schematic < ActiveRecord::Base
   validates :permalink, uniqueness: true, allow_blank: true
 
   scope :published, -> { where(state: :published) }
+  scope :chronological, -> { order(:created_at) }
 
   attr_accessor :temporary_file
 
@@ -29,9 +30,9 @@ class Schematic < ActiveRecord::Base
   after_create :set_permalink
 
   state_machine :state, :initial => :new do
-    before_transition :new => :creating_world, :do => :schedule_world_creation
-    before_transition :creating_world => :rendering_primary_camera_angle, :do => :schedule_primary_render
-    before_transition :rendering_primary_camera_angle => :published, :do => :schedule_secondary_renderings
+    after_transition :new => :creating_world, :do => :schedule_world_creation
+    after_transition :creating_world => :rendering_primary_camera_angle, :do => :schedule_primary_render
+    after_transition :rendering_primary_camera_angle => :published, :do => :schedule_secondary_renderings
 
     event :create_world do
       transition :new => :creating_world
