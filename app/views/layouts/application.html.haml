@@ -5,7 +5,21 @@
     = stylesheet_link_tag 'application', media: 'all'
     = csrf_meta_tags
     = yield :head
+    %link{href: 'https://fonts.googleapis.com/css?family=Lobster', rel: 'stylesheet', type: 'text/css'}
   %body
-    = yield
+    .container-fluid
+      .row.top-bar
+        .container
+          .row
+            .col-xs-24
+              .pull-left
+                .title.lobster
+                  Minebuild
+              .pull-right
+                %ul.list-inline
+                  %li= link_to 'Home', root_url
+      .row
+        .container
+          = yield
     = javascript_include_tag "application"
     = yield :script
