@@ -7,7 +7,7 @@ class SchematicsController < ApplicationController
   protect_from_forgery :only => []
 
   def index
-    @schematics = Schematic.published
+    @schematics = Schematic.published.chronological
   end
 
   def show
