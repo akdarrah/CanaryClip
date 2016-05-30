@@ -1,5 +1,6 @@
 html, body {
   padding-bottom: 25px;
+  background-image: image-url("square_bg.png")
 }
 
 .lobster {
@@ -10,6 +11,7 @@ html, body {
   border-bottom: 2px solid #AAAAAA;
   padding: 15px 15px 10px 15px;
   margin-bottom: 25px;
+  background: white;
 
   .title {
     font-size: 28px;
@@ -28,6 +30,7 @@ html, body {
 .schematic-card {
   margin-bottom: 15px;
   border: 1px solid #AAAAAA;
+  background: white;
 
   hr {
     margin: 10px 0;
