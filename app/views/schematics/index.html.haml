@@ -1,4 +1,10 @@
 .row
   - @schematics.each do |schematic|
-    .col-xs-12.col-sm-6.col-md-3.schematic-card
-      = link_to image_tag(schematic.primary_render.file.url, class: 'img-responsive'), schematic_path(schematic)
+    .col-xs-12.col-sm-6.col-md-3
+      .schematic-card
+        = link_to image_tag(schematic.primary_render.file.url, class: 'img-responsive'), schematic_path(schematic)
+        .card-info
+          = schematic.name
+          %hr
+          = image_tag(schematic.character.avatar.url, class: 'small-character-avatar')
+          = schematic.character

@@ -21,6 +21,19 @@ html, body {
   }
 }
 
+.small-character-avatar {
+  width: 30px;
+}
+
 .schematic-card {
   margin-bottom: 15px;
+  border: 1px solid #AAAAAA;
+
+  hr {
+    margin: 10px 0;
+  }
+
+  .card-info {
+    padding: 5px;
+  }
 }
