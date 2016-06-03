@@ -1,11 +1,35 @@
-.row
-  .col-xs-24
-    %h1= @schematic.name
-    %p= link_to "Download", download_schematic_path(@schematic)
-    %p
-      = "By: #{@schematic.character}"
-      = image_tag @schematic.character.avatar.url
+.row.schematic-view
+  .col-xs-9
+    .row
+      .col-xs-12
 
-    - @schematic.renders.camera_angle_order.each do |render|
-      %p= render.camera_angle
-      = image_tag(render.file.url, class: 'img-responsive')
+        #carousel-example-generic.carousel.slide{:'data-ride' => "carousel"}
+          %ol.carousel-indicators
+            - @schematic.renders.each_with_index do |render, index|
+              %li{:'data-target' => "#carousel-example-generic", :'data-slide-to' => index, :class => "#{'active' if index.zero?}"}
+
+          .carousel-inner{:role => "listbox"}
+            - @schematic.renders.each_with_index do |render, index|
+              .item{class: "#{'active' if index.zero?}"}
+                = image_tag render.file.url
+
+          %a.left.carousel-control{href: "#carousel-example-generic", role: "button", :'data-slide' => "prev"}
+            %span.glyphicon.glyphicon-chevron-left{:'aria-hidden' => "true"}
+            %span.sr-only Previous
+          %a.right.carousel-control{href: "#carousel-example-generic", role: "button", :'data-slide' => "next"}
+            %span.glyphicon.glyphicon-chevron-right{:'aria-hidden' => "true"}
+            %span.sr-only Next
+
+  .col-xs-3
+    = image_tag @schematic.primary_render.file.url, class: 'img-responsive'
+
+
+-# %h1= @schematic.name
+-# %p= link_to "Download", download_schematic_path(@schematic)
+-# %p
+-#   = "By: #{@schematic.character}"
+-#   = image_tag @schematic.character.avatar.url
+-#
+-# - @schematic.renders.camera_angle_order.each do |render|
+-#   %p= render.camera_angle
+-#   = image_tag(render.file.url, class: 'img-responsive')
