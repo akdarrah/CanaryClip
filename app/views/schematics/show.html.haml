@@ -2,7 +2,13 @@
   .col-xs-12
     .col-xs-12.white-stripe
       .row
-        .col-xs-9
+        .col-xs-12.col-md-3.col-md-push-9.right-column
+          %p
+            = image_tag(@schematic.character.avatar.url, class: 'small-character-avatar')
+            = @schematic.character
+          %hr
+          %p= link_to "Download", download_schematic_path(@schematic), class: 'btn btn-primary btn-block'
+        .col-xs-12.col-md-9.col-md-pull-3
           .row
             .col-xs-12
               #carousel-example-generic.carousel.slide{:'data-ride' => "carousel"}
@@ -21,9 +27,3 @@
                 %a.right.carousel-control{href: "#carousel-example-generic", role: "button", :'data-slide' => "next"}
                   %span.glyphicon.glyphicon-chevron-right{:'aria-hidden' => "true"}
                   %span.sr-only Next
-        .col-xs-3.right-column
-          %p
-            = image_tag(@schematic.character.avatar.url, class: 'small-character-avatar')
-            = @schematic.character
-          %hr
-          %p= link_to "Download", download_schematic_path(@schematic), class: 'btn btn-primary btn-block'
