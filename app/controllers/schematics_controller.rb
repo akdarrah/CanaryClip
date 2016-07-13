@@ -20,7 +20,7 @@ class SchematicsController < ApplicationController
 
     respond_to do |format|
       if @schematic.save
-        @schematic.create_world!
+        @schematic.collect_metadata!
         format.text { render json: ["Schematic permalink: #{@schematic.permalink}"], status: :ok }
       else
         format.text { render json: ["Schematic upload failed. Please try again."], status: :ok }

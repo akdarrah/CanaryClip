@@ -20,6 +20,10 @@ class Schematic < ActiveRecord::Base
   validates :name, presence: true
   validates :permalink, uniqueness: true, allow_blank: true
 
+  validates :width, :length, :height,
+    numericality: {greater_than_or_equal_to: 0, only_integer: true},
+    allow_blank: true
+
   scope :published, -> { where(state: :published) }
   scope :chronological, -> { order(:created_at) }
 
@@ -30,12 +34,18 @@ class Schematic < ActiveRecord::Base
   after_create :set_permalink
 
   state_machine :state, :initial => :new do
-    after_transition :new => :creating_world, :do => :schedule_world_creation
+    after_transition :new => :collecting_metadata, :do => :schedule_metadata_collection
+    after_transition :collecting_metadata => :creating_world, :do => :schedule_world_creation
     after_transition :creating_world => :rendering_primary_camera_angle, :do => :schedule_primary_render
     after_transition :rendering_primary_camera_angle => :published, :do => :schedule_secondary_renderings
 
+    event :collect_metadata do
+      transition :new => :collecting_metadata
+    end
+
+    # TODO: Validation to ensure width, length, and height present
     event :create_world do
-      transition :new => :creating_world
+      transition :collecting_metadata => :creating_world
     end
 
     event :world_created do
@@ -47,9 +57,8 @@ class Schematic < ActiveRecord::Base
     end
   end
 
-  def analysis
-    @analysis ||= NBTFile.load(File.read(file.path)).last
-    @analysis.slice("Width", "Length", "Height")
+  def nbt_file
+    @nbt_file ||= NBTFile.load(File.read(file.path)).last
   end
 
   def to_param
@@ -89,6 +98,10 @@ class Schematic < ActiveRecord::Base
   # an id to generate the hashid
   def set_permalink
     update_column :permalink, HASHIDS.encode(id)
+  end
+
+  def schedule_metadata_collection
+    Schematic::CollectMetadataWorker.perform_async(id)
   end
 
   def schedule_world_creation

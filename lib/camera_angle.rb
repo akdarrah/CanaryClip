@@ -39,38 +39,38 @@ class CameraAngle
 
   def calculate_schematic_positions
     self.right_x  = SceneDirector::PASTE_X
-    self.middle_x = SceneDirector::PASTE_X + (@schematic.analysis['Width'] / 2)
-    self.left_x   = SceneDirector::PASTE_X + @schematic.analysis['Width']
+    self.middle_x = SceneDirector::PASTE_X + (@schematic.width / 2)
+    self.left_x   = SceneDirector::PASTE_X + @schematic.width
 
     self.bottom_y = SceneDirector::PASTE_Y
-    self.middle_y = SceneDirector::PASTE_Y + (@schematic.analysis['Height'] / 2)
-    self.top_y    = SceneDirector::PASTE_Y + @schematic.analysis['Height']
+    self.middle_y = SceneDirector::PASTE_Y + (@schematic.height / 2)
+    self.top_y    = SceneDirector::PASTE_Y + @schematic.height
 
     self.close_z  = SceneDirector::PASTE_Z
-    self.middle_z = SceneDirector::PASTE_Z + (@schematic.analysis['Length'] / 2)
-    self.far_z    = SceneDirector::PASTE_Z + @schematic.analysis['Length']
+    self.middle_z = SceneDirector::PASTE_Z + (@schematic.length / 2)
+    self.far_z    = SceneDirector::PASTE_Z + @schematic.length
 
     optimistic_player_pov_y = PLAYER_POV_HEIGHT + CAMERA_DELTA
 
-    self.player_pov_y = if optimistic_player_pov_y < @schematic.analysis["Height"]
+    self.player_pov_y = if optimistic_player_pov_y < @schematic.height
         optimistic_player_pov_y
       else
-        @schematic.analysis["Height"]
+        @schematic.height
       end
 
-    self.sky_cam_height = if @schematic.analysis["Height"] < MIN_SKY_POV
+    self.sky_cam_height = if @schematic.height < MIN_SKY_POV
         MIN_SKY_POV
       else
-        @schematic.analysis["Height"]
+        @schematic.height
       end * 0.65
 
-    width_or_height = ([@schematic.analysis["Height"], @schematic.analysis["Width"]].max * CAPTURE_PERCENTAGE)
+    width_or_height = ([@schematic.height, @schematic.width].max * CAPTURE_PERCENTAGE)
     self.width_or_height_distance = (width_or_height / 2) / Math::tan(FOV_RADIAN / 2)
 
-    length_or_height = ([@schematic.analysis["Height"], @schematic.analysis["Length"]].max * CAPTURE_PERCENTAGE)
+    length_or_height = ([@schematic.height, @schematic.length].max * CAPTURE_PERCENTAGE)
     self.length_or_height_distance = (length_or_height / 2) / Math::tan(FOV_RADIAN / 2)
 
-    width_or_length = ([@schematic.analysis["Width"], @schematic.analysis["Length"]].max * CAPTURE_PERCENTAGE)
+    width_or_length = ([@schematic.width, @schematic.length].max * CAPTURE_PERCENTAGE)
     self.width_or_length_distance = (width_or_length / 2) / Math::tan(FOV_RADIAN / 2)
   end
 
