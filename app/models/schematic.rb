@@ -1,4 +1,6 @@
 class Schematic < ActiveRecord::Base
+  serialize :parsed_nbt_data, JSON
+
   belongs_to :character
 
   has_many :renders, dependent: :destroy
@@ -57,12 +59,12 @@ class Schematic < ActiveRecord::Base
     end
   end
 
-  def nbt_file
-    @nbt_file ||= NBTFile.load(File.read(file.path)).last
-  end
-
   def to_param
     permalink
+  end
+
+  def escaped_file_path
+    Shellwords.escape file.path
   end
 
   def raw_schematic_data=(data)

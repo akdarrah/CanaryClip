@@ -74,7 +74,6 @@ GEM
     mimemagic (0.3.0)
     minitest (4.7.5)
     multi_json (1.11.2)
-    nbtfile (0.2.0)
     paperclip (4.3.6)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
@@ -177,7 +176,6 @@ DEPENDENCIES
   haml (~> 4.0.7)
   hashids
   jquery-rails
-  nbtfile
   paperclip
   pg
   pry-doc

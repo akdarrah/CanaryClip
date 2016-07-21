@@ -9,7 +9,6 @@ gem 'paperclip'
 gem 'uuid'
 gem "font-awesome-rails"
 gem 'hashids'
-gem 'nbtfile'
 gem 'sidekiq'
 gem 'sinatra', '>= 1.3.0', :require => nil
 gem 'state_machine'
