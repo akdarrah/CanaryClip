@@ -63,6 +63,25 @@ class Schematic < ActiveRecord::Base
     permalink
   end
 
+  # Keep inspect sane by omitting parsed_nbt_data
+  def inspect
+    inspection = if @attributes
+      self.class.column_names.collect { |name|
+        if has_attribute?(name)
+          if name == 'parsed_nbt_data'
+            "#{name}: ..."
+          else
+            "#{name}: #{attribute_for_inspect(name)}"
+          end
+        end
+      }.compact.join(", ")
+    else
+      "not initialized"
+    end
+
+    "#<#{self.class} #{inspection}>"
+  end
+
   def escaped_file_path
     Shellwords.escape file.path
   end
