@@ -4,7 +4,7 @@ class SchematicsController < ApplicationController
 
   # We should come up with some way of verifying this request
   # is from a legit game server...
-  protect_from_forgery :only => []
+  protect_from_forgery :except => [:create, :download]
 
   def index
     @schematics = Schematic.published.chronological
