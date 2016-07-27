@@ -1,4 +1,7 @@
 class Block < ActiveRecord::Base
+  has_many :block_counts, dependent: :destroy
+  has_many :schematics, through: :block_counts
+
   validates :minecraft_id, presence: true
   validates :minecraft_id, uniqueness: true
 

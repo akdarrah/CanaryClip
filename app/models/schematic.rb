@@ -3,6 +3,9 @@ class Schematic < ActiveRecord::Base
 
   belongs_to :character
 
+  has_many :block_counts, dependent: :destroy
+  has_many :blocks, through: :block_counts
+
   has_many :renders, dependent: :destroy
   has_one :primary_render,
     -> { where(camera_angle: CameraAngle::PRIMARY) },
