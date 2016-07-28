@@ -8,6 +8,16 @@
             = @schematic.character
           %hr
           %p= link_to "Download", download_schematic_path(@schematic), class: 'btn btn-primary btn-block'
+          %p= "#{number_with_delimiter @schematic.total_block_count} blocks"
+          %table
+            %tbody
+              - @schematic.block_counts.most_used_order.each do |block_count|
+                %tr
+                  %td
+                    - if block_count.block.icon.present?
+                      = image_tag block_count.block.icon.url, class: 'block-icon'
+                  %td= block_count.block.display_name
+                  %td= number_with_delimiter block_count.count
         .col-xs-12.col-md-9.col-md-pull-3
           .row
             .col-xs-12

@@ -98,6 +98,10 @@ class Schematic < ActiveRecord::Base
     self.temporary_file = filepath
   end
 
+  def total_block_count
+    block_counts.sum(:count)
+  end
+
   def tmp_world_path
     Rails.root + "tmp/worlds/#{id}"
   end
