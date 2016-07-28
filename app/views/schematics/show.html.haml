@@ -16,7 +16,9 @@
                   %td
                     - if block_count.block.icon.present?
                       = image_tag block_count.block.icon.url, class: 'block-icon'
+                  %td &nbsp;
                   %td= block_count.block.display_name
+                  %td &nbsp;
                   %td= number_with_delimiter block_count.count
         .col-xs-12.col-md-9.col-md-pull-3
           .row
