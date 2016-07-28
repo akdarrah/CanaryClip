@@ -1,4 +1,6 @@
 class Schematic < ActiveRecord::Base
+  is_impressionable
+
   serialize :parsed_nbt_data, JSON
 
   belongs_to :character
@@ -99,6 +101,14 @@ class Schematic < ActiveRecord::Base
 
   def total_block_count
     block_counts.visible.sum(:count)
+  end
+
+  def total_show_impressions
+    impressions.where(action_name: 'show').count
+  end
+
+  def total_download_impressions
+    impressions.where(action_name: 'download').count
   end
 
   def tmp_world_path

@@ -2,6 +2,9 @@ class SchematicsController < ApplicationController
 
   before_filter :find_or_create_character, only: [:create]
 
+  before_filter :find_schematic, only: [:show, :download]
+  before_filter :log_impression, only: [:show, :download]
+
   # We should come up with some way of verifying this request
   # is from a legit game server...
   protect_from_forgery :except => [:create, :download]
@@ -11,7 +14,6 @@ class SchematicsController < ApplicationController
   end
 
   def show
-    @schematic = Schematic.find_by_permalink(params[:id])
   end
 
   def create
@@ -29,8 +31,6 @@ class SchematicsController < ApplicationController
   end
 
   def download
-    @schematic = Schematic.find_by_permalink(params[:id])
-
     if @schematic.present?
       send_file @schematic.file.path
     else
@@ -51,6 +51,16 @@ class SchematicsController < ApplicationController
 
     @character = Character.find_or_create_by!(uuid: character_uuid)
     @character.update_column :username, character_username
+  end
+
+  def find_schematic
+    @schematic = Schematic.find_by_permalink(params[:id])
+  end
+
+  def log_impression
+    if @schematic.present?
+      impressionist(@schematic)
+    end
   end
 
 end

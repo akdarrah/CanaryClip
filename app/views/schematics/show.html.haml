@@ -8,7 +8,24 @@
             = @schematic.character
           %hr
           %p= link_to "Download", download_schematic_path(@schematic), class: 'btn btn-primary btn-block'
-          %p= "#{number_with_delimiter @schematic.total_block_count} blocks"
+          %input{type: 'text', readonly: 'readonly', value: @schematic.permalink}
+          %p.small Use the command `mb load #{@schematic.permalink}` to download this schematic to your clipboard.
+          %hr
+            %dl
+              %dt Uploaded
+              %dd= @schematic.created_at
+              %dt Views
+              %dd= number_with_delimiter @schematic.total_show_impressions
+              %dt Downloads
+              %dd= number_with_delimiter @schematic.total_download_impressions
+              %dt Block Count
+              %dd= number_with_delimiter @schematic.total_block_count
+              %dt Width
+              %dd= number_with_delimiter @schematic.width
+              %dt Length
+              %dd= number_with_delimiter @schematic.length
+              %dt Height
+              %dd= number_with_delimiter @schematic.height
           %table
             %tbody
               - @schematic.block_counts.visible.most_used_order.each do |block_count|
