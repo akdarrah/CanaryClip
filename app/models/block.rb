@@ -1,4 +1,6 @@
 class Block < ActiveRecord::Base
+  INVISIBLE_MINECRAFT_IDS = [0, 95]
+
   has_many :block_counts, dependent: :destroy
   has_many :schematics, through: :block_counts
 

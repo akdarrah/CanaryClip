@@ -99,7 +99,7 @@ class Schematic < ActiveRecord::Base
   end
 
   def total_block_count
-    block_counts.sum(:count)
+    block_counts.visible.sum(:count)
   end
 
   def tmp_world_path

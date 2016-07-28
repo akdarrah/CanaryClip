@@ -7,4 +7,8 @@ class BlockCount < ActiveRecord::Base
   validates :count, numericality: {greater_than: 0, only_integer: true}
 
   scope :most_used_order, -> { order('block_counts.count desc') }
+  scope :visible, -> {
+    joins(:block)
+      .where(['blocks.minecraft_id NOT IN (?)', Block::INVISIBLE_MINECRAFT_IDS])
+  }
 end

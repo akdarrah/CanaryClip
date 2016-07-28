@@ -11,7 +11,7 @@
           %p= "#{number_with_delimiter @schematic.total_block_count} blocks"
           %table
             %tbody
-              - @schematic.block_counts.most_used_order.each do |block_count|
+              - @schematic.block_counts.visible.most_used_order.each do |block_count|
                 %tr
                   %td
                     - if block_count.block.icon.present?
