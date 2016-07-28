@@ -8,6 +8,9 @@ class Schematic < ActiveRecord::Base
   has_many :block_counts, dependent: :destroy
   has_many :blocks, through: :block_counts
 
+  has_many :tracked_downloads, dependent: :destroy
+  has_many :downloaded_by_characters, through: :tracked_downloads, source: :character
+
   has_many :renders, dependent: :destroy
   has_one :primary_render,
     -> { where(camera_angle: CameraAngle::PRIMARY) },

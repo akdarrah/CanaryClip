@@ -4,6 +4,7 @@ class SchematicsController < ApplicationController
 
   before_filter :find_schematic, only: [:show, :download]
   before_filter :log_impression, only: [:show, :download]
+  before_filter :track_downloads, only: [:download]
 
   # We should come up with some way of verifying this request
   # is from a legit game server...
@@ -60,6 +61,27 @@ class SchematicsController < ApplicationController
   def log_impression
     if @schematic.present?
       impressionist(@schematic)
+    end
+  end
+
+  # The game plugin will send character info, but the interface
+  # does not have to (think guest users).
+  # TODO: Dry with find_or_create_character
+  def track_downloads
+    character_uuid     = params[:character_uuid]
+    character_username = params[:character_username]
+
+    if character_uuid.present?
+      @character = Character.find_or_create_by!(uuid: character_uuid)
+
+      if character_username.present?
+        @character.update_column(:username, character_username)
+      end
+
+      TrackedDownload.create!(
+        :character => @character,
+        :schematic => @schematic
+      )
     end
   end
 

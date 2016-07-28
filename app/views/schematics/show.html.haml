@@ -18,6 +18,10 @@
               %dd= number_with_delimiter @schematic.total_show_impressions
               %dt Downloads
               %dd= number_with_delimiter @schematic.total_download_impressions
+              %dt Downloaded By
+              %dd
+                - @schematic.downloaded_by_characters.each do |character|
+                  = image_tag(character.avatar.url, class: 'small-character-avatar')
               %dt Block Count
               %dd= number_with_delimiter @schematic.total_block_count
               %dt Width

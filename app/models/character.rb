@@ -1,6 +1,9 @@
 class Character < ActiveRecord::Base
   has_many :schematics, dependent: :destroy
 
+  has_many :tracked_downloads, dependent: :destroy
+  has_many :downloaded_schematics, through: :tracked_downloads, source: :schematic
+
   validates :uuid, presence: true
   validates :uuid, uniqueness: true
 
