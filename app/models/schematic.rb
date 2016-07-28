@@ -21,8 +21,7 @@ class Schematic < ActiveRecord::Base
   validates_attachment_content_type :file, content_type: ['application/x-gzip', 'application/gzip']
   validates_attachment_file_name :file, :matches => [/schematic\Z/]
 
-  validates :name, :character, presence: true
-  validates :name, presence: true
+  validates :character, presence: true
   validates :permalink, uniqueness: true, allow_blank: true
 
   validates :width, :length, :height,
@@ -34,9 +33,9 @@ class Schematic < ActiveRecord::Base
 
   attr_accessor :temporary_file
 
-  before_create :sync_name_to_file
   after_create :delete_temporary_file
   after_create :set_permalink
+  after_create :sync_permalink_to_file
 
   state_machine :state, :initial => :new do
     after_transition :new => :collecting_metadata, :do => :schedule_metadata_collection
@@ -108,10 +107,6 @@ class Schematic < ActiveRecord::Base
 
   private
 
-  def sync_name_to_file
-    self.file_file_name = "#{name}.schematic"
-  end
-
   def delete_temporary_file
     if temporary_file.present?
       File.delete temporary_file
@@ -126,6 +121,10 @@ class Schematic < ActiveRecord::Base
   # an id to generate the hashid
   def set_permalink
     update_column :permalink, HASHIDS.encode(id)
+  end
+
+  def sync_permalink_to_file
+    update_column :file_file_name, "#{permalink}.schematic"
   end
 
   def schedule_metadata_collection

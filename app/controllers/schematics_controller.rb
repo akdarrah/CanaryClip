@@ -42,7 +42,7 @@ class SchematicsController < ApplicationController
 
   def create_params
     params.require(:schematic)
-      .permit(:raw_schematic_data, :name)
+      .permit(:raw_schematic_data)
   end
 
   def find_or_create_character
