@@ -37,7 +37,6 @@ class Render::RenderSceneWorker
   end
 
   def rendered_image_file
-
     FileUtils.cp_r TEMPLATE_SCENE_PATH, @tmp_scene_path
 
     camera_angle   = "CameraAngles::#{@render.camera_angle.camelize}".constantize
