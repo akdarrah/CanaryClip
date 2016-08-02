@@ -27,6 +27,8 @@ group :test do
   gem 'factory_girl', '4.5.0'
   gem 'rspec-rails'
   gem "database_cleaner", '1.4.1'
+  gem 'mocha'
+  gem 'minitest-focus'
 end
 
 group :development, :test do

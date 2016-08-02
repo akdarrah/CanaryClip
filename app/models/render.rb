@@ -15,6 +15,9 @@ class Render < ActiveRecord::Base
   end)
 
   state_machine :state, :initial => :pending do
+    after_transition :pending => :scheduled,
+      :do => :schedule_job
+
     event :schedule do
       transition :pending => :scheduled
     end
@@ -27,4 +30,11 @@ class Render < ActiveRecord::Base
       transition :rendering => :completed
     end
   end
+
+  private #####################################################################
+
+  def schedule_job
+    Render::RenderSceneWorker.perform_async(id)
+  end
+
 end
