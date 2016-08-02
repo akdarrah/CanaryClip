@@ -14,14 +14,18 @@ class Render::RenderSceneWorker
     @render         = Render.find(render_id)
     @schematic      = @render.schematic
     @tmp_world_path = Rails.root + "tmp/worlds/#{@render.id}"
+    @tmp_scene_path = Rails.root + "tmp/scenes/#{@render.id}"
 
-    @render.render!
-    create_world!
+    ActiveRecord::Base.transaction do
+      @render.render!
+      create_world!
 
-    @render.file = rendered_image_file
-    @render.complete!
-
-    # TODO: Cleanup tmp files & Transaction for errors
+      @render.file = rendered_image_file
+      @render.complete!
+    end
+  ensure
+    FileUtils.rm_r @tmp_world_path if File.exists?(@tmp_world_path.to_s)
+    FileUtils.rm_r @tmp_scene_path if File.exists?(@tmp_scene_path.to_s)
   end
 
   private #####################################################################
@@ -33,18 +37,17 @@ class Render::RenderSceneWorker
   end
 
   def rendered_image_file
-    tmp_scene_path = Rails.root + "tmp/scenes/#{@render.id}"
 
-    FileUtils.cp_r TEMPLATE_SCENE_PATH, tmp_scene_path
+    FileUtils.cp_r TEMPLATE_SCENE_PATH, @tmp_scene_path
 
     camera_angle   = "CameraAngles::#{@render.camera_angle.camelize}".constantize
-    config_path    = tmp_scene_path + CONFIG_FILE_NAME
-    image_path     = tmp_scene_path + IMAGE_FILE_NAME
+    config_path    = @tmp_scene_path + CONFIG_FILE_NAME
+    image_path     = @tmp_scene_path + IMAGE_FILE_NAME
     template_json  = JSON.parse(File.read(config_path))
     scene_director = SceneDirector.new(@schematic, @tmp_world_path, template_json, camera_angle)
 
     File.open(config_path, "w"){|f| f.write(scene_director.to_json)}
-    system "java -jar #{CHUNKY_LAUNCHER_PATH} -scene-dir #{tmp_scene_path} -render Blank188"
+    system "java -jar #{CHUNKY_LAUNCHER_PATH} -scene-dir #{@tmp_scene_path} -render Blank188"
 
     File.open(image_path)
   end
