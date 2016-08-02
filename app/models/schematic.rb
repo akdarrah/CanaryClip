@@ -114,20 +114,12 @@ class Schematic < ActiveRecord::Base
     impressions.where(action_name: 'download').count
   end
 
-  def tmp_world_path
-    Rails.root + "tmp/worlds/#{id}"
-  end
-
   private
 
   def delete_temporary_file
     if temporary_file.present?
       File.delete temporary_file
     end
-  end
-
-  def delete_tmp_world
-    FileUtils.rm_r tmp_world_path
   end
 
   # This has to be in an after_create since we need

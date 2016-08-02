@@ -1,6 +1,6 @@
 class SceneDirector
   attr_accessor :schematic, :template_config,
-    :samples_per_pixel, :camera_angle
+    :samples_per_pixel, :camera_angle, :tmp_world_path
 
   PASTE_X = 1159
   PASTE_Y = 4
@@ -9,8 +9,9 @@ class SceneDirector
   DEVELOPMENT_SPP = 30
   PRODUCTION_SPP  = 100
 
-  def initialize(schematic, template_config, camera_angle)
+  def initialize(schematic, tmp_world_path, template_config, camera_angle)
     self.schematic       = schematic
+    self.tmp_world_path  = tmp_world_path
     self.template_config = template_config
     self.camera_angle    = camera_angle
 
@@ -26,7 +27,7 @@ class SceneDirector
   private
 
   def set_world_path!
-    template_config["world"]["path"] = @schematic.tmp_world_path.to_s
+    template_config["world"]["path"] = @tmp_world_path.to_s
   end
 
   def set_target_samples_per_pixel!
