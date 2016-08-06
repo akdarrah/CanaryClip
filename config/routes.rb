@@ -1,12 +1,15 @@
 require 'sidekiq/web'
 
 Minebuild::Application.routes.draw do
-  devise_for :users
+  root :to => 'schematics#index'
+
   if Rails.env.development?
     mount Sidekiq::Web => '/sidekiq'
   end
 
-  root :to => 'schematics#index'
+  ActiveAdmin.routes(self)
+
+  devise_for :users
 
   resources :schematics, only: [:index, :show, :create] do
     member do

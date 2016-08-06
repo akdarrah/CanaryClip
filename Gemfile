@@ -19,6 +19,8 @@ gem 'sass-rails', '>= 3.2'
 gem 'impressionist'
 gem 'devise'
 
+gem 'activeadmin', github: 'activeadmin'
+
 group :development do
   gem "better_errors"
   gem "binding_of_caller"
