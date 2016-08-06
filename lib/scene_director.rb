@@ -15,6 +15,7 @@ class SceneDirector
 
     set_world_path!
     set_target_samples_per_pixel!
+    set_resolution!
     set_camera_position_and_orientation!
   end
 
@@ -30,6 +31,13 @@ class SceneDirector
 
   def set_target_samples_per_pixel!
     template_config["sppTarget"] = render.samples_per_pixel
+  end
+
+  def set_resolution!
+    resolution = Render::RESOLUTIONS[@render.resolution]
+
+    template_config['width']  = resolution[:width]
+    template_config['height'] = resolution[:height]
   end
 
   def set_camera_position_and_orientation!

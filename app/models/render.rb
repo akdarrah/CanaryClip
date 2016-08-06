@@ -2,11 +2,20 @@ class Render < ActiveRecord::Base
   DEVELOPMENT_SPP = 30
   PRODUCTION_SPP  = 100
 
+  STANDARD_RESOLUTION = '1024x768'
+  HIGH_RESOLUTION     = '1920x1080'
+
+  RESOLUTIONS = {
+    STANDARD_RESOLUTION => {width: 1024, height: 768},
+    HIGH_RESOLUTION     => {width: 1920, height: 1080}
+  }
+
   belongs_to :schematic
-  validates :schematic, :camera_angle, :samples_per_pixel, presence: true
+  validates :schematic, :resolution, :camera_angle, :samples_per_pixel, presence: true
   validates :samples_per_pixel, numericality: { only_integer: true }
 
   validates :camera_angle, inclusion: {in: CameraAngle::AVAILABLE}
+  validates :resolution, inclusion: {in: RESOLUTIONS.keys}
 
   has_attached_file :file
   validates_attachment_content_type :file, content_type: /\Aimage\/.*\Z/
@@ -14,6 +23,7 @@ class Render < ActiveRecord::Base
   validates :camera_angle, uniqueness: {scope: :schematic_id}
 
   before_validation :set_samples_per_pixel
+  before_validation :set_resolution
 
   scope :camera_angle_order, (lambda do
     order(CameraAngle::AVAILABLE.map{|angle| "renders.camera_angle = '#{angle}' DESC"}.join(', '))
@@ -56,6 +66,10 @@ class Render < ActiveRecord::Base
       else
         DEVELOPMENT_SPP
       end
+  end
+
+  def set_resolution
+    self.resolution ||= STANDARD_RESOLUTION
   end
 
 end
