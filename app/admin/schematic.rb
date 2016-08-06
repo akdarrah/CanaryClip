@@ -1,17 +1,32 @@
 ActiveAdmin.register Schematic do
+   menu priority: 1
 
-# See permitted parameters documentation:
-# https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-#
-# permit_params :list, :of, :attributes, :on, :model
-#
-# or
-#
-# permit_params do
-#   permitted = [:permitted, :attributes]
-#   permitted << :other if params[:action] == 'create' && current_user.admin?
-#   permitted
-# end
+   permit_params :character_id, :permalink
 
+   index do
+     selectable_column
+     id_column
+     column :created_at
+     column "Primary Render" do |schematic|
+       image_tag(schematic.primary_render.file.url, class: "icon")
+     end
+     column :permalink
+     column :state
+   end
+
+   filter :id
+   filter :permalink
+   filter :width
+   filter :length
+   filter :height
+   filter :state
+
+   form do |f|
+     f.inputs "Schematic Details" do
+       f.input :character_id
+       f.input :permalink
+     end
+     f.actions
+   end
 
 end
