@@ -8,7 +8,6 @@ class Render::RenderSceneWorker
   TEMPLATE_SCENE_PATH  = Rails.root + "private/scene"
   CHUNKY_LAUNCHER_PATH = "/Users/user/Desktop/ChunkyLauncher.jar"
   CONFIG_FILE_NAME     = "Blank188.json"
-  IMAGE_FILE_NAME      = "Blank188-30.png"
 
   def perform(render_id)
     @render         = Render.find(render_id)
@@ -41,7 +40,7 @@ class Render::RenderSceneWorker
 
     camera_angle   = "CameraAngles::#{@render.camera_angle.camelize}".constantize
     config_path    = @tmp_scene_path + CONFIG_FILE_NAME
-    image_path     = @tmp_scene_path + IMAGE_FILE_NAME
+    image_path     = @tmp_scene_path + "Blank188-#{@render.samples_per_pixel}.png"
     template_json  = JSON.parse(File.read(config_path))
     scene_director = SceneDirector.new(@render, @tmp_world_path, template_json, camera_angle)
 
