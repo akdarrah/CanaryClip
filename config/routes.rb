@@ -1,6 +1,7 @@
 require 'sidekiq/web'
 
 Minebuild::Application.routes.draw do
+  devise_for :users
   if Rails.env.development?
     mount Sidekiq::Web => '/sidekiq'
   end
