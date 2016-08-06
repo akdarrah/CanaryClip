@@ -13,8 +13,9 @@
           .row
             .col-xs-24
               .pull-left
-                .title.lobster
-                  Minebuild
+                = link_to root_url, class: 'site-logo-link' do
+                  .title.lobster
+                    Minebuild
               .pull-right
                 %ul.list-inline
                   - if current_user.blank?

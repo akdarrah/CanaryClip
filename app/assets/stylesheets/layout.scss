@@ -3,6 +3,12 @@ html, body {
   background-image: image-url("square_bg.png")
 }
 
+.site-logo-link {
+  &:hover {
+    text-decoration: none;
+  }
+}
+
 .lobster {
   font-family: 'Lobster', cursive;
 }
