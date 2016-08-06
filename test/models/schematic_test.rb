@@ -27,4 +27,15 @@ class SchematicTest < ActiveSupport::TestCase
     assert @schematic.published?
   end
 
+  test "A Schematic::CollectMetadataWorker is queued when schematic is collecting metadata" do
+    Schematic::CollectMetadataWorker
+      .expects(:perform_async)
+      .with(@schematic.id)
+      .once
+
+    assert @schematic.new?
+    assert @schematic.collect_metadata!
+    assert @schematic.collecting_metadata?
+  end
+
 end
