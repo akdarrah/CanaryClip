@@ -22,6 +22,7 @@ class RenderTest < ActiveSupport::TestCase
     assert_raise(StateMachine::InvalidTransition){ @render.render! }
 
     assert @render.complete!
+    assert @render.completed?
   end
 
   test "A Render::RenderSceneWorker is queued when render is scheduled!" do
