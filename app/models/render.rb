@@ -1,4 +1,7 @@
 class Render < ActiveRecord::Base
+  DEVELOPMENT_SPP = 30
+  PRODUCTION_SPP  = 100
+
   belongs_to :schematic
   validates :schematic, :camera_angle, :samples_per_pixel, presence: true
   validates :samples_per_pixel, numericality: { only_integer: true }
@@ -29,6 +32,10 @@ class Render < ActiveRecord::Base
     event :complete do
       transition :rendering => :completed
     end
+  end
+
+  def default_samples_per_pixel
+    (Rails.env.production? ? PRODUCTION_SPP : DEVELOPMENT_SPP)
   end
 
   private #####################################################################
