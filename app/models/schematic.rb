@@ -45,6 +45,8 @@ class Schematic < ActiveRecord::Base
   state_machine :state, :initial => :new do
     after_transition :new => :collecting_metadata,
       :do => :schedule_metadata_collection
+    after_transition :collecting_metadata => :rendering,
+      :do => :create_renders
 
     event :collect_metadata do
       transition :new => :collecting_metadata
@@ -127,6 +129,17 @@ class Schematic < ActiveRecord::Base
 
   def schedule_metadata_collection
     Schematic::CollectMetadataWorker.perform_async(id)
+  end
+
+  def create_renders
+    CameraAngle::AVAILABLE.each do |camera_angle|
+      renders.create!(
+        :schematic    => self,
+        :camera_angle => camera_angle
+      )
+    end
+
+    renders.each(&:schedule!)
   end
 
 end
