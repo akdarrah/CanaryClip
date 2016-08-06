@@ -1,7 +1,7 @@
 ActiveAdmin.register Schematic do
   menu priority: 1
 
-  config.sort_order = 'id_asc'
+  config.sort_order = 'id_desc'
 
   permit_params :character_id, :permalink
 

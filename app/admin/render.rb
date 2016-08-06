@@ -1,7 +1,7 @@
 ActiveAdmin.register Render do
   menu priority: 3
 
-  config.sort_order = 'id_asc'
+  config.sort_order = 'id_desc'
 
   permit_params :schematic_id, :camera_angle, :samples_per_pixel, :resolution
 

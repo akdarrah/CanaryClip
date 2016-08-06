@@ -1,7 +1,7 @@
 ActiveAdmin.register Character do
   menu priority: 4
 
-  config.sort_order = 'id_asc'
+  config.sort_order = 'id_desc'
 
   permit_params :username, :uuid
 
