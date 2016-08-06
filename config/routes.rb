@@ -3,7 +3,7 @@ require 'sidekiq/web'
 Minebuild::Application.routes.draw do
   root :to => 'schematics#index'
 
-  if Rails.env.development?
+  authenticate :user, lambda { |u| u.admin? } do
     mount Sidekiq::Web => '/sidekiq'
   end
 
