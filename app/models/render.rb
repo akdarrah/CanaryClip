@@ -20,7 +20,7 @@ class Render < ActiveRecord::Base
   has_attached_file :file
   validates_attachment_content_type :file, content_type: /\Aimage\/.*\Z/
 
-  validates :camera_angle, uniqueness: {scope: :schematic_id}
+  validates :camera_angle, uniqueness: {scope: [:schematic_id, :resolution]}
 
   before_validation :set_samples_per_pixel
   before_validation :set_resolution
