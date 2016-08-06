@@ -22,6 +22,8 @@ class Render < ActiveRecord::Base
   state_machine :state, :initial => :pending do
     after_transition :pending => :scheduled,
       :do => :schedule_job
+    after_transition :rendering => :completed,
+      :do => :publish_schematic
 
     event :schedule do
       transition :pending => :scheduled
@@ -40,6 +42,12 @@ class Render < ActiveRecord::Base
 
   def schedule_job
     Render::RenderSceneWorker.perform_async(id)
+  end
+
+  def publish_schematic
+    if !schematic.renders.where.not(state: :completed).exists?
+      schematic.publish!
+    end
   end
 
   def set_samples_per_pixel
