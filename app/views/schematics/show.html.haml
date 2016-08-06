@@ -46,11 +46,11 @@
             .col-xs-12
               #carousel-example-generic.carousel.slide{:'data-ride' => "carousel"}
                 %ol.carousel-indicators
-                  - @schematic.renders.camera_angle_order.each_with_index do |render, index|
+                  - @schematic.renders.standard_resolution.camera_angle_order.each_with_index do |render, index|
                     %li{:'data-target' => "#carousel-example-generic", :'data-slide-to' => index, :class => "#{'active' if index.zero?}"}
 
                 .carousel-inner{:role => "listbox"}
-                  - @schematic.renders.camera_angle_order.each_with_index do |render, index|
+                  - @schematic.renders.standard_resolution.camera_angle_order.each_with_index do |render, index|
                     .item{class: "#{'active' if index.zero?}"}
                       = image_tag render.file.url
 

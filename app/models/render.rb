@@ -29,6 +29,9 @@ class Render < ActiveRecord::Base
     order(CameraAngle::AVAILABLE.map{|angle| "renders.camera_angle = '#{angle}' DESC"}.join(', '))
   end)
 
+  scope :standard_resolution, -> { where(resolution: STANDARD_RESOLUTION) }
+  scope :high_resolution, -> { where(resolution: HIGH_RESOLUTION) }
+
   state_machine :state, :initial => :pending do
     after_transition :pending => :scheduled,
       :do => :schedule_job
