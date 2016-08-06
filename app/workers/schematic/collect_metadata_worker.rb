@@ -23,6 +23,6 @@ class Schematic::CollectMetadataWorker
       end
     end
 
-    @schematic.create_world!
+    @schematic.render!
   end
 end

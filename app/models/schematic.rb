@@ -43,26 +43,19 @@ class Schematic < ActiveRecord::Base
   after_create :sync_permalink_to_file
 
   state_machine :state, :initial => :new do
-    after_transition :new => :collecting_metadata, :do => :schedule_metadata_collection
-    after_transition :collecting_metadata => :creating_world, :do => :schedule_world_creation
-    after_transition :creating_world => :rendering_primary_camera_angle, :do => :schedule_primary_render
-    after_transition :rendering_primary_camera_angle => :published, :do => :schedule_secondary_renderings
+    after_transition :new => :collecting_metadata,
+      :do => :schedule_metadata_collection
 
     event :collect_metadata do
       transition :new => :collecting_metadata
     end
 
-    # TODO: Validation to ensure width, length, and height present
-    event :create_world do
-      transition :collecting_metadata => :creating_world
-    end
-
-    event :world_created do
-      transition :creating_world => :rendering_primary_camera_angle
+    event :render do
+      transition :collecting_metadata => :rendering
     end
 
     event :publish do
-      transition :rendering_primary_camera_angle => :published
+      transition :rendering => :published
     end
   end
 
@@ -134,20 +127,6 @@ class Schematic < ActiveRecord::Base
 
   def schedule_metadata_collection
     Schematic::CollectMetadataWorker.perform_async(id)
-  end
-
-  def schedule_world_creation
-    Schematic::CreateWorldWorker.perform_async(id)
-  end
-
-  def schedule_primary_render
-    Schematic::SceneRendererWorker.perform_async(id, CameraAngle::PRIMARY)
-  end
-
-  def schedule_secondary_renderings
-    CameraAngle::SECONDARY.each do |camera_angle|
-      Schematic::SceneRendererWorker.perform_async(id, camera_angle)
-    end
   end
 
 end
