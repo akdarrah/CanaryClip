@@ -1,6 +1,8 @@
 ActiveAdmin.register Character do
   menu priority: 4
 
+  config.sort_order = 'id_asc'
+
   permit_params :username, :uuid
 
   index do
@@ -15,6 +17,7 @@ ActiveAdmin.register Character do
   end
 
   filter :id
+  filter :created_at
   filter :username
   filter :uuid
 

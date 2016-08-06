@@ -1,7 +1,7 @@
 ActiveAdmin.register Block do
   menu priority: 5
 
-  config.sort_order = 'minecraft_id_asc'
+  config.sort_order = 'id_asc'
 
   permit_params :minecraft_id, :name, :display_name, :stack_size,
     :diggable, :bounding_box, :transparent, :emit_light, :filter_light,
@@ -24,6 +24,7 @@ ActiveAdmin.register Block do
   end
 
   filter :id
+  filter :created_at
   filter :minecraft_id
   filter :display_name
 

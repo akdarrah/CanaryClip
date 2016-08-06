@@ -1,6 +1,8 @@
 ActiveAdmin.register User do
   menu priority: 2
 
+  config.sort_order = 'id_asc'
+
   permit_params :email, :password, :password_confirmation
 
   index do
@@ -13,6 +15,8 @@ ActiveAdmin.register User do
     actions
   end
 
+  filter :id
+  filter :created_at
   filter :email
   filter :current_sign_in_at
   filter :sign_in_count

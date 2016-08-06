@@ -1,6 +1,8 @@
 ActiveAdmin.register Render do
   menu priority: 3
 
+  config.sort_order = 'id_asc'
+
   permit_params :schematic_id, :camera_angle, :samples_per_pixel, :resolution
 
   index do
@@ -18,6 +20,7 @@ ActiveAdmin.register Render do
   end
 
   filter :id
+  filter :created_at
   filter :camera_angle
   filter :samples_per_pixel
   filter :resolution
