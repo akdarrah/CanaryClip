@@ -13,6 +13,8 @@ class Render < ActiveRecord::Base
 
   validates :camera_angle, uniqueness: {scope: :schematic_id}
 
+  before_validation :set_samples_per_pixel
+
   scope :camera_angle_order, (lambda do
     order(CameraAngle::AVAILABLE.map{|angle| "renders.camera_angle = '#{angle}' DESC"}.join(', '))
   end)
@@ -34,14 +36,18 @@ class Render < ActiveRecord::Base
     end
   end
 
-  def default_samples_per_pixel
-    (Rails.env.production? ? PRODUCTION_SPP : DEVELOPMENT_SPP)
-  end
-
   private #####################################################################
 
   def schedule_job
     Render::RenderSceneWorker.perform_async(id)
+  end
+
+  def set_samples_per_pixel
+    self.samples_per_pixel ||= if Rails.env.production?
+        PRODUCTION_SPP
+      else
+        DEVELOPMENT_SPP
+      end
   end
 
 end

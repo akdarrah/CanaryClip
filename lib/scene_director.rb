@@ -29,7 +29,7 @@ class SceneDirector
   end
 
   def set_target_samples_per_pixel!
-    template_config["sppTarget"] = render.default_samples_per_pixel
+    template_config["sppTarget"] = render.samples_per_pixel
   end
 
   def set_camera_position_and_orientation!
