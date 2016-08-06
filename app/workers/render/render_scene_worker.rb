@@ -10,6 +10,9 @@ class Render::RenderSceneWorker
   CONFIG_FILE_NAME     = "Blank188.json"
 
   def perform(render_id)
+    # Give the transaction time to finish
+    sleep 1
+
     @render         = Render.find(render_id)
     @schematic      = @render.schematic
     @tmp_world_path = Rails.root + "tmp/worlds/#{@render.id}"
