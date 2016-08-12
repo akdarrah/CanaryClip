@@ -1,6 +1,8 @@
 class Render::RenderSceneWorker
   include Sidekiq::Worker
 
+  TEXTURE_PATH = Rails.root + "private/red_craft.zip"
+
   TEMPLATE_WORLD_PATH = Rails.root + "private/Blank188"
   MCE_PY_PATH         = "/Users/user/Developer/minebuild/pymclevel/mce.py"
   DEST_COORDINATES    = "#{SceneDirector::PASTE_X}, #{SceneDirector::PASTE_Y}, #{SceneDirector::PASTE_Z}"
@@ -48,7 +50,7 @@ class Render::RenderSceneWorker
     scene_director = SceneDirector.new(@render, @tmp_world_path, template_json, camera_angle)
 
     File.open(config_path, "w"){|f| f.write(scene_director.to_json)}
-    system "java -jar #{CHUNKY_LAUNCHER_PATH} -scene-dir #{@tmp_scene_path} -render Blank188"
+    system "java -jar #{CHUNKY_LAUNCHER_PATH} -texture #{TEXTURE_PATH} -scene-dir #{@tmp_scene_path} -render Blank188"
 
     File.open(image_path)
   end
