@@ -2,7 +2,6 @@
 /db/*.sqlite3
 /db/*.sqlite3-journal
 /log/*.log
-/tmp
 *~
 db/schema.rb
 config/database.yml
