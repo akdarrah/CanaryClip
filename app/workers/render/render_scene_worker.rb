@@ -8,7 +8,7 @@ class Render::RenderSceneWorker
   DEST_COORDINATES    = "#{SceneDirector::PASTE_X}, #{SceneDirector::PASTE_Y}, #{SceneDirector::PASTE_Z}"
 
   TEMPLATE_SCENE_PATH  = Rails.root + "private/scene"
-  CHUNKY_LAUNCHER_PATH = "/Users/user/Desktop/ChunkyLauncher.jar"
+  CHUNKY_LAUNCHER_PATH = Rails.root + "private/ChunkyLauncher.jar"
   CONFIG_FILE_NAME     = "Blank188.json"
 
   def perform(render_id)
