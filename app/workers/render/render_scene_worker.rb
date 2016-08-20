@@ -4,7 +4,7 @@ class Render::RenderSceneWorker
   TEXTURE_PATH = Rails.root + "private/red_craft.zip"
 
   TEMPLATE_WORLD_PATH = Rails.root + "private/Blank188"
-  MCE_PY_PATH         = "/Users/user/Developer/minebuild/pymclevel/mce.py"
+  MCE_PY_PATH         = Rails.root + "private/pymclevel/mce.py"
   DEST_COORDINATES    = "#{SceneDirector::PASTE_X}, #{SceneDirector::PASTE_Y}, #{SceneDirector::PASTE_Z}"
 
   TEMPLATE_SCENE_PATH  = Rails.root + "private/scene"
