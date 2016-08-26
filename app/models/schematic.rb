@@ -120,7 +120,7 @@ class Schematic < ActiveRecord::Base
   # This has to be in an after_create since we need
   # an id to generate the hashid
   def set_permalink
-    update_column :permalink, HASHIDS.encode(id)
+    update_column :permalink, SCHEMATIC_HASHIDS.encode(id)
   end
 
   def sync_permalink_to_file
