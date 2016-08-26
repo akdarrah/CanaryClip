@@ -1,4 +1,6 @@
 class Character < ActiveRecord::Base
+  belongs_to :user
+  
   has_many :schematics, dependent: :destroy
 
   has_many :tracked_downloads, dependent: :destroy
