@@ -20,6 +20,10 @@ class CharacterClaim < ActiveRecord::Base
     end
   end
 
+  def to_param
+    token
+  end
+
   private
 
   def find_or_create_character
