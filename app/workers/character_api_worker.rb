@@ -6,8 +6,9 @@ class CharacterApiWorker
 
   def perform(character_id)
     @character = Character.find character_id
-    data       = JSON.parse(Net::HTTP.get(NAME_API_HOST, "/name/uuid/#{@character.uuid}"))
+    data       = JSON.parse(Net::HTTP.get(NAME_API_HOST, "/name/uuid/#{@character.username_or_uuid}"))
 
+    @character.uuid     = data['uuid']
     @character.avatar   = open("#{IMAGE_API}/#{@character.uuid}.png")
     @character.username = data['name']
     @character.save!
