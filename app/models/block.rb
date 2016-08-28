@@ -4,9 +4,21 @@ class Block < ActiveRecord::Base
   has_many :block_counts, dependent: :destroy
   has_many :schematics, through: :block_counts
 
-  validates :minecraft_id, presence: true
-  validates :minecraft_id, uniqueness: true
+  validates :minecraft_id, :permalink, presence: true
+  validates :minecraft_id, :permalink, uniqueness: true
 
   has_attached_file :icon
   validates_attachment_content_type :icon, content_type: /\Aimage\/.*\Z/
+
+  before_validation :set_permalink
+
+  def to_param
+    permalink
+  end
+
+  private
+
+  def set_permalink
+    self.permalink = name.parameterize
+  end
 end

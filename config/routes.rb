@@ -19,6 +19,9 @@ Minebuild::Application.routes.draw do
     end
   end
 
+  resources :blocks, only: [:show]
+  resources :characters, only: [:show]
+
   resources :character_claims, only: [:index, :show, :new, :create]
   resources :schematics, only: [:index, :show] do
     member do
