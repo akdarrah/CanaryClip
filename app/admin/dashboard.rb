@@ -18,7 +18,7 @@ ActiveAdmin.register_page "Dashboard" do
             end
             tbody do
 
-              [Schematic, User, Render, Character, Block].each do |klass|
+              [Schematic, User, Render, Character, CharacterClaim, Block].each do |klass|
                 tr do
                   td klass.name
                   td klass.count
