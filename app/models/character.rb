@@ -14,7 +14,7 @@ class Character < ActiveRecord::Base
   validates_attachment :avatar,
     content_type: { content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif"] }
 
-  after_create :schedule_api_worker
+  after_commit :schedule_api_worker, on: :create
 
   def to_s
     (username || uuid)
