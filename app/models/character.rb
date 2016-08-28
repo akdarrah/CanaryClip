@@ -6,7 +6,7 @@ class Character < ActiveRecord::Base
   has_many :tracked_downloads, dependent: :destroy
   has_many :downloaded_schematics, through: :tracked_downloads, source: :schematic
 
-  validates :uuid, :username, uniqueness: true
+  validates :uuid, :username, uniqueness: true, allow_blank: true
   validate :username_or_uuid_required
 
   has_attached_file :avatar,

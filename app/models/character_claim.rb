@@ -4,6 +4,7 @@ class CharacterClaim < ActiveRecord::Base
 
   validates :user, :character_username, :state, presence: true
 
+  before_create :find_or_create_character
   after_create :set_token
 
   state_machine :state, :initial => :pending do
@@ -20,6 +21,10 @@ class CharacterClaim < ActiveRecord::Base
   end
 
   private
+
+  def find_or_create_character
+    self.character = Character.find_or_create_by!(username: character_username)
+  end
 
   def set_token
     update_column :token, CHARACTER_CLAIM_HASHIDS.encode(id)
