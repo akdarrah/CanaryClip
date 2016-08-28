@@ -19,6 +19,7 @@ Minebuild::Application.routes.draw do
     end
   end
 
+  resources :character_claims
   resources :schematics, only: [:index, :show] do
     member do
       get :download

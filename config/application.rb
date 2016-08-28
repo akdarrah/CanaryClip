@@ -9,5 +9,7 @@ Bundler.require(*Rails.groups)
 module Minebuild
   class Application < Rails::Application
     config.autoload_paths += %W(#{Rails.root}/lib)
+
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.yml')]
   end
 end
