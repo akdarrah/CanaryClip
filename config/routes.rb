@@ -12,6 +12,11 @@ Minebuild::Application.routes.draw do
   devise_for :users
 
   namespace :plugin do
+    resources :character_claims, only: [] do
+      member do
+        post :claim
+      end
+    end
     resources :schematics, only: [:create, :download] do
       member do
         get :download
