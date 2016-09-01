@@ -8,8 +8,7 @@ class Character < ActiveRecord::Base
   has_many :character_claim
 
   validates :uuid, :username, :permalink, uniqueness: true, allow_blank: true
-  validate :username_or_uuid_required
-  validates :permalink, presence: true
+  validates :permalink, :username, presence: true
 
   has_attached_file :avatar,
     :default_url => "/assets/default_avatar.png"
@@ -20,9 +19,8 @@ class Character < ActiveRecord::Base
   after_commit :schedule_api_worker, on: :create
 
   def to_s
-    (username || uuid)
+    username
   end
-  alias :username_or_uuid :to_s
 
   def to_param
     permalink
@@ -34,13 +32,9 @@ class Character < ActiveRecord::Base
     CharacterApiWorker.perform_async(id)
   end
 
-  def username_or_uuid_required
-    if username_or_uuid.blank?
-      errors.add(:base, 'Username or UUID required')
-    end
-  end
-
   def set_permalink
-    self.permalink = username.parameterize
+    if username.present?
+      self.permalink = username.parameterize
+    end
   end
 end
