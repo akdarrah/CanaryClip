@@ -24,6 +24,12 @@ class CharacterClaim < ActiveRecord::Base
     token
   end
 
+  def claim_with_username_verification(username)
+    if username == character_username
+      claim!
+    end
+  end
+
   private
 
   def find_or_create_character

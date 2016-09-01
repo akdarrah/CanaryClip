@@ -22,6 +22,27 @@ class CharacterClaimTest < ActiveSupport::TestCase
     assert_raise(StateMachine::InvalidTransition){ @character_claim.claim! }
   end
 
+  # find_or_create_character
+
+  test "character is created if it does not exist" do
+    @user               = create(:user)
+    @character_username = UUID.generate
+
+    refute Character.where(username: @character_username).exists?
+
+    @character_claim = CharacterClaim.create!(
+      :user               => @user,
+      :character_username => @character_username
+    )
+    @character = Character.where(username: @character_username).first
+
+    assert @character.present?
+    assert_equal @character_claim.character, @character
+    assert_equal @character_claim.character.username, @character.username
+  end
+
+  # assign_character_to_user
+
   test "character is assigned to the user when claimed" do
     @character                 = create(:character)
     @character_claim.character = @character
@@ -34,6 +55,23 @@ class CharacterClaimTest < ActiveSupport::TestCase
 
     assert_equal @user, @character.user
     assert @user.characters.exists?
+  end
+
+  # claim_with_username_verification
+
+  test "claims if the username matches" do
+    valid_username = @character_claim.character_username
+
+    assert @character_claim.pending?
+    @character_claim.claim_with_username_verification(valid_username)
+    assert @character_claim.claimed?
+  end
+
+  test "does not claim if username is wrong" do
+    assert @character_claim.pending?
+    @character_claim.claim_with_username_verification('...')
+    assert @character_claim.pending?
+    refute @character_claim.claimed?
   end
 
 end
