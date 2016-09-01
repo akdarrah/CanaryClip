@@ -1,0 +1,6 @@
+en:
+  plugin:
+    character_claims:
+      not_found: "Character Claim Failed: Please check your claim code and try again."
+      check_username: "Character Claim failed: Please verify your claim code belongs to %{username}."
+      claimed: "Character Claim for %{username} was successful."

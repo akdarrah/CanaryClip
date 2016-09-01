@@ -1,18 +1,22 @@
-class Plugin::CharacterClaimsController < ApplicationController
+class Plugin::CharacterClaimsController < Plugin::BaseController
 
-  # TODO: Authenticate by token or Server IP / PORT
-  protect_from_forgery :except => [:claim]
+  before_filter :find_character_claim
 
   def claim
-    raise params.inspect
-
-    @character_claim = CharacterClaim.find_by_token!(params[:id])
-
-    # TODO: Should do username verification
-    if @character_claim.claim!
-      format.text { render json: ["Character Claimed!"], status: :ok }
+    if @character_claim.claim_with_username_verification(@character.username)
+      render_plugin_text I18n.t('plugin.character_claims.claimed', username: @character.username)
     else
-      format.text { render json: ["Character Claim failed. Please try again."], status: :ok }
+      render_plugin_text I18n.t('plugin.character_claims.check_username', username: @character.username)
+    end
+  end
+
+  private
+
+  def find_character_claim
+    @character_claim = CharacterClaim.find_by_token(params[:id])
+
+    if @character_claim.blank?
+      render_plugin_text I18n.t('plugin.character_claims.not_found')
     end
   end
 
