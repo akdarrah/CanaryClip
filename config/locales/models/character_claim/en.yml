@@ -1,0 +1,15 @@
+en:
+  activerecord:
+    attributes:
+      character_claim:
+        user_id: User
+        character_id: Character
+        character_username: Character Username
+        token: Short Code
+        state: State
+        created_at: Created
+        updated_at: Updated
+    models:
+      character_claim:
+        one: Character Claim
+        other: Character Claims
