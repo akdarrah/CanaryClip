@@ -6,4 +6,6 @@ class User < ActiveRecord::Base
 
   has_many :characters
   has_many :character_claims
+
+  belongs_to :current_character, class_name: "Character"
 end

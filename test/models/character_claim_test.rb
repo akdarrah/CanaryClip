@@ -57,6 +57,30 @@ class CharacterClaimTest < ActiveSupport::TestCase
     assert @user.characters.exists?
   end
 
+  test "character is set as users current_character if user doesn't have one" do
+    @character                 = create(:character)
+    @character_claim.character = @character
+    @user                      = @character_claim.user
+
+    assert @user.current_character.blank?
+    assert @character_claim.claim!
+    assert_equal @character, @user.reload.current_character
+  end
+
+  test "character is not set as users current_character if user already has a current_character" do
+    @other_character           = create(:character)
+    @character                 = create(:character)
+    @character_claim.character = @character
+    @user                      = @character_claim.user
+
+    @user.update_column :current_character_id, @other_character
+    assert @user.reload.current_character.present?
+
+    assert @character_claim.claim!
+    assert_not_equal @character, @user.reload.current_character
+    assert_equal @other_character, @user.reload.current_character
+  end
+
   # claim_with_username_verification
 
   test "claims if the username matches" do

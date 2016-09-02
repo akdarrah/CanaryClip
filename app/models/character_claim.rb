@@ -42,5 +42,9 @@ class CharacterClaim < ActiveRecord::Base
 
   def assign_character_to_user
     user.characters << character
+
+    if user.current_character.blank?
+      user.update_column :current_character_id, character
+    end
   end
 end
