@@ -8,6 +8,7 @@ config/database.yml
 log/*
 tmp/cache/*
 tmp/uploads/*
+tmp/schematics/*
 tmp/sass-cache/*
 system/*
 *.xcf
