@@ -7,13 +7,12 @@ class Plugin::SchematicsController < Plugin::BaseController
     @schematic = Schematic.new(create_params)
     @schematic.character = @character
 
-    respond_to do |format|
-      if @schematic.save
-        @schematic.collect_metadata!
-        render json: ["Schematic permalink: #{@schematic.permalink}"], status: :ok
-      else
-        render json: ["Schematic upload failed. Please try again."], status: :ok
-      end
+    if @schematic.save
+      @schematic.collect_metadata!
+
+      render_plugin_text I18n.t('plugin.schematics.upload_success', permalink: @schematic.permalink)
+    else
+      render_plugin_text I18n.t('plugin.schematics.validation_error')
     end
   end
 
