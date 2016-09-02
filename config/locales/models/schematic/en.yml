@@ -1,0 +1,17 @@
+en:
+  activerecord:
+    attributes:
+      schematic:
+        character_id: Character
+        permalink: Short Code
+        state: State
+        width: Width
+        length: Length
+        height: Height
+        parsed_nbt_data: NBT Data
+        created_at: Created
+        updated_at: Updated
+    models:
+      schematic:
+        one: Schematic
+        other: Schematics

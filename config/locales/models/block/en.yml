@@ -1,0 +1,22 @@
+en:
+  activerecord:
+    attributes:
+      block:
+        minecraft_id: Minecraft ID
+        name: Name
+        display_name: Display Name
+        stack_size: Stack Size
+        diggable: Diggable
+        bounding_box: Bounding Box
+        transparent: Transparent
+        emit_light: Emit Light
+        filter_light: Filter Light
+        material: Material
+        hardness: Hardness
+        permalink: Permalink
+        created_at: Created
+        updated_at: Updated
+    models:
+      block:
+        one: Block
+        other: Blocks

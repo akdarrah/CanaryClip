@@ -1,0 +1,12 @@
+en:
+  activerecord:
+    attributes:
+      tracked_download:
+        character_id: Character
+        schematic_id: Schematic
+        created_at: Created
+        updated_at: Updated
+    models:
+      tracked_download:
+        one: Tracked Download
+        other: Tracked Downloads

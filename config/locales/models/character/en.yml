@@ -1,0 +1,14 @@
+en:
+  activerecord:
+    attributes:
+      character:
+        username: Username
+        uuid: UUID
+        created_at: Created
+        updated_at: Updated
+        user_id: User
+        permalink: Permalink
+    models:
+      character:
+        one: Character
+        other: Characters

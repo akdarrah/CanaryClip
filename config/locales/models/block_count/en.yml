@@ -1,0 +1,13 @@
+en:
+  activerecord:
+    attributes:
+      block_count:
+        block_id: Block
+        schematic_id: Schematic
+        count: Count
+        created_at: Created
+        updated_at: Updated
+    models:
+      block_count:
+        one: Block Count
+        other: Block Counts

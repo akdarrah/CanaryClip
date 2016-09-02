@@ -1,0 +1,15 @@
+en:
+  activerecord:
+    attributes:
+      render:
+        schematic_id: Schematic
+        camera_angle: Camera Angle
+        samples_per_pixel: Samples Per Pixel
+        state: State
+        resolution: Resolution
+        created_at: Created
+        updated_at: Updated
+    models:
+      render:
+        one: Render
+        other: Renders

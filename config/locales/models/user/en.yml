@@ -1,0 +1,13 @@
+en:
+  activerecord:
+    attributes:
+      user:
+        email: Email
+        admin: Admin
+        current_character_id: Current Character
+        created_at: Created
+        updated_at: Updated
+    models:
+      user:
+        one: User
+        other: Users
