@@ -20,9 +20,7 @@ class SchematicsController < ApplicationController
   end
 
   def log_impression
-    if @schematic.present?
-      impressionist(@schematic)
-    end
+    impressionist(@schematic)
   end
 
 end

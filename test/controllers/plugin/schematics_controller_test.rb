@@ -60,4 +60,68 @@ class PluginSchematicsControllerTest < ActionController::TestCase
     end
   end
 
+  # Plugin::SchematicsController#download
+
+  test "when schematic cannot be found with given short code" do
+    @permalink = UUID.generate(:compact)
+
+    refute Schematic.where(permalink: @permalink).exists?
+
+    get :download,
+      :id     => @permalink,
+      :plugin => {
+        :character_username => @character.username,
+        :character_uuid     => @character.uuid
+      }
+
+    assert_response :ok
+    assert response.body.include?('Schematic not found')
+    assert assigns[:schematic].blank?
+  end
+
+  test "When schematic can be found an impression is logged" do
+    @schematic = create(:schematic)
+
+    refute @schematic.impressions.exists?
+
+    get :download,
+      :id     => @schematic.permalink,
+      :plugin => {
+        :character_username => @character.username,
+        :character_uuid     => @character.uuid
+      }
+
+    assert_equal 1, @schematic.impressions.count
+    assert_equal 'download', @schematic.impressions.first.action_name
+  end
+
+  test "When schematic can be found a TrackedDownload is created" do
+    @schematic = create(:schematic)
+
+    refute @schematic.tracked_downloads.exists?
+
+    get :download,
+      :id     => @schematic.permalink,
+      :plugin => {
+        :character_username => @character.username,
+        :character_uuid     => @character.uuid
+      }
+
+    assert_equal 1, @schematic.tracked_downloads.count
+    assert_equal @character, @schematic.tracked_downloads.first.character
+  end
+
+  test "When schematic can be found, the file is sent as response" do
+    @schematic = create(:schematic)
+
+    get :download,
+      :id     => @schematic.permalink,
+      :plugin => {
+        :character_username => @character.username,
+        :character_uuid     => @character.uuid
+      }
+
+    assert_response :ok
+  end
+
 end

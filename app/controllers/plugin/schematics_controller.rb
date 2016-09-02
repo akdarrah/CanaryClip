@@ -17,11 +17,7 @@ class Plugin::SchematicsController < Plugin::BaseController
   end
 
   def download
-    if @schematic.present?
-      send_file @schematic.file.path
-    else
-      render :nothing => true, :status => :not_found
-    end
+    send_file @schematic.file.path
   end
 
   private
@@ -33,12 +29,14 @@ class Plugin::SchematicsController < Plugin::BaseController
 
   def find_schematic
     @schematic = Schematic.find_by_permalink(params[:id])
+
+    if @schematic.blank?
+      render_plugin_text I18n.t('plugin.schematics.not_found', permalink: params[:id])
+    end
   end
 
   def log_impression
-    if @schematic.present?
-      impressionist(@schematic)
-    end
+    impressionist(@schematic)
   end
 
   def track_downloads

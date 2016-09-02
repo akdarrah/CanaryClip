@@ -7,3 +7,4 @@ en:
     schematics:
       validation_error: "Schematic Upload Failed: Please try again."
       upload_success: "Schematic Upload Success: Access your schematic using short code %{permalink}."
+      not_found: "Schematic not found with %{permalink}. Please check your short code and try again."
