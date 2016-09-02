@@ -1,5 +1,7 @@
 en:
   character_claims:
+    index:
+      add_character_claim: "Claim your Character"
     new:
       claim_your_character: "Claim your Character"
     show:
