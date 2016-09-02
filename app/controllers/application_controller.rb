@@ -8,4 +8,14 @@ class ApplicationController < ActionController::Base
       redirect_to root_url
     end
   end
+
+  def current_character
+    current_user.try(:current_character)
+  end
+
+  def require_current_character
+    if current_character.blank?
+      redirect_to root_url
+    end
+  end
 end
