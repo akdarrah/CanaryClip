@@ -15,6 +15,10 @@ class Render::RenderSceneWorker
     # Give the transaction time to finish
     sleep 1
 
+    if !File.exists?(MCE_PY_PATH)
+      raise "Pymclevel must be installed to #{MCE_PY_PATH}"
+    end
+
     @render         = Render.find(render_id)
     @schematic      = @render.schematic
     @tmp_world_path = Rails.root + "tmp/worlds/#{@render.id}"
@@ -34,7 +38,6 @@ class Render::RenderSceneWorker
 
   private #####################################################################
 
-  # TODO: Each Render needs a tmp world
   def create_world!
     FileUtils.cp_r TEMPLATE_WORLD_PATH, @tmp_world_path
     system "python #{MCE_PY_PATH} #{@tmp_world_path} import #{@schematic.file.path} #{DEST_COORDINATES}"
