@@ -1,0 +1,4 @@
+en:
+  plugin:
+    base:
+      invalid_authenticity_token: "Invalid Authenticity Token"

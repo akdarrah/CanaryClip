@@ -18,7 +18,8 @@ class PluginCharacterClaimsControllerTest < ActionController::TestCase
       :id     => @unknown_claim_code,
       :plugin => {
         "character_uuid"     => @uuid,
-        "character_username" => @username
+        "character_username" => @username,
+        "authenticity_token" => PLUGIN_AUTHENTICITY_TOKEN
       }
 
     assert_response :ok
@@ -32,7 +33,8 @@ class PluginCharacterClaimsControllerTest < ActionController::TestCase
       :id     => @character_claim.token,
       :plugin => {
         "character_uuid"     => @uuid,
-        "character_username" => @wrong_username
+        "character_username" => @wrong_username,
+        "authenticity_token" => PLUGIN_AUTHENTICITY_TOKEN
       }
 
     assert_response :ok
@@ -50,7 +52,8 @@ class PluginCharacterClaimsControllerTest < ActionController::TestCase
       :id     => @character_claim.token,
       :plugin => {
         "character_uuid"     => @character.uuid,
-        "character_username" => @character.username
+        "character_username" => @character.username,
+        "authenticity_token" => PLUGIN_AUTHENTICITY_TOKEN
       }
 
     assert_response :ok
