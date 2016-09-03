@@ -1,6 +1,7 @@
 class SchematicsController < ApplicationController
   before_filter :find_schematic, only: [:show, :download]
   before_filter :log_impression, only: [:show, :download]
+  before_filter :track_downloads, only: [:download]
 
   def index
     @schematics = Schematic.published.chronological
@@ -21,6 +22,15 @@ class SchematicsController < ApplicationController
 
   def log_impression
     impressionist(@schematic)
+  end
+
+  def track_downloads
+    if current_character.present?
+      TrackedDownload.create!(
+        :character => current_character,
+        :schematic => @schematic
+      )
+    end
   end
 
 end

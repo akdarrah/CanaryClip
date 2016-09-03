@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_character
-    current_user.try(:current_character)
+    @current_character ||= current_user.try(:current_character)
   end
 
   def require_current_character
