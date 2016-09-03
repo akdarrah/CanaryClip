@@ -8,7 +8,7 @@ class RenderTest < ActiveSupport::TestCase
 
   test "State machine life cycle" do
     Render.any_instance.stubs(:publish_schematic)
-    
+
     assert @render.pending?
     assert_raise(StateMachine::InvalidTransition){ @render.render! }
     assert_raise(StateMachine::InvalidTransition){ @render.complete! }
@@ -29,7 +29,7 @@ class RenderTest < ActiveSupport::TestCase
 
   test "A Render::RenderSceneWorker is queued when render is scheduled!" do
     Render::RenderSceneWorker
-      .expects(:perform_async)
+      .expects(:perform_at)
       .with(@render.id)
       .once
 

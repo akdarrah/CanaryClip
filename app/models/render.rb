@@ -53,8 +53,11 @@ class Render < ActiveRecord::Base
 
   private #####################################################################
 
+  # If the last jobs finish at the same time, there is a chance that the
+  # Schematic won't get properly published
   def schedule_job
-    Render::RenderSceneWorker.perform_async(id)
+    schedule_time = rand(1..10).seconds.from_now
+    Render::RenderSceneWorker.perform_at(schedule_time, id)
   end
 
   def publish_schematic
