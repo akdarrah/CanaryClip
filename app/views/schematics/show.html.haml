@@ -16,6 +16,8 @@
           %p.small Use the command `mb load #{@schematic.permalink}` to download this schematic to your clipboard.
           %hr
             %dl
+              %dt Share
+              %dd= social_share_button_tag t('.social_share_title', name: @schematic.permalink, character_name: @schematic.character.username)
               %dt Uploaded
               %dd= @schematic.created_at
               %dt Views

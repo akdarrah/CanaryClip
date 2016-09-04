@@ -20,6 +20,7 @@ gem 'impressionist'
 gem 'devise'
 gem 'simple_form'
 gem "jquery-slick-rails"
+gem 'social-share-button'
 
 gem 'activeadmin', github: 'activeadmin'
 
