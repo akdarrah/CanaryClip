@@ -7,6 +7,10 @@
             = image_tag(@schematic.character.avatar.url, class: 'small-character-avatar')
             = @schematic.character
           %hr
+          - if @favorite.present?
+            %p= link_to "Unfavorite", schematic_favorite_path(@schematic, @favorite), class: 'btn btn-primary btn-block', method: :delete
+          - else
+            %p= link_to "Favorite", schematic_favorites_path(@schematic), class: 'btn btn-primary btn-block', method: :post
           %p= link_to "Download", download_schematic_path(@schematic), class: 'btn btn-primary btn-block'
           %input{type: 'text', readonly: 'readonly', value: @schematic.permalink}
           %p.small Use the command `mb load #{@schematic.permalink}` to download this schematic to your clipboard.
@@ -18,9 +22,13 @@
               %dd= number_with_delimiter @schematic.total_show_impressions
               %dt Downloads
               %dd= number_with_delimiter @schematic.total_download_impressions
-              %dt Downloaded By
+              %dt= "Downloaded By (#{@schematic.downloaded_by_characters.count})"
               %dd
                 - @schematic.downloaded_by_characters.each do |character|
+                  = image_tag(character.avatar.url, class: 'small-character-avatar')
+              %dt= "Favorited By (#{@schematic.favorited_by_characters.count})"
+              %dd
+                - @schematic.favorited_by_characters.each do |character|
                   = image_tag(character.avatar.url, class: 'small-character-avatar')
               %dt Block Count
               %dd= number_with_delimiter @schematic.total_block_count

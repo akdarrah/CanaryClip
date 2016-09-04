@@ -8,6 +8,7 @@ class SchematicsController < ApplicationController
   end
 
   def show
+    @favorite = @schematic.favorites.for_character(current_character)
   end
 
   def download

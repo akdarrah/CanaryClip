@@ -9,6 +9,7 @@ class Schematic < ActiveRecord::Base
   has_many :blocks, through: :block_counts
 
   has_many :favorites, dependent: :destroy
+  has_many :favorited_by_characters, through: :favorites, source: :character
 
   has_many :tracked_downloads, dependent: :destroy
   has_many :downloaded_by_characters, through: :tracked_downloads, source: :character

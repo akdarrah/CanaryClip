@@ -4,25 +4,22 @@ class FavoritesController < ApplicationController
 
   def create
     @favorite = @schematic.favorites.build(character: current_character)
+    @favorite.save
 
-    if @favorite.save
-      render json: @favorite, status: :ok
-    else
-      render json: @favorite.errors, status: :internal_server_error
-    end
+    redirect_to schematic_path(@schematic)
   end
 
   def destroy
-    @favorite = @schematic.favorites.where(character: current_character).first
+    @favorite = @schematic.favorites.for_character(current_character)
     @favorite.destroy
-    
-    render json: @favorite, status: :ok
+
+    redirect_to schematic_path(@schematic)
   end
 
   private
 
   def find_schematic
-    @schematic = Schematic.find(params[:schematic_id])
+    @schematic = Schematic.find_by_permalink!(params[:schematic_id])
   end
 
 end
