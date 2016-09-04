@@ -64,6 +64,10 @@ class Schematic < ActiveRecord::Base
     end
   end
 
+  def admin_access?(user)
+    user.characters.where(id: character).exists?
+  end
+
   def to_param
     permalink
   end

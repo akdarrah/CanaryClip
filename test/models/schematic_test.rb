@@ -57,4 +57,23 @@ class SchematicTest < ActiveSupport::TestCase
     end
   end
 
+  # Schematic#admin_access?
+
+  test "user does not have admin access if they do not own the character of the schematic" do
+    @user      = create(:user)
+    @character = @schematic.character
+
+    refute @user.characters.exists?
+    refute @schematic.admin_access?(@user)
+  end
+
+  test "user does have admin access if they own the character of the schematic" do
+    @user      = create(:user)
+    @character = @schematic.character
+
+    @user.characters << @character
+
+    assert @schematic.admin_access?(@user)
+  end
+
 end
