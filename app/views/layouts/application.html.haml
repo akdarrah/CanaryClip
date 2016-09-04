@@ -31,5 +31,6 @@
       .row
         .container
           = yield
+    = render partial: "layouts/analytics"
     = javascript_include_tag "application"
     = yield :script
