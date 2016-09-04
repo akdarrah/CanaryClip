@@ -21,6 +21,7 @@ gem 'devise'
 gem 'simple_form'
 gem "jquery-slick-rails"
 gem 'social-share-button'
+gem "cancan"
 
 gem 'activeadmin', github: 'activeadmin'
 

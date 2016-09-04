@@ -15,3 +15,8 @@ en:
       schematic:
         one: Schematic
         other: Schematics
+
+  simple_form:
+    placeholders:
+      schematic:
+        description: 'Enter a description for this schematic'

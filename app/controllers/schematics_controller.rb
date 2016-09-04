@@ -1,5 +1,6 @@
 class SchematicsController < ApplicationController
-  before_filter :find_schematic, only: [:show, :download, :update]
+  load_and_authorize_resource find_by: :permalink
+
   before_filter :log_impression, only: [:show, :download]
   before_filter :track_downloads, only: [:download]
 
@@ -15,7 +16,6 @@ class SchematicsController < ApplicationController
     send_file @schematic.file.path
   end
 
-  # TODO: Permissions
   def update
     @schematic.attributes = update_params
     @schematic.save!
@@ -24,10 +24,6 @@ class SchematicsController < ApplicationController
   end
 
   private
-
-  def find_schematic
-    @schematic = Schematic.find_by_permalink!(params[:id])
-  end
 
   def log_impression
     impressionist(@schematic)
