@@ -1,5 +1,5 @@
 class SchematicsController < ApplicationController
-  before_filter :find_schematic, only: [:show, :download]
+  before_filter :find_schematic, only: [:show, :download, :update]
   before_filter :log_impression, only: [:show, :download]
   before_filter :track_downloads, only: [:download]
 
@@ -13,6 +13,14 @@ class SchematicsController < ApplicationController
 
   def download
     send_file @schematic.file.path
+  end
+
+  # TODO: Permissions
+  def update
+    @schematic.attributes = update_params
+    @schematic.save!
+
+    redirect_to schematic_path(@schematic)
   end
 
   private
@@ -32,6 +40,11 @@ class SchematicsController < ApplicationController
         :schematic => @schematic
       )
     end
+  end
+
+  def update_params
+    params.require(:schematic)
+      .permit(:description)
   end
 
 end

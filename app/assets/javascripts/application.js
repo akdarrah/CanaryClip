@@ -15,4 +15,5 @@
 //= require jquery.slick
 //= require bootstrap-sprockets
 //= require social-share-button
+//= require readmore.min
 //= require_tree .

@@ -4,6 +4,12 @@
       .slick-slider
         - @schematic.renders.standard_resolution.camera_angle_order.each_with_index do |render, index|
           = image_tag render.file.url
+      %br
+      .description= simple_format @schematic.description
+      -# = simple_form_for @schematic do |f|
+      -#   = f.input :description
+      -#   = f.button :submit
+      %br
     .col-xs-12.col-md-3
       %p
         = image_tag(@schematic.character.avatar.url, class: 'small-character-avatar')
@@ -62,4 +68,6 @@
         accessibility: true,
         autoplay: true
       });
+
+      $('.description').readmore();
     });
