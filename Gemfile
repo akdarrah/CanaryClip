@@ -19,6 +19,7 @@ gem 'sass-rails', '>= 3.2'
 gem 'impressionist'
 gem 'devise'
 gem 'simple_form'
+gem "jquery-slick-rails"
 
 gem 'activeadmin', github: 'activeadmin'
 

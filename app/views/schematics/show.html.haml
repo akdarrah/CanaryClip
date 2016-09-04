@@ -52,19 +52,14 @@
         .col-xs-12.col-md-9.col-md-pull-3
           .row
             .col-xs-12
-              #carousel-example-generic.carousel.slide{:'data-ride' => "carousel"}
-                %ol.carousel-indicators
-                  - @schematic.renders.standard_resolution.camera_angle_order.each_with_index do |render, index|
-                    %li{:'data-target' => "#carousel-example-generic", :'data-slide-to' => index, :class => "#{'active' if index.zero?}"}
+              .slick-slider
+                - @schematic.renders.standard_resolution.camera_angle_order.each_with_index do |render, index|
+                  = image_tag render.file.url
 
-                .carousel-inner{:role => "listbox"}
-                  - @schematic.renders.standard_resolution.camera_angle_order.each_with_index do |render, index|
-                    .item{class: "#{'active' if index.zero?}"}
-                      = image_tag render.file.url
-
-                %a.left.carousel-control{href: "#carousel-example-generic", role: "button", :'data-slide' => "prev"}
-                  %span.glyphicon.glyphicon-chevron-left{:'aria-hidden' => "true"}
-                  %span.sr-only Previous
-                %a.right.carousel-control{href: "#carousel-example-generic", role: "button", :'data-slide' => "next"}
-                  %span.glyphicon.glyphicon-chevron-right{:'aria-hidden' => "true"}
-                  %span.sr-only Next
+- content_for :script do
+  :javascript
+    $(document).ready(function(){
+      $('.slick-slider').slick({
+        dots: true
+      });
+    });
