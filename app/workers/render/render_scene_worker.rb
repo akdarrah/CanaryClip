@@ -1,7 +1,7 @@
 class Render::RenderSceneWorker
   include Sidekiq::Worker
 
-  TEXTURE_PATH = Rails.root + "private/red_craft.zip"
+  TEXTURE_PATH = Rails.root + "private/Faithful.zip"
 
   TEMPLATE_WORLD_PATH = Rails.root + "private/Blank188"
   MCE_PY_PATH         = Rails.root + "private/pymclevel/mce.py"
