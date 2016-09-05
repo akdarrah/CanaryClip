@@ -40,17 +40,19 @@
       - download_count = number_with_delimiter(@schematic.total_download_impressions)
       - favorite_count = number_with_delimiter(@schematic.favorited_by_characters.count)
       .row
-        .col-xs-6
-          = link_to "Download".html_safe, download_schematic_path(@schematic), class: 'btn btn-primary btn-block'
-        .col-xs-6
+        .col-xs-12
+          = link_to fa_icon('download'), download_schematic_path(@schematic), class: 'btn btn-primary', title: 'Download schematic file to your computer'
           - if @favorite.present?
-            = link_to "Unfavorite", schematic_favorite_path(@schematic, @favorite), class: 'btn btn-danger btn-block', method: :delete
+            = link_to fa_icon('heart'), schematic_favorite_path(@schematic, @favorite), class: 'btn btn-danger', method: :delete, title: 'Click to unfavorite'
           - else
-            = link_to "Favorite", schematic_favorites_path(@schematic), class: 'btn btn-danger btn-block', method: :post
-
+            = link_to fa_icon('heart-o'), schematic_favorites_path(@schematic), class: 'btn btn-danger', method: :post, title: 'Click to favorite'
       %br
-      %input{type: 'text', readonly: 'readonly', value: @schematic.permalink}
-      %br
+      .row
+        .col-xs-12
+          .input-group
+            %input{type: 'text', readonly: 'readonly', class: "form-control", value: @schematic.permalink}
+            %span.input-group-btn
+              %button.btn.btn-secondary{type: "button"}= fa_icon('clipboard')
       %br
       %p.small Use the command `mb load #{@schematic.permalink}` to download this schematic to your clipboard.
       .strike
