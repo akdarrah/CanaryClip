@@ -5,7 +5,8 @@
         %span
           = image_tag(@schematic.character.avatar.url, class: 'small-character-avatar')
           = @schematic.character
-        %hr
+        .strike
+          %span= formatted_date @schematic.created_at
       .slick-slider
         - @schematic.renders.standard_resolution.camera_angle_order.each_with_index do |render, index|
           = image_tag render.file.url
@@ -15,7 +16,8 @@
         %span
           = image_tag(@schematic.character.avatar.url, class: 'small-character-avatar')
           = @schematic.character
-        %hr
+        .strike
+          %span= formatted_date @schematic.created_at
       .row
         .col-xs-12
           = link_to "#{fa_icon('download')} #{number_with_delimiter(@schematic.total_download_impressions)}".html_safe, download_schematic_path(@schematic), class: 'btn btn-primary', title: 'Download schematic file to your computer'
@@ -33,6 +35,9 @@
             %span.input-group-btn
               %button.btn.btn-secondary.btn-clipboard{type: "button", 'data-clipboard-target' => "#schematic-permalink-input", title: 'Click to copy to clipboard'}= fa_icon('clipboard')
       %br
+      .row.small
+        .col-xs-12
+          = dimensions(@schematic)
       .description
         - if can?(:update, @schematic)
           .description-form
@@ -42,12 +47,6 @@
         - else
           .description-text
             = simple_format @schematic.description
-      %br
-      .row.small
-        .col-xs-12
-          = formatted_date @schematic.created_at
-        .col-xs-12
-          = dimensions(@schematic)
       .strike
         %span= "#{number_with_delimiter(@schematic.total_block_count)} Blocks"
       - @schematic.block_counts.visible.most_used_order.each do |block_count|
