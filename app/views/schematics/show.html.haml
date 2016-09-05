@@ -45,12 +45,8 @@
               = image_tag(character.avatar.url, class: 'small-character-avatar')
           %dt Block Count
           %dd= number_with_delimiter @schematic.total_block_count
-          %dt Width
-          %dd= number_with_delimiter @schematic.width
-          %dt Length
-          %dd= number_with_delimiter @schematic.length
-          %dt Height
-          %dd= number_with_delimiter @schematic.height
+          %dt Dimensions
+          %dt= dimensions(@schematic)
       %table
         %tbody
           - @schematic.block_counts.visible.most_used_order.each do |block_count|
