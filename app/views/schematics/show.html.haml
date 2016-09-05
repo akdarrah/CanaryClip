@@ -18,31 +18,27 @@
         = image_tag(@schematic.character.avatar.url, class: 'small-character-avatar')
         = @schematic.character
       %hr
-      - if @favorite.present?
-        %p= link_to "Unfavorite", schematic_favorite_path(@schematic, @favorite), class: 'btn btn-danger btn-block', method: :delete
-      - else
-        %p= link_to "Favorite", schematic_favorites_path(@schematic), class: 'btn btn-danger btn-block', method: :post
-      %p= link_to "Download", download_schematic_path(@schematic), class: 'btn btn-primary btn-block'
       %input{type: 'text', readonly: 'readonly', value: @schematic.permalink}
       %p.small Use the command `mb load #{@schematic.permalink}` to download this schematic to your clipboard.
+      - download_count = number_with_delimiter(@schematic.total_download_impressions)
+      %p= link_to "Download #{download_count}", download_schematic_path(@schematic), class: 'btn btn-primary btn-block'
+      - @schematic.downloaded_by_characters.each do |character|
+        = image_tag(character.avatar.url, class: 'small-character-avatar')
+      %hr
+      - favorite_count = number_with_delimiter(@schematic.favorited_by_characters.count)
+      - if @favorite.present?
+        %p= link_to "Unfavorite #{favorite_count}", schematic_favorite_path(@schematic, @favorite), class: 'btn btn-danger btn-block', method: :delete
+      - else
+        %p= link_to "Favorite #{favorite_count}", schematic_favorites_path(@schematic), class: 'btn btn-danger btn-block', method: :post
+      - @schematic.favorited_by_characters.each do |character|
+        = image_tag(character.avatar.url, class: 'small-character-avatar')
       %hr
         %dl
-          %dt Share
           %dd= social_share_button_tag t('.social_share_title', name: @schematic.permalink, character_name: @schematic.character.username)
           %dt Uploaded
           %dd= formatted_date @schematic.created_at
           %dt Views
           %dd= number_with_delimiter @schematic.total_show_impressions
-          %dt Downloads
-          %dd= number_with_delimiter @schematic.total_download_impressions
-          %dt= "Downloaded By (#{@schematic.downloaded_by_characters.count})"
-          %dd
-            - @schematic.downloaded_by_characters.each do |character|
-              = image_tag(character.avatar.url, class: 'small-character-avatar')
-          %dt= "Favorited By (#{@schematic.favorited_by_characters.count})"
-          %dd
-            - @schematic.favorited_by_characters.each do |character|
-              = image_tag(character.avatar.url, class: 'small-character-avatar')
           %dt Dimensions
           %dd= dimensions(@schematic)
           %dt= "#{number_with_delimiter(@schematic.total_block_count)} Blocks"
