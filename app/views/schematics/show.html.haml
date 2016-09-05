@@ -52,7 +52,7 @@
           .input-group
             %input{type: 'text', readonly: 'readonly', id: 'schematic-permalink-input', class: "form-control select-all-to-copy", value: @schematic.permalink}
             %span.input-group-btn
-              %button.btn.btn-secondary.btn-clipboard{type: "button", 'data-clipboard-target' => "#schematic-permalink-input"}= fa_icon('clipboard')
+              %button.btn.btn-secondary.btn-clipboard{type: "button", 'data-clipboard-target' => "#schematic-permalink-input", title: 'Click to copy to clipboard'}= fa_icon('clipboard')
       %br
       %p.small Use the command `mb load #{@schematic.permalink}` to download this schematic to your clipboard.
       .strike
