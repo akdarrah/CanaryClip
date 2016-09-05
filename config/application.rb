@@ -11,5 +11,7 @@ module Minebuild
     config.autoload_paths += %W(#{Rails.root}/lib)
 
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.yml')]
+
+    config.time_zone = 'Eastern Time (US & Canada)'
   end
 end

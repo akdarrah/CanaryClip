@@ -11,6 +11,14 @@ module ApplicationHelper
     end
   end
 
+  def formatted_date(timestamp)
+    full_date = timestamp.strftime('%b %d %Y, %I:%M %p %Z')
+
+    content_tag :span, title: full_date do
+      "#{time_ago_in_words(timestamp, title: full_date)} ago"
+    end
+  end
+
   def block_icon_with_title(block_count)
     block = block_count.block
     count = block_count.count

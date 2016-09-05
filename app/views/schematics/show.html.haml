@@ -30,7 +30,7 @@
           %dt Share
           %dd= social_share_button_tag t('.social_share_title', name: @schematic.permalink, character_name: @schematic.character.username)
           %dt Uploaded
-          %dd= @schematic.created_at
+          %dd= formatted_date @schematic.created_at
           %dt Views
           %dd= number_with_delimiter @schematic.total_show_impressions
           %dt Downloads
@@ -43,11 +43,9 @@
           %dd
             - @schematic.favorited_by_characters.each do |character|
               = image_tag(character.avatar.url, class: 'small-character-avatar')
-          %dt Block Count
-          %dd= number_with_delimiter @schematic.total_block_count
           %dt Dimensions
           %dd= dimensions(@schematic)
-          %dt Blocks
+          %dt= "#{number_with_delimiter(@schematic.total_block_count)} Blocks"
           %dd
             - @schematic.block_counts.visible.most_used_order.each do |block_count|
               = block_icon_with_title(block_count)
