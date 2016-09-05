@@ -2,13 +2,36 @@
   .col-xs-12.white-stripe
     .col-xs-12.col-md-8
       .visible-xs.visible-sm
-        .strike
-          %span
-            = image_tag(@schematic.character.avatar.url, class: 'small-character-avatar')
-            = @schematic.character
+        %span
+          = image_tag(@schematic.character.avatar.url, class: 'small-character-avatar')
+          = @schematic.character
+        %hr
       .slick-slider
         - @schematic.renders.standard_resolution.camera_angle_order.each_with_index do |render, index|
           = image_tag render.file.url
+      %br
+    .col-xs-12.col-md-4
+      .visible-lg.visible-md
+        %span
+          = image_tag(@schematic.character.avatar.url, class: 'small-character-avatar')
+          = @schematic.character
+        %hr
+      .row
+        .col-xs-12
+          = link_to "#{fa_icon('download')} #{number_with_delimiter(@schematic.total_download_impressions)}".html_safe, download_schematic_path(@schematic), class: 'btn btn-primary', title: 'Download schematic file to your computer'
+          - if @favorite.present?
+            = link_to "#{fa_icon('heart')} #{number_with_delimiter(@schematic.favorited_by_characters.count)}".html_safe, schematic_favorite_path(@schematic, @favorite), class: 'btn btn-danger', method: :delete, title: 'Click to unfavorite'
+          - else
+            = link_to "#{fa_icon('heart-o')} #{number_with_delimiter(@schematic.favorited_by_characters.count)}".html_safe, schematic_favorites_path(@schematic), class: 'btn btn-danger', method: :post, title: 'Click to favorite'
+          &nbsp;
+          %span= "#{number_with_delimiter(@schematic.total_show_impressions)} Views"
+      %br
+      .row
+        .col-xs-12
+          .input-group
+            %input{type: 'text', readonly: 'readonly', id: 'schematic-permalink-input', class: "form-control select-all-to-copy", value: @schematic.permalink}
+            %span.input-group-btn
+              %button.btn.btn-secondary.btn-clipboard{type: "button", 'data-clipboard-target' => "#schematic-permalink-input", title: 'Click to copy to clipboard'}= fa_icon('clipboard')
       %br
       .description
         - if can?(:update, @schematic)
@@ -20,49 +43,11 @@
           .description-text
             = simple_format @schematic.description
       %br
-    .col-xs-12.col-md-4
-      .visible-lg.visible-md
-        .strike
-          %span
-            = image_tag(@schematic.character.avatar.url, class: 'small-character-avatar')
-            = @schematic.character
-      %br
-      .row
+      .row.small
         .col-xs-12
           = formatted_date @schematic.created_at
         .col-xs-12
-          = "#{number_with_delimiter(@schematic.total_show_impressions)} Views"
-        .col-xs-12
           = dimensions(@schematic)
-
-      %br
-      %br
-      - download_count = number_with_delimiter(@schematic.total_download_impressions)
-      - favorite_count = number_with_delimiter(@schematic.favorited_by_characters.count)
-      .row
-        .col-xs-12
-          = link_to fa_icon('download'), download_schematic_path(@schematic), class: 'btn btn-primary', title: 'Download schematic file to your computer'
-          - if @favorite.present?
-            = link_to fa_icon('heart'), schematic_favorite_path(@schematic, @favorite), class: 'btn btn-danger', method: :delete, title: 'Click to unfavorite'
-          - else
-            = link_to fa_icon('heart-o'), schematic_favorites_path(@schematic), class: 'btn btn-danger', method: :post, title: 'Click to favorite'
-      %br
-      .row
-        .col-xs-12
-          .input-group
-            %input{type: 'text', readonly: 'readonly', id: 'schematic-permalink-input', class: "form-control select-all-to-copy", value: @schematic.permalink}
-            %span.input-group-btn
-              %button.btn.btn-secondary.btn-clipboard{type: "button", 'data-clipboard-target' => "#schematic-permalink-input", title: 'Click to copy to clipboard'}= fa_icon('clipboard')
-      %br
-      %p.small Use the command `mb load #{@schematic.permalink}` to download this schematic to your clipboard.
-      .strike
-        %span= "#{download_count} Downloads"
-      - @schematic.downloaded_by_characters.each do |character|
-        = image_tag(character.avatar.url, class: 'small-character-avatar')
-      .strike
-        %span= "#{favorite_count} Favorites"
-      - @schematic.favorited_by_characters.each do |character|
-        = image_tag(character.avatar.url, class: 'small-character-avatar')
       .strike
         %span= "#{number_with_delimiter(@schematic.total_block_count)} Blocks"
       - @schematic.block_counts.visible.most_used_order.each do |block_count|
@@ -85,5 +70,7 @@
         autoplay: true
       });
 
-      $('.description-text').readmore();
+      $('.description-text').readmore({
+        collapsedHeight: 100
+      });
     });
