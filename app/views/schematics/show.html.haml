@@ -1,6 +1,11 @@
 .row.schematic-view
   .col-xs-12.white-stripe
     .col-xs-12.col-md-8
+      .visible-xs.visible-sm
+        .strike
+          %span
+            = image_tag(@schematic.character.avatar.url, class: 'small-character-avatar')
+            = @schematic.character
       .slick-slider
         - @schematic.renders.standard_resolution.camera_angle_order.each_with_index do |render, index|
           = image_tag render.file.url
@@ -16,10 +21,11 @@
             = simple_format @schematic.description
       %br
     .col-xs-12.col-md-4
-      .strike
-        %span
-          = image_tag(@schematic.character.avatar.url, class: 'small-character-avatar')
-          = @schematic.character
+      .visible-lg.visible-md
+        .strike
+          %span
+            = image_tag(@schematic.character.avatar.url, class: 'small-character-avatar')
+            = @schematic.character
       %br
       .row
         .col-xs-12
