@@ -17,10 +17,11 @@
               = f.button :submit, 'Save', class: "btn-primary"
       %br
     .col-xs-12.col-md-4
-      %p
-        = image_tag(@schematic.character.avatar.url, class: 'small-character-avatar')
-        = @schematic.character
-      %hr
+      .strike
+        %span
+          = image_tag(@schematic.character.avatar.url, class: 'small-character-avatar')
+          = @schematic.character
+      %br
 
       - download_count = number_with_delimiter(@schematic.total_download_impressions)
       - favorite_count = number_with_delimiter(@schematic.favorited_by_characters.count)
