@@ -17,4 +17,6 @@
 //= require social-share-button
 //= require readmore.min
 //= require clipboard.min
+//= require jquery.matchHeight
+//= require grade
 //= require_tree .

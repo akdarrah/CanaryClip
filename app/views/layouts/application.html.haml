@@ -28,9 +28,8 @@
                   - if current_user.present?
                     %li= link_to 'Characters', character_claims_path
                   %li= link_to 'Home', root_url
-      .row
-        .container
-          = yield
+    .container
+      = yield
     = render partial: "layouts/analytics"
     = javascript_include_tag "application"
     = yield :script

@@ -50,8 +50,9 @@ html, body {
 
 
 .schematic-view {
-  .white-stripe {
-    background: white;
+  background: white;
+
+  .schematic-column {
     padding-top: 30px;
   }
 }
@@ -92,4 +93,17 @@ html, body {
 .strike > span:after {
     left: 100%;
     margin-left: 15px;
+}
+
+
+
+
+
+.slick-dots li button:before
+{
+    color: white;
+}
+.slick-dots li.slick-active button:before
+{
+    color: white;
 }
