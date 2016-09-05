@@ -11,4 +11,12 @@ module ApplicationHelper
     end
   end
 
+  def block_icon_with_title(block_count)
+    block = block_count.block
+    count = block_count.count
+    title = "#{block.display_name} &times; #{count}".html_safe
+
+    image_tag block.icon.url, title: title, class: 'block-icon'
+  end
+
 end
