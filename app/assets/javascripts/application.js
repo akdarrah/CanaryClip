@@ -16,4 +16,5 @@
 //= require bootstrap-sprockets
 //= require social-share-button
 //= require readmore.min
+//= require clipboard.min
 //= require_tree .

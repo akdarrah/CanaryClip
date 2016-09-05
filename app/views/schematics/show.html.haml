@@ -50,9 +50,9 @@
       .row
         .col-xs-12
           .input-group
-            %input{type: 'text', readonly: 'readonly', class: "form-control", value: @schematic.permalink}
+            %input{type: 'text', readonly: 'readonly', id: 'schematic-permalink-input', class: "form-control", value: @schematic.permalink}
             %span.input-group-btn
-              %button.btn.btn-secondary{type: "button"}= fa_icon('clipboard')
+              %button.btn.btn-secondary.btn-clipboard{type: "button", 'data-clipboard-target' => "#schematic-permalink-input"}= fa_icon('clipboard')
       %br
       %p.small Use the command `mb load #{@schematic.permalink}` to download this schematic to your clipboard.
       .strike
@@ -73,6 +73,8 @@
 - content_for :script do
   :javascript
     $(document).ready(function(){
+      new Clipboard('.btn-clipboard');
+
       $('.slick-slider').slick({
         dots: true,
         accessibility: true,
