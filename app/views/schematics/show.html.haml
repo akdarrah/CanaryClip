@@ -6,15 +6,14 @@
           = image_tag render.file.url
       %br
       .description
-        .description-text
-          = simple_format @schematic.description
-        %br
-        = formatted_date @schematic.created_at
         - if can?(:update, @schematic)
           .description-form
             = simple_form_for @schematic do |f|
               = f.input :description, label: false
               = f.button :submit, 'Save', class: "btn-primary"
+        - else
+          .description-text
+            = simple_format @schematic.description
       %br
     .col-xs-12.col-md-4
       .strike
@@ -22,7 +21,16 @@
           = image_tag(@schematic.character.avatar.url, class: 'small-character-avatar')
           = @schematic.character
       %br
+      .row
+        .col-xs-12
+          = formatted_date @schematic.created_at
+        .col-xs-12
+          = "#{number_with_delimiter(@schematic.total_show_impressions)} Views"
+        .col-xs-12
+          = dimensions(@schematic)
 
+      %br
+      %br
       - download_count = number_with_delimiter(@schematic.total_download_impressions)
       - favorite_count = number_with_delimiter(@schematic.favorited_by_characters.count)
       .row
@@ -52,12 +60,7 @@
       - @schematic.block_counts.visible.most_used_order.each do |block_count|
         = block_icon_with_title(block_count)
       %hr
-        = social_share_button_tag t('.social_share_title', name: @schematic.permalink, character_name: @schematic.character.username)
-        %dl
-          %dt Views
-          %dd= number_with_delimiter @schematic.total_show_impressions
-          %dt Dimensions
-          %dd= dimensions(@schematic)
+        .text-center= social_share_button_tag t('.social_share_title', name: @schematic.permalink, character_name: @schematic.character.username)
 
 - content_for :script do
   :javascript
