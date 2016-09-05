@@ -35,12 +35,12 @@
       - favorite_count = number_with_delimiter(@schematic.favorited_by_characters.count)
       .row
         .col-xs-6
-          = link_to "Download #{download_count}", download_schematic_path(@schematic), class: 'btn btn-primary btn-block'
+          = link_to "Download".html_safe, download_schematic_path(@schematic), class: 'btn btn-primary btn-block'
         .col-xs-6
           - if @favorite.present?
-            = link_to "Unfavorite #{favorite_count}", schematic_favorite_path(@schematic, @favorite), class: 'btn btn-danger btn-block', method: :delete
+            = link_to "Unfavorite", schematic_favorite_path(@schematic, @favorite), class: 'btn btn-danger btn-block', method: :delete
           - else
-            = link_to "Favorite #{favorite_count}", schematic_favorites_path(@schematic), class: 'btn btn-danger btn-block', method: :post
+            = link_to "Favorite", schematic_favorites_path(@schematic), class: 'btn btn-danger btn-block', method: :post
 
       %br
       %input{type: 'text', readonly: 'readonly', value: @schematic.permalink}
