@@ -6,7 +6,10 @@
           = image_tag render.file.url
       %br
       .description
-        .description-text= simple_format @schematic.description
+        .description-text
+          = simple_format @schematic.description
+        %br
+        = formatted_date @schematic.created_at
         - if can?(:update, @schematic)
           .description-form
             = simple_form_for @schematic do |f|
@@ -33,10 +36,8 @@
       - @schematic.favorited_by_characters.each do |character|
         = image_tag(character.avatar.url, class: 'small-character-avatar')
       %hr
+        = social_share_button_tag t('.social_share_title', name: @schematic.permalink, character_name: @schematic.character.username)
         %dl
-          %dd= social_share_button_tag t('.social_share_title', name: @schematic.permalink, character_name: @schematic.character.username)
-          %dt Uploaded
-          %dd= formatted_date @schematic.created_at
           %dt Views
           %dd= number_with_delimiter @schematic.total_show_impressions
           %dt Dimensions

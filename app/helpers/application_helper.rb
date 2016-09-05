@@ -12,10 +12,8 @@ module ApplicationHelper
   end
 
   def formatted_date(timestamp)
-    full_date = timestamp.strftime('%b %d %Y, %I:%M %p %Z')
-
-    content_tag :span, title: full_date do
-      "#{time_ago_in_words(timestamp, title: full_date)} ago"
+    content_tag :span do
+      timestamp.strftime('%b %d %Y, %I:%M %p %Z')
     end
   end
 
