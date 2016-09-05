@@ -50,7 +50,7 @@
       .row
         .col-xs-12
           .input-group
-            %input{type: 'text', readonly: 'readonly', id: 'schematic-permalink-input', class: "form-control", value: @schematic.permalink}
+            %input{type: 'text', readonly: 'readonly', id: 'schematic-permalink-input', class: "form-control select-all-to-copy", value: @schematic.permalink}
             %span.input-group-btn
               %button.btn.btn-secondary.btn-clipboard{type: "button", 'data-clipboard-target' => "#schematic-permalink-input"}= fa_icon('clipboard')
       %br
@@ -74,6 +74,10 @@
   :javascript
     $(document).ready(function(){
       new Clipboard('.btn-clipboard');
+
+      $(".select-all-to-copy").on("click", function () {
+        $(this).select();
+      });
 
       $('.slick-slider').slick({
         dots: true,
