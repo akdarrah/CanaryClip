@@ -1,63 +1,74 @@
-.row.schematic-view
-  .col-xs-12.visible-xs.visible-sm.schematic-column
-    %span
-      = image_tag(@schematic.character.avatar.url, class: 'small-character-avatar')
-      = @schematic.character
-    .strike
-      %span= formatted_date @schematic.created_at
-  .col-xs-12.col-md-8.gradient-wrap.schematic-column{'data-match-height' => "schematic-column-group"}
-    .slick-slider
-      - @schematic.renders.standard_resolution.camera_angle_order.each_with_index do |render, index|
-        = image_tag render.file.url
-    %br
-  .col-xs-12.col-md-4.schematic-column{'data-match-height' => "schematic-column-group"}
-    .visible-lg.visible-md
-      %span
-        = image_tag(@schematic.character.avatar.url, class: 'small-character-avatar')
-        = @schematic.character
-      .strike
-        %span= formatted_date @schematic.created_at
-    .row
-      .col-xs-12
-        = link_to "#{fa_icon('download')} #{number_with_delimiter(@schematic.total_download_impressions)}".html_safe, download_schematic_path(@schematic), class: 'btn btn-primary', title: 'Download schematic file to your computer'
-        - if @favorite.present?
-          = link_to "#{fa_icon('heart')} #{number_with_delimiter(@schematic.favorited_by_characters.count)}".html_safe, schematic_favorite_path(@schematic, @favorite), class: 'btn btn-danger', method: :delete, title: 'Click to unfavorite'
-        - else
-          = link_to "#{fa_icon('heart-o')} #{number_with_delimiter(@schematic.favorited_by_characters.count)}".html_safe, schematic_favorites_path(@schematic), class: 'btn btn-danger', method: :post, title: 'Click to favorite'
-        &nbsp;
-        %span= "#{number_with_delimiter(@schematic.total_show_impressions)} Views"
-    %br
-    .row
-      .col-xs-12
-        .input-group
-          %input{type: 'text', readonly: 'readonly', id: 'schematic-permalink-input', class: "form-control select-all-to-copy", value: @schematic.permalink}
-          %span.input-group-btn
-            %button.btn.btn-secondary.btn-clipboard{type: "button", 'data-clipboard-target' => "#schematic-permalink-input", title: 'Click to copy to clipboard'}= fa_icon('clipboard')
-    %br
-    .row.small
-      .col-xs-12
-        = dimensions(@schematic)
-    .description
-      - if can?(:update, @schematic)
-        .description-form
-          = simple_form_for @schematic do |f|
-            = f.input :description, label: false
-            = f.button :submit, 'Save', class: "btn-primary"
-      - else
-        .description-text
-          = simple_format @schematic.description
-    .strike
-      %span= "#{number_with_delimiter(@schematic.total_block_count)} Blocks"
-    - @schematic.block_counts.visible.most_used_order.each do |block_count|
-      = block_icon_with_title(block_count)
-    %hr
-      .text-center= social_share_button_tag t('.social_share_title', name: @schematic.permalink, character_name: @schematic.character.username)
+.container-fluid.schematic-stripe
+  .row
+    .container
+      .row.schematic-view
+        .col-xs-12.col-md-8.gradient-wrap.schematic-column{'data-match-height' => "schematic-column-group"}
+          .slick-slider
+            - @schematic.renders.standard_resolution.camera_angle_order.each_with_index do |render, index|
+              = image_tag render.file.url
+          %br
+        .col-xs-12.col-md-4.schematic-sidebar.schematic-column{'data-match-height' => "schematic-column-group"}
+          %span
+            = image_tag(@schematic.character.avatar.url, class: 'small-character-avatar')
+            = @schematic.character
+          .strike
+            %span= formatted_date @schematic.created_at
+          .row
+            .col-xs-12
+              = link_to "#{fa_icon('download')} #{number_with_delimiter(@schematic.total_download_impressions)}".html_safe, download_schematic_path(@schematic), class: 'btn btn-primary', title: 'Download schematic file to your computer'
+              - if @favorite.present?
+                = link_to "#{fa_icon('heart')} #{number_with_delimiter(@schematic.favorited_by_characters.count)}".html_safe, schematic_favorite_path(@schematic, @favorite), class: 'btn btn-danger', method: :delete, title: 'Click to unfavorite'
+              - else
+                = link_to "#{fa_icon('heart-o')} #{number_with_delimiter(@schematic.favorited_by_characters.count)}".html_safe, schematic_favorites_path(@schematic), class: 'btn btn-danger', method: :post, title: 'Click to favorite'
+              &nbsp;
+              %span= "#{number_with_delimiter(@schematic.total_show_impressions)} Views"
+          %br
+          .row
+            .col-xs-12
+              .input-group
+                %input{type: 'text', readonly: 'readonly', id: 'schematic-permalink-input', class: "form-control select-all-to-copy", value: @schematic.permalink}
+                %span.input-group-btn
+                  %button.btn.btn-secondary.btn-clipboard{type: "button", 'data-clipboard-target' => "#schematic-permalink-input", title: 'Click to copy to clipboard'}= fa_icon('clipboard')
+          %br
+          .row.small
+            .col-xs-12
+              = dimensions(@schematic)
+          .description
+            - if can?(:update, @schematic)
+              .description-form
+                = simple_form_for @schematic do |f|
+                  = f.input :description, label: false
+                  = f.button :submit, 'Save', class: "btn-primary"
+            - else
+              .description-text
+                = simple_format @schematic.description
+          .strike
+            %span= "#{number_with_delimiter(@schematic.total_block_count)} Blocks"
+          - @schematic.block_counts.visible.most_used_order.each do |block_count|
+            = block_icon_with_title(block_count)
+          %hr
+            .text-center= social_share_button_tag t('.social_share_title', name: @schematic.permalink, character_name: @schematic.character.username)
 
 - content_for :script do
   :javascript
 
     window.addEventListener('load', function(){
-      Grade(document.querySelectorAll('.gradient-wrap'));
+      Grade(document.querySelectorAll('.gradient-wrap'), null, function(gradientData){
+        var gradientData = gradientData[0].gradientData;
+
+        var firstColorArray = gradientData[0].rgba;
+        var firstColor = "rgba(" + firstColorArray[0] + ", " + firstColorArray[1] + ", " + firstColorArray[2] + ", " + firstColorArray[2] + ")";
+
+        var secondColorArray = gradientData[1].rgba;
+        var secondColor = "rgba(" + secondColorArray[0] + ", " + secondColorArray[1] + ", " + secondColorArray[2] + ", " + secondColorArray[2] + ")";
+
+        $('.schematic-stripe')
+          .css('background', firstColor)
+          .css('background', '-webkit-linear-gradient(left, '+firstColor+', '+secondColor+')')
+          .css('background', '-o-linear-gradient(right, '+firstColor+', '+secondColor+')')
+          .css('background', '-moz-linear-gradient(right, '+firstColor+', '+secondColor+')')
+          .css('background', 'linear-gradient(to right, '+firstColor+', '+secondColor+')');
+      })
     });
 
     $(document).ready(function(){

@@ -49,11 +49,16 @@ html, body {
 }
 
 
-.schematic-view {
-  background: white;
 
-  .schematic-column {
-    padding-top: 30px;
+.schematic-stripe {
+  padding: 30px;
+
+  .schematic-view {
+    .schematic-sidebar {
+      background: white;
+      padding-top: 15px;
+      padding-bottom: 15px;
+    }
   }
 }
 
