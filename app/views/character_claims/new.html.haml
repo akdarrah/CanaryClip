@@ -1,5 +1,8 @@
-%h1= t('.claim_your_character')
+.container
+  .col-xs-12
+    .row
+      %h1= t('.claim_your_character')
 
-= simple_form_for @character_claim do |f|
-  = f.input :character_username
-  = f.button :submit
+      = simple_form_for @character_claim do |f|
+        = f.input :character_username
+        = f.button :submit

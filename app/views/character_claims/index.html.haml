@@ -1,17 +1,18 @@
-.row
-  .col-xs-12
-    = link_to t('.add_character_claim'), new_character_claim_path
-    %table.table
-      %thead
-        %tr
-          %th &nbsp;
-          %th= CharacterClaim.human_attribute_name(:character_username)
-          %th= CharacterClaim.human_attribute_name(:token)
-          %th= CharacterClaim.human_attribute_name(:state)
-      %tbody
-        - @character_claims.each do |character_claim|
+.container
+  .row
+    .col-xs-12
+      = link_to t('.add_character_claim'), new_character_claim_path
+      %table.table
+        %thead
           %tr
-            %td= image_tag(character_claim.character.avatar.url, class: 'small-character-avatar')
-            %td= link_to character_claim.character.username, character_claim_path(character_claim)
-            %td= character_claim.token
-            %td= character_claim.state
+            %th &nbsp;
+            %th= CharacterClaim.human_attribute_name(:character_username)
+            %th= CharacterClaim.human_attribute_name(:token)
+            %th= CharacterClaim.human_attribute_name(:state)
+        %tbody
+          - @character_claims.each do |character_claim|
+            %tr
+              %td= image_tag(character_claim.character.avatar.url, class: 'small-character-avatar')
+              %td= link_to character_claim.character.username, character_claim_path(character_claim)
+              %td= character_claim.token
+              %td= character_claim.state
