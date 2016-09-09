@@ -1,10 +1,11 @@
-.row
-  - @schematics.each do |schematic|
-    .col-xs-12.col-sm-6.col-md-4
-      .schematic-card
-        .card-info
-          = image_tag(schematic.character.avatar.url, class: 'small-character-avatar')
-          = schematic.character
-        = link_to image_tag(schematic.primary_render.file.url, class: 'img-responsive'), schematic_path(schematic)
-        .card-info
-          = "#{number_with_delimiter schematic.total_block_count} Blocks"
+.container
+  .row
+    - @schematics.each do |schematic|
+      .col-xs-12.col-sm-6.col-md-4
+        .schematic-card
+          .card-info
+            = image_tag(schematic.character.avatar.url, class: 'small-character-avatar')
+            = schematic.character
+          = link_to image_tag(schematic.primary_render.file.url, class: 'img-responsive'), schematic_path(schematic)
+          .card-info
+            = "#{number_with_delimiter schematic.total_block_count} Blocks"
