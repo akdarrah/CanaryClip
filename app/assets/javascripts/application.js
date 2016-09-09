@@ -19,5 +19,4 @@
 //= require clipboard.min
 //= require jquery.matchHeight
 //= require grade
-//= require granim.min
 //= require_tree .
