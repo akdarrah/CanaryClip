@@ -2,10 +2,6 @@ class SceneDirector
   attr_accessor :render, :schematic, :template_config,
     :camera_angle, :tmp_world_path
 
-  PASTE_X = 1159
-  PASTE_Y = 4
-  PASTE_Z = 744
-
   def initialize(render, tmp_world_path, template_config, camera_angle)
     self.render          = render
     self.schematic       = render.schematic

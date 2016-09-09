@@ -5,7 +5,6 @@ class Render::RenderSceneWorker
 
   TEMPLATE_WORLD_PATH = Rails.root + "private/Blank188"
   MCE_PY_PATH         = Rails.root + "private/pymclevel/mce.py"
-  DEST_COORDINATES    = "#{SceneDirector::PASTE_X}, #{SceneDirector::PASTE_Y}, #{SceneDirector::PASTE_Z}"
 
   TEMPLATE_SCENE_PATH  = Rails.root + "private/scene"
   CHUNKY_LAUNCHER_PATH = Rails.root + "private/ChunkyLauncher.jar"
@@ -40,7 +39,7 @@ class Render::RenderSceneWorker
 
   def create_world!
     FileUtils.cp_r TEMPLATE_WORLD_PATH, @tmp_world_path
-    system "python #{MCE_PY_PATH} #{@tmp_world_path} import #{@schematic.file.path} #{DEST_COORDINATES}"
+    system "python #{MCE_PY_PATH} #{@tmp_world_path} import #{@schematic.file.path} #{@schematic.paste_coordinates}"
   end
 
   def rendered_image_file

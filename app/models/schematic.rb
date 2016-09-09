@@ -72,6 +72,11 @@ class Schematic < ActiveRecord::Base
     permalink
   end
 
+  def region_paster
+    @region_paster ||= RegionPaster.new(self)
+  end
+  delegate :paste_x, :paste_y, :paste_z, :paste_coordinates, to: :region_paster
+
   # Keep inspect sane by omitting parsed_nbt_data
   def inspect
     inspection = if @attributes

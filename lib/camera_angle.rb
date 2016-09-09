@@ -38,17 +38,17 @@ class CameraAngle
   private
 
   def calculate_schematic_positions
-    self.right_x  = SceneDirector::PASTE_X
-    self.middle_x = SceneDirector::PASTE_X + (@schematic.width / 2)
-    self.left_x   = SceneDirector::PASTE_X + @schematic.width
+    self.right_x  = @schematic.paste_x
+    self.middle_x = @schematic.paste_x + (@schematic.width / 2)
+    self.left_x   = @schematic.paste_x + @schematic.width
 
-    self.bottom_y = SceneDirector::PASTE_Y
-    self.middle_y = SceneDirector::PASTE_Y + (@schematic.height / 2)
-    self.top_y    = SceneDirector::PASTE_Y + @schematic.height
+    self.bottom_y = @schematic.paste_y
+    self.middle_y = @schematic.paste_y + (@schematic.height / 2)
+    self.top_y    = @schematic.paste_y + @schematic.height
 
-    self.close_z  = SceneDirector::PASTE_Z
-    self.middle_z = SceneDirector::PASTE_Z + (@schematic.length / 2)
-    self.far_z    = SceneDirector::PASTE_Z + @schematic.length
+    self.close_z  = @schematic.paste_z
+    self.middle_z = @schematic.paste_z + (@schematic.length / 2)
+    self.far_z    = @schematic.paste_z + @schematic.length
 
     optimistic_player_pov_y = PLAYER_POV_HEIGHT + CAMERA_DELTA
 
