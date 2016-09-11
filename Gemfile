@@ -22,6 +22,7 @@ gem 'simple_form'
 gem "jquery-slick-rails"
 gem 'social-share-button'
 gem "cancan"
+gem "attr_encrypted", "~> 3.0.0"
 
 gem 'activeadmin', github: 'activeadmin'
 

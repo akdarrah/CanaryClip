@@ -47,6 +47,8 @@ GEM
     arbre (1.1.1)
       activesupport (>= 3.0.0)
     arel (4.0.2)
+    attr_encrypted (3.0.3)
+      encryptor (~> 3.0.0)
     autoprefixer-rails (6.3.6.1)
       execjs
     awesome_print (1.6.1)
@@ -89,6 +91,7 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
+    encryptor (3.0.0)
     erubis (2.7.0)
     execjs (2.7.0)
     factory_girl (4.5.0)
@@ -263,6 +266,7 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin!
+  attr_encrypted (~> 3.0.0)
   awesome_print
   better_errors
   binding_of_caller
