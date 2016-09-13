@@ -1,0 +1,24 @@
+en:
+  activerecord:
+    attributes:
+      server:
+        name: Name
+        permalink: Permalink
+        owner_user_id: Owner User
+        owner_character_id: Owner Character
+        authenticity_token: Authenticity Token
+        description: Description
+        hostname: Hostname
+        claims_allowed: Claims Allowed
+        created_at: Created
+        updated_at: Updated
+    models:
+      server:
+        one: Server
+        other: Servers
+  errors:
+    models:
+      server:
+        attributes:
+          owner_character:
+            must_belong_to_user: "must belong to owner user"
