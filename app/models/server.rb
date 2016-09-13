@@ -1,6 +1,4 @@
 class Server < ActiveRecord::Base
-  attr_encrypted :authenticity_token, key: ATTR_ENCRYPTED_KEY
-
   belongs_to :owner_user, class_name: "User"
   belongs_to :owner_character, class_name: "Character"
 

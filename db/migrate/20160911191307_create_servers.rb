@@ -5,7 +5,7 @@ class CreateServers < ActiveRecord::Migration
       t.string :permalink, null: false
       t.integer :owner_user_id, null: false
       t.integer :owner_character_id
-      t.string :encrypted_authenticity_token, null: false
+      t.string :authenticity_token, null: false
       t.text :description
       t.string :hostname, null: false
       t.boolean :claims_allowed, null: false, default: false

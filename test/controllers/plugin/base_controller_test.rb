@@ -5,6 +5,7 @@ class PluginBaseControllerTest < ActionController::TestCase
   tests Plugin::CharacterClaimsController
 
   def setup
+    @server   = create(:server)
     @username = "onebert"
     @uuid     = UUID.generate(:compact)
   end
@@ -17,7 +18,7 @@ class PluginBaseControllerTest < ActionController::TestCase
       :plugin => {
         "character_uuid"     => @uuid,
         "character_username" => @username,
-        "authenticity_token" => PLUGIN_AUTHENTICITY_TOKEN
+        "authenticity_token" => @server.authenticity_token
       }
 
     assert_response :ok
@@ -35,7 +36,7 @@ class PluginBaseControllerTest < ActionController::TestCase
       :plugin => {
         "character_uuid"     => @character.uuid,
         "character_username" => @character.username,
-        "authenticity_token" => PLUGIN_AUTHENTICITY_TOKEN
+        "authenticity_token" => @server.authenticity_token
       }
 
     assert_response :ok
@@ -51,7 +52,7 @@ class PluginBaseControllerTest < ActionController::TestCase
         :plugin => {
           "character_uuid"     => @uuid,
           "character_username" => nil,
-          "authenticity_token" => PLUGIN_AUTHENTICITY_TOKEN
+          "authenticity_token" => @server.authenticity_token
         }
     end
   end
