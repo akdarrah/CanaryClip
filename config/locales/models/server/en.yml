@@ -16,9 +16,9 @@ en:
       server:
         one: Server
         other: Servers
-  errors:
-    models:
-      server:
-        attributes:
-          owner_character:
-            must_belong_to_user: "must belong to owner user"
+    errors:
+      models:
+        server:
+          attributes:
+            owner_character:
+              must_belong_to_user: "must belong to owner user"

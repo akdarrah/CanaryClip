@@ -7,8 +7,10 @@ class Server < ActiveRecord::Base
 
   validates :name, :permalink, uniqueness: true
 
+  validate :owner_character_must_belong_to_owner_user,
+    if: Proc.new { |s| s.owner_character.present? }
+
   # TODO: Hostname should be domain name or IP
-  # TODO: Owner character should belong to owner user
 
   before_validation :set_permalink
   before_validation :set_authenticity_token, on: :create
@@ -23,6 +25,12 @@ class Server < ActiveRecord::Base
 
   def set_authenticity_token
     self.authenticity_token ||= UUID.generate(:compact)
+  end
+
+  def owner_character_must_belong_to_owner_user
+    if !owner_user.characters.where(id: owner_character_id).exists?
+      errors.add(:owner_character, :must_belong_to_user)
+    end
   end
 
 end
