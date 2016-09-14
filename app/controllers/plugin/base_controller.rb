@@ -11,7 +11,9 @@ class Plugin::BaseController < ApplicationController
   end
 
   def verify_plugin_authenticity_token
-    if params[:plugin][:authenticity_token] != PLUGIN_AUTHENTICITY_TOKEN
+    @server = Server.find_by_authenticity_token(params[:plugin][:authenticity_token])
+
+    if @server.blank?
       render_plugin_text I18n.t('plugin.base.invalid_authenticity_token')
     end
   end

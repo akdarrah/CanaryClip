@@ -1,5 +1,5 @@
 class Plugin::CharacterClaimsController < Plugin::BaseController
-
+  before_action :verify_server_allows_claims
   before_filter :find_character_claim
 
   def claim
@@ -17,6 +17,12 @@ class Plugin::CharacterClaimsController < Plugin::BaseController
 
     if @character_claim.blank?
       render_plugin_text I18n.t('plugin.character_claims.not_found')
+    end
+  end
+
+  def verify_server_allows_claims
+    if !@server.claims_allowed?
+      render_plugin_text I18n.t('plugin.character_claims.claims_not_allowed')
     end
   end
 

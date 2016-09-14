@@ -8,6 +8,28 @@ class PluginCharacterClaimsControllerTest < ActionController::TestCase
     @character_claim = create(:character_claim)
     @username        = "onebert"
     @uuid            = UUID.generate(:compact)
+    @server          = create(:server, claims_allowed: true)
+  end
+
+  test 'does not allow character claims if claims_allowed is false on the server' do
+    @user      = @character_claim.user
+    @character = @character_claim.character
+
+    @server.update_column :claims_allowed, false
+
+    refute @user.characters.exists?
+    refute @server.claims_allowed?
+
+    post :claim,
+      :id     => @character_claim.token,
+      :plugin => {
+        "character_uuid"     => @character.uuid,
+        "character_username" => @character.username,
+        "authenticity_token" => @server.authenticity_token
+      }
+
+    assert_response :ok
+    assert response.body.include? I18n.t('plugin.character_claims.claims_not_allowed')
   end
 
   test 'rejects requests with an unknown claim code' do
@@ -19,7 +41,7 @@ class PluginCharacterClaimsControllerTest < ActionController::TestCase
       :plugin => {
         "character_uuid"     => @uuid,
         "character_username" => @username,
-        "authenticity_token" => PLUGIN_AUTHENTICITY_TOKEN
+        "authenticity_token" => @server.authenticity_token
       }
 
     assert_response :ok
@@ -34,7 +56,7 @@ class PluginCharacterClaimsControllerTest < ActionController::TestCase
       :plugin => {
         "character_uuid"     => @uuid,
         "character_username" => @wrong_username,
-        "authenticity_token" => PLUGIN_AUTHENTICITY_TOKEN
+        "authenticity_token" => @server.authenticity_token
       }
 
     assert_response :ok
@@ -53,7 +75,7 @@ class PluginCharacterClaimsControllerTest < ActionController::TestCase
       :plugin => {
         "character_uuid"     => @character.uuid,
         "character_username" => @character.username,
-        "authenticity_token" => PLUGIN_AUTHENTICITY_TOKEN
+        "authenticity_token" => @server.authenticity_token
       }
 
     assert_response :ok

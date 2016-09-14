@@ -5,6 +5,7 @@ class PluginSchematicsControllerTest < ActionController::TestCase
   tests Plugin::SchematicsController
 
   def setup
+    @server    = create(:server)
     @character = create(:character)
   end
 
@@ -20,7 +21,7 @@ class PluginSchematicsControllerTest < ActionController::TestCase
       :plugin    => {
         :character_uuid     => @character.uuid,
         :character_username => @character.username,
-        :authenticity_token => PLUGIN_AUTHENTICITY_TOKEN
+        :authenticity_token => @server.authenticity_token
       }
 
     @schematic = assigns[:schematic]
@@ -47,7 +48,7 @@ class PluginSchematicsControllerTest < ActionController::TestCase
         :plugin    => {
           :character_uuid     => @character.uuid,
           :character_username => @character.username,
-          :authenticity_token => PLUGIN_AUTHENTICITY_TOKEN
+          :authenticity_token => @server.authenticity_token
         }
 
       @schematic = assigns[:schematic]
@@ -74,7 +75,7 @@ class PluginSchematicsControllerTest < ActionController::TestCase
       :plugin => {
         :character_username => @character.username,
         :character_uuid     => @character.uuid,
-        :authenticity_token => PLUGIN_AUTHENTICITY_TOKEN
+        :authenticity_token => @server.authenticity_token
       }
 
     assert_response :ok
@@ -92,7 +93,7 @@ class PluginSchematicsControllerTest < ActionController::TestCase
       :plugin => {
         :character_username => @character.username,
         :character_uuid     => @character.uuid,
-        :authenticity_token => PLUGIN_AUTHENTICITY_TOKEN
+        :authenticity_token => @server.authenticity_token
       }
 
     assert_equal 1, @schematic.impressions.count
@@ -109,7 +110,7 @@ class PluginSchematicsControllerTest < ActionController::TestCase
       :plugin => {
         :character_username => @character.username,
         :character_uuid     => @character.uuid,
-        :authenticity_token => PLUGIN_AUTHENTICITY_TOKEN
+        :authenticity_token => @server.authenticity_token
       }
 
     assert_equal 1, @schematic.tracked_downloads.count
@@ -124,7 +125,7 @@ class PluginSchematicsControllerTest < ActionController::TestCase
       :plugin => {
         :character_username => @character.username,
         :character_uuid     => @character.uuid,
-        :authenticity_token => PLUGIN_AUTHENTICITY_TOKEN
+        :authenticity_token => @server.authenticity_token
       }
 
     assert_response :ok

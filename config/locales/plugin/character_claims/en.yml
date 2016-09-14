@@ -4,3 +4,4 @@ en:
       not_found: "Character Claim Failed: Please check your claim code and try again."
       check_username: "Character Claim failed: Please verify your claim code belongs to %{username}."
       claimed: "Character Claim for %{username} was successful."
+      claims_not_allowed: "Character Claims are not allowed from this server."

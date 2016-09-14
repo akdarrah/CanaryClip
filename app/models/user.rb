@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 
   has_many :characters
   has_many :character_claims
+  has_many :owned_servers, foreign_key: :owner_user_id, class_name: "Server"
 
   belongs_to :current_character, class_name: "Character"
 end

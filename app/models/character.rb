@@ -7,6 +7,7 @@ class Character < ActiveRecord::Base
   has_many :downloaded_schematics, through: :tracked_downloads, source: :schematic
   has_many :character_claims
   has_many :favorites, dependent: :destroy
+  has_many :owned_servers, foreign_key: :owner_character_id, class_name: "Server"
 
   validates :uuid, :username, :permalink, uniqueness: true, allow_blank: true
   validates :permalink, :username, presence: true
