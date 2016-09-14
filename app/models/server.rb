@@ -7,10 +7,9 @@ class Server < ActiveRecord::Base
 
   validates :name, :permalink, uniqueness: true
 
+  validate :hostname_is_dns_hostname_or_ip_address
   validate :owner_character_must_belong_to_owner_user,
     if: Proc.new { |s| s.owner_character.present? }
-
-  # TODO: Hostname should be domain name or IP
 
   before_validation :set_permalink
   before_validation :set_authenticity_token, on: :create
@@ -30,6 +29,15 @@ class Server < ActiveRecord::Base
   def owner_character_must_belong_to_owner_user
     if !owner_user.characters.where(id: owner_character_id).exists?
       errors.add(:owner_character, :must_belong_to_user)
+    end
+  end
+
+  def hostname_is_dns_hostname_or_ip_address
+    any_ipv4 = Regexy::Web::IPv4.new(:normal) |
+      Regexy::Web::IPv4.new(:with_port)
+
+    if (hostname =~ any_ipv4).nil? && (hostname =~ Regexy::Web::HostName.new).nil?
+      errors.add(:hostname, :invalid)
     end
   end
 

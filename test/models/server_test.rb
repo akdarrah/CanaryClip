@@ -30,4 +30,26 @@ class ServerTest < ActiveSupport::TestCase
     assert @server.valid?
   end
 
+  # Server#hostname_is_dns_hostname_or_ip_address
+
+  test "ip addresses without a port are allowed" do
+    @server.hostname = "45.35.171.145"
+    assert @server.valid?
+  end
+
+  test "ip addresses with a port are allowed" do
+    @server.hostname = "45.35.171.145:25654"
+    assert @server.valid?
+  end
+
+  test "dns hostnames are allowed" do
+    @server.hostname = "play.shaded.gg"
+    assert @server.valid?
+  end
+
+  test "other hostnames are not allowed" do
+    @server.hostname = UUID.generate
+    refute @server.valid?
+  end
+
 end

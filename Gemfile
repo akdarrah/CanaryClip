@@ -23,6 +23,7 @@ gem "jquery-slick-rails"
 gem 'social-share-button'
 gem "cancan"
 gem "attr_encrypted", "~> 3.0.3"
+gem 'regexy'
 
 gem 'activeadmin', github: 'activeadmin'
 
