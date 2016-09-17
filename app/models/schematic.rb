@@ -4,6 +4,7 @@ class Schematic < ActiveRecord::Base
   serialize :parsed_nbt_data, JSON
 
   belongs_to :character
+  belongs_to :server
 
   has_many :block_counts, dependent: :destroy
   has_many :blocks, through: :block_counts
@@ -29,7 +30,7 @@ class Schematic < ActiveRecord::Base
   validates_attachment_content_type :file, content_type: ['application/x-gzip', 'application/gzip']
   validates_attachment_file_name :file, :matches => [/schematic\Z/]
 
-  validates :character, presence: true
+  validates :character, :server, presence: true
   validates :permalink, uniqueness: true, allow_blank: true
 
   validates :width, :length, :height,

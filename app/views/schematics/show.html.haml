@@ -29,6 +29,9 @@
                 %input{type: 'text', readonly: 'readonly', id: 'schematic-permalink-input', class: "form-control select-all-to-copy", value: @schematic.permalink}
                 %span.input-group-btn
                   %button.btn.btn-secondary.btn-clipboard{type: "button", 'data-clipboard-target' => "#schematic-permalink-input", title: 'Click to copy to clipboard'}= fa_icon('clipboard')
+            .col-xs-12
+              &nbsp;
+              = "#{fa_icon('arrow-circle-right')} via #{link_to(@schematic.server, server_path(@schematic.server))}".html_safe
           %br
           .row.small
             .col-xs-12

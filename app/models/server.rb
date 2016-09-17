@@ -2,6 +2,8 @@ class Server < ActiveRecord::Base
   belongs_to :owner_user, class_name: "User"
   belongs_to :owner_character, class_name: "Character"
 
+  has_many :schematics, dependent: :destroy
+
   validates_presence_of :name, :permalink,
     :owner_user, :authenticity_token, :hostname
 
@@ -13,6 +15,14 @@ class Server < ActiveRecord::Base
 
   before_validation :set_permalink
   before_validation :set_authenticity_token, on: :create
+
+  def to_param
+    permalink
+  end
+
+  def to_s
+    name
+  end
 
   private
 
