@@ -27,7 +27,7 @@ Minebuild::Application.routes.draw do
   resources :blocks, only: [:show]
   resources :characters, only: [:show]
 
-  resources :servers, only: [:show] do
+  resources :servers, only: [:show, :new, :create] do
     member do
       get :download
     end

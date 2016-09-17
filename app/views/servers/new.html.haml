@@ -1,0 +1,8 @@
+.container
+  .row
+    .col-xs-12
+      = simple_form_for @server do |f|
+        = f.input :name
+        = f.input :hostname
+        = f.input :description
+        = f.button :submit, 'Save', class: "btn-primary"

@@ -21,7 +21,7 @@ gem 'devise'
 gem 'simple_form'
 gem "jquery-slick-rails"
 gem 'social-share-button'
-gem "cancan"
+gem 'cancancan', '~> 1.10'
 gem "attr_encrypted", "~> 3.0.3"
 gem 'regexy'
 

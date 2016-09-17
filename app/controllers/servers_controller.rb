@@ -6,7 +6,28 @@ class ServersController < ApplicationController
   def show
   end
 
+  def new
+    @server = current_user.owned_servers.new
+  end
+
+  def create
+    @server = current_user.owned_servers.new(create_params)
+
+    if @server.save
+      redirect_to server_path @server
+    else
+      render action: :new
+    end
+  end
+
   def download
     send_file DOWNLOAD_PATH
+  end
+
+  private
+
+  def create_params
+    params.require(:server)
+      .permit(:name, :hostname, :description)
   end
 end
