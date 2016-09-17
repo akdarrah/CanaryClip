@@ -1,6 +1,7 @@
 FactoryGirl.define do
   factory :schematic do
     character
+    server
     state 'new'
     width 0
     length 0
