@@ -4,7 +4,7 @@ class Plugin::SchematicsController < Plugin::BaseController
   before_filter :track_downloads, only: [:download]
 
   def create
-    @schematic = Schematic.new(create_params)
+    @schematic = @server.schematics.new(create_params)
     @schematic.character = @character
 
     if @schematic.save

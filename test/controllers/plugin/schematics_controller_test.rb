@@ -32,6 +32,7 @@ class PluginSchematicsControllerTest < ActionController::TestCase
 
     assert @character.schematics.exists?
     assert_equal @schematic.character, @character
+    assert_equal @server, @schematic.server
     assert @schematic.collecting_metadata?
   end
 
