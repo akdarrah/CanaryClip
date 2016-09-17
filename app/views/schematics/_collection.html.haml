@@ -1,9 +1,28 @@
-- schematics.each do |schematic|
-  .col-xs-12.col-sm-6.col-md-4
-    .schematic-card
-      .card-info
-        = image_tag(schematic.character.avatar.url, class: 'small-character-avatar')
-        = link_to schematic.character, character_path(schematic.character)
-      = link_to image_tag(schematic.primary_render.file.url, class: 'img-responsive'), schematic_path(schematic)
-      .card-info
-        = "#{number_with_delimiter schematic.total_block_count} Blocks"
+.container-fluid
+  .grid
+    - schematics.each do |schematic|
+      .grid-item.col-xs-12.col-sm-6.col-lg-4
+        .schematic-card
+          = link_to image_tag(schematic.primary_render.file.url, class: 'img-responsive'), schematic_path(schematic)
+          .card-info
+            .row
+              .col-xs-6
+                = image_tag(schematic.character.avatar.url, class: 'small-character-avatar')
+                = link_to schematic.character, character_path(schematic.character)
+              .col-xs-6.text-right
+                = "#{fa_icon('download')} #{number_with_delimiter(schematic.total_download_impressions)}".html_safe
+                = "#{fa_icon('heart')} #{number_with_delimiter(schematic.favorited_by_characters.count)}".html_safe
+            .strike
+              %span= "#{number_with_delimiter(schematic.total_block_count)} Blocks"
+            - schematic.block_counts.visible.most_used_order.each do |block_count|
+              = link_to block_icon_with_title(block_count), block_path(block_count.block)
+
+-content_for :script do
+  :javascript
+    var $grid = $('.grid').masonry({
+      // options...
+    });
+    // layout Masonry after each image loads
+    $grid.imagesLoaded().progress( function() {
+      $grid.masonry('layout');
+    });
