@@ -10,7 +10,7 @@
         .col-xs-12.col-md-4.schematic-sidebar.schematic-column{'data-match-height' => "schematic-column-group"}
           %span
             = image_tag(@schematic.character.avatar.url, class: 'small-character-avatar')
-            = @schematic.character
+            = link_to @schematic.character, character_path(@schematic.character)
           .strike
             %span= formatted_date @schematic.created_at
           .row
@@ -45,7 +45,7 @@
           .strike
             %span= "#{number_with_delimiter(@schematic.total_block_count)} Blocks"
           - @schematic.block_counts.visible.most_used_order.each do |block_count|
-            = block_icon_with_title(block_count)
+            = link_to block_icon_with_title(block_count), block_path(block_count.block)
           %hr
             .text-center= social_share_button_tag t('.social_share_title', name: @schematic.permalink, character_name: @schematic.character.username)
 
