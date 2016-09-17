@@ -61,6 +61,31 @@ class AbilityTest < ActiveSupport::TestCase
     assert @ability.can?(:show, @server)
   end
 
+  test 'All users cannot new Server' do
+    @ability = Ability.new(nil)
+    refute @ability.can?(:new, @server)
+  end
+
+  test 'Registered users can new Server' do
+    @ability = Ability.new(@user)
+    assert @ability.can?(:new, @server)
+  end
+
+  test 'All users cannot create Server' do
+    @ability = Ability.new(nil)
+    refute @ability.can?(:create, @server)
+  end
+
+  test 'Registered users can create Server' do
+    @ability = Ability.new(@user)
+    assert @ability.can?(:create, @server)
+  end
+
+  test "All users cannot download Server" do
+    @ability = Ability.new(nil)
+    refute @ability.can?(:download, @server)
+  end
+
   test "Non-owner registered users cannot download Server" do
     @ability = Ability.new(@user)
     refute @ability.can?(:download, @server)

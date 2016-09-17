@@ -24,6 +24,7 @@ class Ability
     can [:show], Server
 
     if user
+      can [:new, :create], Server
       can [:download], Server do |server|
         server.owner_user == user
       end
