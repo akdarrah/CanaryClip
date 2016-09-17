@@ -1,5 +1,6 @@
 class Render::RenderSceneWorker
   include Sidekiq::Worker
+  sidekiq_options queue: 'chunky'
 
   TEXTURE_PATH = Rails.root + "private/Faithful.zip"
 
