@@ -6,6 +6,7 @@ class AbilityTest < ActiveSupport::TestCase
     @user      = create(:user)
     @ability   = Ability.new(@user)
     @schematic = create(:schematic)
+    @server    = create(:server)
   end
 
   # Schematic
@@ -51,6 +52,25 @@ class AbilityTest < ActiveSupport::TestCase
     @ability = Ability.new(@user)
 
     assert @ability.can?(:update, @schematic)
+  end
+
+  # Server
+
+  test "All users can show Server" do
+    @ability = Ability.new(nil)
+    assert @ability.can?(:show, @server)
+  end
+
+  test "Non-owner registered users cannot download Server" do
+    @ability = Ability.new(@user)
+    refute @ability.can?(:download, @server)
+  end
+
+  test "Owner user can download Server" do
+    @user    = @server.owner_user
+    @ability = Ability.new(@user)
+
+    assert @ability.can?(:download, @server)
   end
 
 end
