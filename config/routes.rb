@@ -34,7 +34,7 @@ Minebuild::Application.routes.draw do
   end
 
   resources :character_claims, only: [:index, :show, :new, :create]
-  resources :schematics, only: [:index, :show, :update] do
+  resources :schematics, only: [:index, :show, :update, :destroy] do
     resources :favorites, only: [:create, :destroy]
 
     member do

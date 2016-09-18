@@ -51,6 +51,9 @@
             = link_to block_icon_with_title(block_count), block_path(block_count.block)
           %hr
             .text-center= social_share_button_tag t('.social_share_title', name: @schematic.permalink, character_name: @schematic.character.username)
+          - if can?(:destroy, @schematic)
+            %hr
+            = link_to "Delete".html_safe, schematic_path(@schematic), class: 'btn btn-danger', title: 'Delete this schematic', method: :delete, confirm: "Are you sure?"
 
 - content_for :script do
   :javascript

@@ -39,7 +39,7 @@ class AbilityTest < ActiveSupport::TestCase
     refute @ability.can?(:update, @schematic)
   end
 
-  test "Users with admin_access cannot update Schematic" do
+  test "Users with admin_access can update Schematic" do
     Schematic.any_instance
       .stubs(:admin_access?)
       .returns(true)
@@ -52,6 +52,34 @@ class AbilityTest < ActiveSupport::TestCase
     @ability = Ability.new(@user)
 
     assert @ability.can?(:update, @schematic)
+  end
+
+  test "All users cannot destroy Schematic" do
+    @ability = Ability.new(nil)
+    refute @ability.can?(:destroy, @schematic)
+  end
+
+  test "Users without admin_access cannot destroy Schematic" do
+    Schematic.any_instance
+      .stubs(:admin_access?)
+      .returns(false)
+
+    refute @ability.can?(:destroy, @schematic)
+  end
+
+  test "Users with admin_access can destroy Schematic" do
+    Schematic.any_instance
+      .stubs(:admin_access?)
+      .returns(true)
+
+    assert @ability.can?(:destroy, @schematic)
+  end
+
+  test "Admin users can destroy Schematic" do
+    @user    = create(:user, admin: true)
+    @ability = Ability.new(@user)
+
+    assert @ability.can?(:destroy, @schematic)
   end
 
   # Server

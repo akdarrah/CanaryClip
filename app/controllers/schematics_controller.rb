@@ -23,6 +23,11 @@ class SchematicsController < ApplicationController
     redirect_to schematic_path(@schematic)
   end
 
+  def destroy
+    @schematic.destroy
+    redirect_to schematics_path
+  end
+
   private
 
   def log_impression

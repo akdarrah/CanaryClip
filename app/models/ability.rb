@@ -14,7 +14,7 @@ class Ability
     can [:index, :show, :download], Schematic
 
     if user
-      can [:update], Schematic do |schematic|
+      can [:update, :destroy], Schematic do |schematic|
         schematic.admin_access?(user)
       end
     end
