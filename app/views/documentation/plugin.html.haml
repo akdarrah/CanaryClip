@@ -1,0 +1,29 @@
+.container
+  .row
+    .col-xs-12.col-sm-8.col-sm-offset-2
+      %h1 Minebuild Plugin
+      %p The Minebuild Plugin is a modified version of the WorldEdit Plugin. It takes advantage of the existing WorldEdit functionality and adds extra commands. There are three commands that are added:
+
+      %h3 Save
+      %p Once your Minecraft creation has been saved to your clipboard, use this command to upload it to Minebuild.
+      %pre //mb save
+      %br
+
+      %h3 Load
+      %p With a shortcode from Minebuild, you can...
+      %pre //mb load &lt;shortcode&gt;
+      %br
+
+      %h3 Claim
+      %p Claim your Minecraft character on Minebuild.
+      %pre //mb load &lt;claim code&gt;
+      %br
+
+-# - worldedit.wand
+-# - worldedit.selection.pos
+-# - worldedit.clipboard.copy
+-# - worldedit.clipboard.paste
+-# - worldedit.clipboard.clear
+-# - worldedit.minebuild.save
+-# - worldedit.minebuild.load
+-# - worldedit.minebuild.claim
