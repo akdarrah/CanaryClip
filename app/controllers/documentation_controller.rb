@@ -4,4 +4,8 @@ class DocumentationController < ApplicationController
     @schematic = Schematic.order('random()').first
   end
 
+  def server_setup
+    @uuid = UUID.generate(:compact)
+  end
+
 end

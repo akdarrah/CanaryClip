@@ -25,6 +25,7 @@ Minebuild::Application.routes.draw do
   end
 
   get 'quick_start', to: "documentation#quick_start"
+  get 'server_setup', to: "documentation#server_setup"
 
   resources :blocks, only: [:show]
   resources :characters, only: [:show]
