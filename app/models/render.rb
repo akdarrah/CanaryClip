@@ -32,6 +32,8 @@ class Render < ActiveRecord::Base
   scope :standard_resolution, -> { where(resolution: STANDARD_RESOLUTION) }
   scope :high_resolution, -> { where(resolution: HIGH_RESOLUTION) }
 
+  scope :completed, -> { where(state: :completed) }
+
   state_machine :state, :initial => :pending do
     after_transition :pending => :scheduled,
       :do => :schedule_job
