@@ -82,7 +82,6 @@ class RenderTest < ActiveSupport::TestCase
 
   # Render#primary_render
 
-  focus
   test "Only a render with PRIMARY camera angle and standard resolution is primary" do
     assert_equal CameraAngle::PRIMARY, @render.camera_angle
     assert_equal Render::STANDARD_RESOLUTION, @render.resolution
