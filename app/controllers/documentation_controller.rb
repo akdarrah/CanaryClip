@@ -4,7 +4,4 @@ class DocumentationController < ApplicationController
     @schematic = Schematic.order('random()').first
   end
 
-  def plugin
-  end
-
 end

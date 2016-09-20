@@ -5,6 +5,7 @@ class SchematicsController < ApplicationController
   before_filter :track_downloads, only: [:download]
 
   def index
+    @server     = Server.official
     @schematics = Schematic.published.chronological
   end
 

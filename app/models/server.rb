@@ -16,6 +16,10 @@ class Server < ActiveRecord::Base
   before_validation :set_permalink
   before_validation :set_authenticity_token, on: :create
 
+  def self.official
+    where(claims_allowed: true).first
+  end
+
   def to_param
     permalink
   end

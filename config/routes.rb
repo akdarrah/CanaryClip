@@ -25,7 +25,6 @@ Minebuild::Application.routes.draw do
   end
 
   get 'quick_start', to: "documentation#quick_start"
-  get 'plugin', to: "documentation#plugin"
 
   resources :blocks, only: [:show]
   resources :characters, only: [:show]

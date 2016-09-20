@@ -1,1 +1,7 @@
+.container
+  .row
+    .col-xs-12
+      .alert.alert-info
+        %h4 Discover and Share Minecraft Creations
+        %p= "New here? Read the #{link_to('Quick Start Guide', quick_start_path)}. Connect to Minecraft server <strong>#{@server.hostname}</strong> to try it out!".html_safe
 = render partial: 'schematics/collection', locals: {schematics: @schematics}
