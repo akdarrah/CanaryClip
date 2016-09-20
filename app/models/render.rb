@@ -53,15 +53,22 @@ class Render < ActiveRecord::Base
 
   private #####################################################################
 
-  # If the last jobs finish at the same time, there is a chance that the
-  # Schematic won't get properly published
+  def primary_render
+    camera_angle == CameraAngle::PRIMARY &&
+      resolution == STANDARD_RESOLUTION
+  end
+  alias :primary_render? primary_render
+
   def schedule_job
-    schedule_time = rand(1..10).seconds.from_now
-    Render::RenderSceneWorker.perform_at(schedule_time, id)
+    if primary_render?
+      Render::PreferredSceneRendererWorker.perform_async(id)
+    else
+      Render::SceneRendererWorker.perform_async(id)
+    end
   end
 
   def publish_schematic
-    if !schematic.renders.where.not(state: :completed).exists?
+    if primary_render?
       schematic.publish!
     end
   end

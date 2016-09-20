@@ -27,15 +27,33 @@ class RenderTest < ActiveSupport::TestCase
     assert @render.completed?
   end
 
-  test "A Render::RenderSceneWorker is queued when render is scheduled!" do
-    Render::RenderSceneWorker
-      .expects(:perform_at)
+  # Render#schedule_job
+
+  test "A Render::SceneRendererWorker is queued when a non-primary render is scheduled!" do
+    @render.stubs(:primary_render?).returns(false)
+
+    Render::SceneRendererWorker
+      .expects(:perform_async)
       .once
 
     @render.schedule!
   end
 
-  test "Schematic is published once the last render is completed" do
+  test "A Render::PreferredSceneRendererWorker is queued when a primary render is scheduled!" do
+    @render.stubs(:primary_render?).returns(true)
+
+    Render::PreferredSceneRendererWorker
+      .expects(:perform_async)
+      .once
+
+    @render.schedule!
+  end
+
+  # Render#publish_schematic
+
+  # The primary render will always be rendered first, so the schematic
+  # will be published while the other renders are not complete
+  test "Schematic is published once the primary render is completed" do
     Render.any_instance.stubs(:schedule_job)
 
     @schematic = create(:schematic, state: "rendering")
@@ -47,6 +65,7 @@ class RenderTest < ActiveSupport::TestCase
 
     4.times do
       render = renders.shift
+      refute render.send(:primary_render?)
 
       assert render.render!
       assert render.complete!
@@ -54,10 +73,31 @@ class RenderTest < ActiveSupport::TestCase
     end
 
     final_render = renders.shift
+    assert final_render.send(:primary_render?)
 
     assert final_render.render!
     assert final_render.complete!
     assert @schematic.reload.published?
+  end
+
+  # Render#primary_render
+
+  focus
+  test "Only a render with PRIMARY camera angle and standard resolution is primary" do
+    assert_equal CameraAngle::PRIMARY, @render.camera_angle
+    assert_equal Render::STANDARD_RESOLUTION, @render.resolution
+    assert @render.send(:primary_render?)
+
+    CameraAngle::SECONDARY.each do |other_angle|
+      @render.camera_angle = other_angle
+      refute @render.send(:primary_render?)
+    end
+
+    @render.resolution = Render::HIGH_RESOLUTION
+    CameraAngle::AVAILABLE.each do |other_angle|
+      @render.camera_angle = other_angle
+      refute @render.send(:primary_render?)
+    end
   end
 
 end

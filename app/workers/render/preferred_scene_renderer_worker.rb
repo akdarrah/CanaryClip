@@ -1,6 +1,6 @@
-class Render::RenderSceneWorker
+class Render::PreferredSceneRendererWorker
   include Sidekiq::Worker
-  sidekiq_options queue: 'chunky'
+  sidekiq_options queue: 'fast_chunky'
 
   def perform(render_id)
     # Give the transaction time to finish
