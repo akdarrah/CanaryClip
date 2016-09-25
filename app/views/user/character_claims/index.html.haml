@@ -1,6 +1,8 @@
 .container
   .row
-    .col-xs-12
+    .col-xs-12.col-sm-3
+      = render partial: "user/shared/menu"
+    .col-xs-12.col-sm-9
       = link_to t('.add_character_claim'), new_user_character_claim_path
       %table.table
         %thead

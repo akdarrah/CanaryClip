@@ -1,6 +1,8 @@
 .container
-  .col-xs-12
-    .row
+  .row
+    .col-xs-12.col-sm-3
+      = render partial: "user/shared/menu"
+    .col-xs-12.col-sm-9
       %h1= t('.claim_your_character')
 
       = simple_form_for [:user, @character_claim] do |f|
