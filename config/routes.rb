@@ -20,7 +20,7 @@ Minebuild::Application.routes.draw do
       end
     end
 
-    resources :servers, only: [:show, :new, :create] do
+    resources :servers, only: [:index, :show, :new, :create] do
       member do
         get :download
       end

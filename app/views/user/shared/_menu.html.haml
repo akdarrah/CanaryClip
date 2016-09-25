@@ -3,7 +3,7 @@
     = link_to 'Account', edit_user_registration_path
   %li{role: "presentation", class: (current_page?(user_character_claims_path) ? "active" : "")}
     = link_to 'Characters', user_character_claims_path
-  %li{role: "presentation", class: (current_page?(new_user_server_path) ? "active" : "")}
-    = link_to 'Servers', new_user_server_path
+  %li{role: "presentation", class: (current_page?(user_servers_path) ? "active" : "")}
+    = link_to 'Servers', user_servers_path
 %br
 %br

@@ -3,6 +3,10 @@ class User::ServersController < ApplicationController
 
   DOWNLOAD_PATH = "#{Rails.root}/private/worldedit-bukkit-6.1.4-minebuild.jar"
 
+  def index
+    @servers = current_user.owned_servers
+  end
+
   def show
     @schematics = @server.schematics.public.page(params[:page])
   end
