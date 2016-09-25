@@ -1,7 +1,7 @@
 .container
   .row
     .col-xs-12
-      = link_to t('.add_character_claim'), new_character_claim_path
+      = link_to t('.add_character_claim'), new_user_character_claim_path
       %table.table
         %thead
           %tr
@@ -13,6 +13,6 @@
           - @character_claims.each do |character_claim|
             %tr
               %td= image_tag(character_claim.character.avatar.url, class: 'small-character-avatar')
-              %td= link_to character_claim.character.username, character_claim_path(character_claim)
+              %td= link_to character_claim.character.username, user_character_claim_path(character_claim)
               %td= character_claim.token
               %td= character_claim.state

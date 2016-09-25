@@ -3,6 +3,6 @@
     .row
       %h1= t('.claim_your_character')
 
-      = simple_form_for @character_claim do |f|
+      = simple_form_for [:user, @character_claim] do |f|
         = f.input :character_username
         = f.button :submit

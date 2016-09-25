@@ -1,4 +1,4 @@
-class CharacterClaimsController < ApplicationController
+class User::CharacterClaimsController < ApplicationController
   before_action :authenticate_user!
 
   def index
@@ -18,7 +18,7 @@ class CharacterClaimsController < ApplicationController
     @character_claim.attributes = create_params
 
     if @character_claim.save
-      redirect_to character_claim_path @character_claim
+      redirect_to user_character_claim_path @character_claim
     else
       render action: :new
     end

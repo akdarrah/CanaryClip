@@ -11,6 +11,10 @@ Minebuild::Application.routes.draw do
 
   devise_for :users
 
+  namespace :user do
+    resources :character_claims, only: [:index, :show, :new, :create]
+  end
+
   namespace :plugin do
     resources :character_claims, only: [] do
       member do
@@ -36,7 +40,6 @@ Minebuild::Application.routes.draw do
     end
   end
 
-  resources :character_claims, only: [:index, :show, :new, :create]
   resources :schematics, only: [:index, :show, :update, :destroy] do
     resources :favorites, only: [:create, :destroy]
 
