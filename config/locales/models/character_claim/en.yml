@@ -5,7 +5,7 @@ en:
         user_id: User
         character_id: Character
         character_username: Character Username
-        token: Short Code
+        token: Claim Code
         state: State
         created_at: Created
         updated_at: Updated
