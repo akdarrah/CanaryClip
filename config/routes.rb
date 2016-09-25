@@ -13,6 +13,12 @@ Minebuild::Application.routes.draw do
 
   namespace :user do
     resources :character_claims, only: [:index, :show, :new, :create]
+
+    resources :servers, only: [:show, :new, :create] do
+      member do
+        get :download
+      end
+    end
   end
 
   namespace :plugin do
@@ -33,12 +39,7 @@ Minebuild::Application.routes.draw do
 
   resources :blocks, only: [:show]
   resources :characters, only: [:show]
-
-  resources :servers, only: [:show, :new, :create] do
-    member do
-      get :download
-    end
-  end
+  resources :servers, only: [:show]
 
   resources :schematics, only: [:index, :show, :update, :destroy] do
     resources :favorites, only: [:create, :destroy]

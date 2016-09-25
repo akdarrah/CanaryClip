@@ -1,0 +1,22 @@
+.container
+  .row
+    .col-xs-12
+      %table.table
+        %tbody
+          %tr
+            %td
+              %strong= Server.human_attribute_name(:name)
+            %td= @server.name
+          %tr
+            %td
+              %strong= Server.human_attribute_name(:hostname)
+            %td= @server.hostname
+          %tr
+            %td
+              %strong= Server.human_attribute_name(:description)
+            %td= @server.description
+          %tr
+            %td
+              %strong= Server.human_attribute_name(:authenticity_token)
+            %td= @server.authenticity_token
+      = link_to "Download the plugin", download_user_server_path(@server)

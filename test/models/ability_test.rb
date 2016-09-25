@@ -84,8 +84,20 @@ class AbilityTest < ActiveSupport::TestCase
 
   # Server
 
-  test "All users can show Server" do
+  test "All users cannot show Server" do
     @ability = Ability.new(nil)
+    refute @ability.can?(:show, @server)
+  end
+
+  test "Non-owner registered users cannot show Server" do
+    @ability = Ability.new(@user)
+    refute @ability.can?(:show, @server)
+  end
+
+  test "Owner user can show Server" do
+    @user    = @server.owner_user
+    @ability = Ability.new(@user)
+
     assert @ability.can?(:show, @server)
   end
 
