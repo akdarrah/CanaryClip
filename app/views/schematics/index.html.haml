@@ -7,4 +7,9 @@
         %p
           %small
             = "Want to add Minebuild to your server? Read the #{link_to('Server Setup Guide', server_setup_path)} to get started.".html_safe
+
 = render partial: 'schematics/collection', locals: {schematics: @schematics}
+
+.container
+  .col-xs-12.text-center
+    = will_paginate @schematics, renderer: BootstrapPagination::Rails

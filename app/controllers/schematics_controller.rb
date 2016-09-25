@@ -6,7 +6,7 @@ class SchematicsController < ApplicationController
 
   def index
     @server     = Server.official
-    @schematics = Schematic.published.chronological
+    @schematics = Schematic.published.chronological.page(params[:page])
   end
 
   def show

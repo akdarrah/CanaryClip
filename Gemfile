@@ -27,6 +27,9 @@ gem 'regexy'
 
 gem 'activeadmin', github: 'activeadmin'
 
+gem 'will_paginate', '~> 3.1.0'
+gem 'will_paginate-bootstrap'
+
 group :development do
   gem "better_errors"
   gem "binding_of_caller"

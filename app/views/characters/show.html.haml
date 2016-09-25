@@ -1,1 +1,5 @@
-= render partial: 'schematics/collection', locals: {schematics: @character.schematics}
+= render partial: 'schematics/collection', locals: {schematics: @schematics}
+
+.container
+  .col-xs-12.text-center
+    = will_paginate @schematics, renderer: BootstrapPagination::Rails
