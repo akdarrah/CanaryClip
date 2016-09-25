@@ -4,7 +4,7 @@ class ServersController < ApplicationController
   DOWNLOAD_PATH = "#{Rails.root}/private/worldedit-bukkit-6.1.4-minebuild.jar"
 
   def show
-    @schematics = @server.schematics.page(params[:page])
+    @schematics = @server.schematics.public.page(params[:page])
   end
 
   def new
