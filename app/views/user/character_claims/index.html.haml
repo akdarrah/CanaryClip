@@ -3,7 +3,31 @@
     .col-xs-12.col-sm-3
       = render partial: "user/shared/menu"
     .col-xs-12.col-sm-9
-      = link_to t('.add_character_claim'), new_user_character_claim_path
+
+      %h3 Characters
+
+      %table.table
+        %thead
+          %tr
+            %th &nbsp;
+            %th &nbsp;
+            %th= Character.human_attribute_name(:character)
+            %th= Character.human_attribute_name(:uuid)
+        %tbody
+          - current_user.characters.each do |character|
+            %tr{class: (current_character == character ? 'info' : '')}
+              %td
+                - if current_character == character
+                  &dash;
+                - else
+                  = link_to 'Switch', switch_user_character_path(character), method: :post
+              %td= image_tag(character.avatar.url, class: 'small-character-avatar')
+              %td= link_to character.username, character_path(character)
+              %td= character.uuid
+
+      %hr
+      %h3 Character Claims
+
       %table.table
         %thead
           %tr
@@ -18,3 +42,4 @@
               %td= link_to character_claim.character.username, user_character_claim_path(character_claim)
               %td= character_claim.token
               %td= character_claim.state
+      = link_to t('.add_character_claim'), new_user_character_claim_path

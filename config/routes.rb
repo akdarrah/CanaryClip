@@ -14,6 +14,12 @@ Minebuild::Application.routes.draw do
   namespace :user do
     resources :character_claims, only: [:index, :show, :new, :create]
 
+    resources :characters, only: [] do
+      member do
+        post :switch
+      end
+    end
+
     resources :servers, only: [:show, :new, :create] do
       member do
         get :download

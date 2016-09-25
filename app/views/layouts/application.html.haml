@@ -26,6 +26,8 @@
                     %li= link_to 'Sidekiq', sidekiq_web_url
                     %li= link_to 'Admin', admin_root_url
                   - if current_user.present?
+                    - if current_character.present?
+                      = image_tag(current_character.avatar.url, class: 'small-character-avatar')
                     %li= link_to 'Settings', edit_user_registration_path
                   %li= link_to 'Home', root_url
     = yield
