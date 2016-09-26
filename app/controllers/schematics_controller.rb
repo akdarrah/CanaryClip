@@ -5,8 +5,9 @@ class SchematicsController < ApplicationController
   before_filter :track_downloads, only: [:download]
 
   def index
-    @server     = Server.official
-    @schematics = Schematic.public.page(params[:page])
+    @marketing_render = Render.high_resolution.order('random()').first
+    @server           = Server.official
+    @schematics       = Schematic.public.page(params[:page])
   end
 
   def show

@@ -9,24 +9,21 @@ html, body {
   }
 }
 
-.lobster {
-  font-family: 'Lobster', cursive;
-}
-
 .top-bar {
-  border-bottom: 2px solid #DDDDDD;
   padding: 15px 15px 10px 15px;
   margin-bottom: 25px;
-  background: white;
 
   .title {
     font-size: 28px;
-    color: #0074D9;
   }
 
   ul {
     padding-top: 5px;
   }
+}
+
+.lobster {
+  font-family: 'Pacifico', cursive;
 }
 
 .small-character-avatar {
@@ -111,4 +108,66 @@ html, body {
 .slick-dots li.slick-active button:before
 {
     color: white;
+}
+
+
+
+
+
+
+
+
+
+
+#canvas-image {
+  display: block;
+  width: 100%;
+  height: 75vh;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  background-position-y: 25%;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.canvas-overlay {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 75vh;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  color: white;
+
+  a {
+    color: white;
+  }
+
+  .slogan-text {
+    margin-top: 150px;
+  }
+
+  .top-bar {
+    padding: 15px 15px 10px 15px;
+    margin-bottom: 25px;
+
+    .title {
+      font-size: 28px;
+    }
+
+    ul {
+      padding-top: 5px;
+    }
+  }
 }

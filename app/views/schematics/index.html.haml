@@ -1,3 +1,32 @@
+- content_for :head do
+  :css
+    #canvas-image {
+      background-image: url(#{@marketing_render.file.url});
+    }
+
+.container-fluid
+  .row
+    %canvas#canvas-image
+    .canvas-overlay
+      .row.top-bar
+        .container
+          .row
+            .col-xs-12
+              .pull-left
+                = link_to root_url, class: 'site-logo-link' do
+                  .title.lobster
+                    Minebuild
+              .pull-right
+                %ul.list-inline
+                  - if current_user.blank?
+                    %li= link_to 'Sign In', new_user_session_url
+                  %li= link_to 'Discover', root_url
+      .container
+        .row.text-center.slogan-text
+          .col-xs-12
+            %h1 Discover and Share Minecraft Creations
+
+%br
 .container
   .row
     .col-xs-12
@@ -13,3 +42,23 @@
 .container
   .col-xs-12.text-center
     = will_paginate @schematics, renderer: BootstrapPagination::Rails
+
+- content_for :script do
+  :javascript
+    $(document).ready(function(){
+      var granimInstance = new Granim({
+        element: '#canvas-image',
+        direction: 'top-bottom',
+        opacity: [1, .5, 0],
+        isPausedWhenNotInView: true,
+        states : {
+            "default-state": {
+                gradients: [
+                    ['#485563', '#29323c', '#29323c'],
+                    ['#00c6ff', '#0072ff', '#0072ff']
+                ],
+                transitionSpeed: 10000
+            }
+        }
+      });
+    });

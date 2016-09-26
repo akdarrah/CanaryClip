@@ -19,6 +19,7 @@
 //= require clipboard.min
 //= require jquery.matchHeight
 //= require grade
+//= require granim.min.js
 //= require imagesloaded.pkgd.min.js
 //= require masonry.pkgd.min
 //= require_tree .
