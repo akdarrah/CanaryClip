@@ -15,7 +15,7 @@
               .pull-left
                 = link_to root_url, class: 'site-logo-link' do
                   .title.lobster
-                    Minebuild
+                    CanaryClip
               .pull-right
                 %ul.list-inline
                   - if current_user.blank?
@@ -35,7 +35,7 @@
         %p= "New here? Read the #{link_to('Quick Start Guide', quick_start_path)}. Connect to Minecraft server <strong>#{@server.hostname}</strong> to try it out!".html_safe
         %p
           %small
-            = "Want to add Minebuild to your server? Read the #{link_to('Server Setup Guide', server_setup_path)} to get started.".html_safe
+            = "Want to add CanaryClip to your server? Read the #{link_to('Server Setup Guide', server_setup_path)} to get started.".html_safe
 
 = render partial: 'schematics/collection', locals: {schematics: @schematics}
 

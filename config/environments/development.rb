@@ -1,4 +1,4 @@
-Minebuild::Application.configure do
+CanaryClip::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
@@ -30,5 +30,5 @@ Minebuild::Application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
-  config.action_mailer.default_url_options = {host: 'minebuild.dev'}
+  config.action_mailer.default_url_options = {host: 'canaryclip.dev'}
 end

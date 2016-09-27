@@ -1,45 +1,45 @@
 .container
   .row
     .col-xs-12
-      %h1 Add Minebuild to Your Server
+      %h1 Add CanaryClip to Your Server
       %br
-      %p Allow players to upload or download creations from Minebuild from your Minecraft server. This guide assumes that your server has #{link_to('Spigot installed', 'https://www.spigotmc.org/wiki/spigot-installation/')}.
+      %p Allow players to upload or download creations from CanaryClip from your Minecraft server. This guide assumes that your server has #{link_to('Spigot installed', 'https://www.spigotmc.org/wiki/spigot-installation/')}.
       %br
 
       %h4 Step 1: Register Your Server
-      %p Once logged into your Minebuild account, #{link_to('register your server', new_user_server_path, :target => "_blank")} with Minebuild to begin.
+      %p Once logged into your CanaryClip account, #{link_to('register your server', new_user_server_path, :target => "_blank")} with CanaryClip to begin.
       %p Give your server a meaningful name for other players to find, and enter your DNS hostname or IP address as the server 'Hostname'.
       %br
       %h4 Step 2: Download the Plugin & Copy Your Server Authenticity Token
-      %p Once you have registered your server, you should see a link where you can download the Minebuild plugin.
-      %p= "Every server that is registered with Minebuild receives a unique Authenticity Token. This token is used to authenticate your server with Minebuild when using the plugin. Without it, Minebuild will not work properly. <strong>Treat your Authenticity Token as if it were a password. Do not reuse the Authenticity Token for more than one Minecraft server.</strong> If you have multiple Minecraft servers, simply register each one for a unique Authenticity Token.".html_safe
+      %p Once you have registered your server, you should see a link where you can download the CanaryClip plugin.
+      %p= "Every server that is registered with CanaryClip receives a unique Authenticity Token. This token is used to authenticate your server with CanaryClip when using the plugin. Without it, CanaryClip will not work properly. <strong>Treat your Authenticity Token as if it were a password. Do not reuse the Authenticity Token for more than one Minecraft server.</strong> If you have multiple Minecraft servers, simply register each one for a unique Authenticity Token.".html_safe
       %br
       %h4 Step 3: Upload the Plugin to Your Server
       %p Using an FTP client of your choice, upload the JAR file to your server's <code>plugins</code> directory (create it if it does not exist).
       %p
         %span.label.label-danger WARNING:
         = "If you already have WorldEdit installed on your server, you need to replace the WorldEdit JAR file in the plugins directory (WorldEdit will continue to work). <strong>Before you do this, download your WorldEdit JAR file as a backup.</strong>.".html_safe
-      %p= "Once complete, the <code>plugins/worldedit-bukkit-6.1.4-minebuild.jar</code> should exist.".html_safe
+      %p= "Once complete, the <code>plugins/worldedit-bukkit-6.1.4-canary_clip.jar</code> should exist.".html_safe
       %p Restart your server for the plugin to create the necessary files.
       %br
       %h4 Step 4: Add Your Authenticity Token to the Server
       %p= "For the purpose of this guide, we will assume our server's Authenticity Token is <code>#{@uuid}</code>".html_safe
       %p= "Once you have restarted your server, you should have a <code>plugins/WorldEdit/config.yml</code> file. Open this file in the text editor of your choice, and add the following to the bottom:".html_safe
       %pre
-        minebuildAuthenticityToken: #{@uuid}
+        canaryClipAuthenticityToken: #{@uuid}
       %p= "If you want to check the format of this file before putting it into WorldEdit, paste it into #{link_to('http://yaml-online-parser.appspot.com/', 'http://yaml-online-parser.appspot.com/', :target => "_blank")} and see if it gives \"ERROR:\".".html_safe
       %br
       %h4 Step 5: Configure Your Server's Permissions
-      %p By default, no one will have permission to use any of the necessary commands in order to use Minebuild.
-      %p Here are the commands that should be allowed for Minebuild:
+      %p By default, no one will have permission to use any of the necessary commands in order to use CanaryClip.
+      %p Here are the commands that should be allowed for CanaryClip:
       %ul
         %li worldedit.wand
         %li worldedit.selection.pos
         %li worldedit.clipboard.copy
         %li worldedit.clipboard.paste
         %li worldedit.clipboard.clear
-        %li worldedit.minebuild.save
-        %li worldedit.minebuild.load
+        %li worldedit.canaryclip.save
+        %li worldedit.canaryclip.load
       %p If you're using a permission plugin, such as PermissionsEx, your permissions.yml file might look something like this:
       %pre
         :preserve
@@ -54,6 +54,6 @@
               - worldedit.clipboard.copy
               - worldedit.clipboard.paste
               - worldedit.clipboard.clear
-              - worldedit.minebuild.save
-              - worldedit.minebuild.load
+              - worldedit.canaryclip.save
+              - worldedit.canaryclip.load
           schema-version: 1

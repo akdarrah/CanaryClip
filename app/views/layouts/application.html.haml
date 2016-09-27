@@ -1,7 +1,7 @@
 !!! Strict
 %html{ xmlns: 'http://www.w3.org/1999/xhtml' }
   %head
-    %title Minebuild
+    %title CanaryClip
     = stylesheet_link_tag 'application', media: 'all'
     = csrf_meta_tags
     = yield :head
@@ -16,7 +16,7 @@
                 .pull-left
                   = link_to root_url, class: 'site-logo-link' do
                     .title.lobster
-                      Minebuild
+                      CanaryClip
                 .pull-right
                   %ul.list-inline
                     - if current_user.blank?

@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Minebuild::Application.config.secret_key_base = '745bd497568ed23be62f001a2798f882aaa9a1d6c1c5ed0b7cdab05967a5fd06415fbc62ed788dcad2787d26c147b14095180b71e39e6df9d9f9b2eb5aacd88e'
+CanaryClip::Application.config.secret_key_base = '745bd497568ed23be62f001a2798f882aaa9a1d6c1c5ed0b7cdab05967a5fd06415fbc62ed788dcad2787d26c147b14095180b71e39e6df9d9f9b2eb5aacd88e'

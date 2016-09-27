@@ -1,6 +1,6 @@
 require 'sidekiq/web'
 
-Minebuild::Application.routes.draw do
+CanaryClip::Application.routes.draw do
   root :to => 'schematics#index'
 
   authenticate :user, lambda { |u| u.admin? } do

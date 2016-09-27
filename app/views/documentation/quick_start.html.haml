@@ -1,15 +1,15 @@
 .container
   .row
     .col-xs-12
-      %h1 Minebuild Quick Start Guide
+      %h1 CanaryClip Quick Start Guide
       %br
 
       .row
         .col-xs-12.col-sm-6
-          %h3 To Upload to Minebuild
+          %h3 To Upload to CanaryClip
           %br
           %h4 Step 1: Select your Minecraft Creation
-          %p Using #{link_to('WorldEdit', 'http://wiki.sk89q.com/wiki/WorldEdit/Selection', :target => "_blank")}, select the blocks that you would like to upload to Minebuild.
+          %p Using #{link_to('WorldEdit', 'http://wiki.sk89q.com/wiki/WorldEdit/Selection', :target => "_blank")}, select the blocks that you would like to upload to CanaryClip.
           %pre //wand
           %p Then use <kbd>mouse1</kbd> to select position 1, and <kbd>mouse2</kbd> to select position 2.
           %br
@@ -17,8 +17,8 @@
           %p Once you have made your selection, copy the blocks to your clipboard.
           %pre //copy
           %br
-          %h4 Step 3: Upload to Minebuild
-          %p Once your Minecraft creation has been saved to your clipboard, use this command to upload it to Minebuild.
+          %h4 Step 3: Upload to CanaryClip
+          %p Once your Minecraft creation has been saved to your clipboard, use this command to upload it to CanaryClip.
           %pre //mb save
           %p For a successful upload, you will get back the message:
           %samp= I18n.t('plugin.schematics.upload_success', permalink: "<shortcode>")
@@ -27,7 +27,7 @@
           %p The <var>&lt;shortcode&gt;</var> can then be used to download your creation.
           %br
         .col-xs-12.col-sm-6
-          %h3 To Download from Minebuild
+          %h3 To Download from CanaryClip
           %br
           %h4 Step 1: Find a Creation to Download
           %p We will be using #{link_to("Schematic ##{@schematic.permalink}", schematic_path(@schematic), :target => "_blank")} for this example.

@@ -7,7 +7,7 @@ class Plugin::BaseController < ApplicationController
   private
 
   def render_plugin_text(text)
-    render json: ["[MINEBUILD] #{text}"], status: :ok
+    render json: ["[CANARYCLIP] #{text}"], status: :ok
   end
 
   def verify_plugin_authenticity_token

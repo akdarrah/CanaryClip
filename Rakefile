@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Minebuild::Application.load_tasks
+CanaryClip::Application.load_tasks
