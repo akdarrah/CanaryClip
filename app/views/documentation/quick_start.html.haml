@@ -19,7 +19,7 @@
           %br
           %h4 Step 3: Upload to CanaryClip
           %p Once your Minecraft creation has been saved to your clipboard, use this command to upload it to CanaryClip.
-          %pre //mb save
+          %pre //can up
           %p For a successful upload, you will get back the message:
           %samp= I18n.t('plugin.schematics.upload_success', permalink: "<shortcode>")
           %br
@@ -35,7 +35,7 @@
           %br
           %h4 Step 2: Load the Creation into your Minecraft Clipboard
           %p While in Minecraft, use this command to download the creation to your clipboard.
-          %pre //mb load #{@schematic.permalink}
+          %pre //can down #{@schematic.permalink}
           %br
           %h4 Step 3: Paste into the World!
           %p Once the clipboard has a creation loaded, use this command to paste into the world:
