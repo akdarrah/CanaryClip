@@ -58,25 +58,6 @@
 - content_for :script do
   :javascript
 
-    window.addEventListener('load', function(){
-      Grade(document.querySelectorAll('.gradient-wrap'), null, function(gradientData){
-        var gradientData = gradientData[0].gradientData;
-
-        var firstColorArray = gradientData[0].rgba;
-        var firstColor = "rgba(" + firstColorArray[0] + ", " + firstColorArray[1] + ", " + firstColorArray[2] + ", " + firstColorArray[2] + ")";
-
-        var secondColorArray = gradientData[1].rgba;
-        var secondColor = "rgba(" + secondColorArray[0] + ", " + secondColorArray[1] + ", " + secondColorArray[2] + ", " + secondColorArray[2] + ")";
-
-        $('.schematic-stripe')
-          .css('background', firstColor)
-          .css('background', '-webkit-linear-gradient(left, '+firstColor+', '+secondColor+')')
-          .css('background', '-o-linear-gradient(right, '+firstColor+', '+secondColor+')')
-          .css('background', '-moz-linear-gradient(right, '+firstColor+', '+secondColor+')')
-          .css('background', 'linear-gradient(to right, '+firstColor+', '+secondColor+')');
-      })
-    });
-
     $(document).ready(function(){
       new Clipboard('.btn-clipboard');
 

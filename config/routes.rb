@@ -1,7 +1,7 @@
 require 'sidekiq/web'
 
 CanaryClip::Application.routes.draw do
-  root :to => 'schematics#index'
+  root :to => 'marketing#index'
 
   authenticate :user, lambda { |u| u.admin? } do
     mount Sidekiq::Web => '/sidekiq'

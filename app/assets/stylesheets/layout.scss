@@ -1,6 +1,28 @@
 html, body {
   padding-bottom: 25px;
-  background-image: image-url("square_bg.png")
+  // background-image: image-url("square_bg.png")
+  background: #2a3139;
+  color: white;
+}
+
+.schematic-preview-card {
+  img {
+    -webkit-filter: grayscale(100%); /* Chrome, Safari, Opera */
+    filter: grayscale(100%);
+
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px; /* future proofing */
+    -khtml-border-radius: 5px; /* for old Konqueror browsers */
+  }
+
+  img:hover {
+    -webkit-filter: grayscale(50%); /* Chrome, Safari, Opera */
+    filter: grayscale(50%);
+
+    -webkit-transition: -webkit-filter 1s, filter 1s;
+    transition: -webkit-filter 1s, filter 1s;
+  }
 }
 
 .site-logo-link {
@@ -12,6 +34,12 @@ html, body {
 .top-bar {
   padding: 15px 15px 10px 15px;
   margin-bottom: 25px;
+
+  color: white;
+
+  a {
+    color: white;
+  }
 
   .title {
     font-size: 28px;
@@ -52,7 +80,7 @@ html, body {
 
   .schematic-view {
     .schematic-sidebar {
-      background: white;
+      background: #e9ecef;
       padding-top: 15px;
       padding-bottom: 15px;
     }

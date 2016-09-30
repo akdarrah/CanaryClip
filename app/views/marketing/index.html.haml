@@ -1,0 +1,70 @@
+- content_for :head do
+  :css
+    #canvas-image {
+      background-image: url(#{@marketing_render.file.url});
+    }
+
+.container-fluid
+  .row
+    %canvas#canvas-image
+    .canvas-overlay
+      .row.top-bar
+        .container
+          .row
+            .col-xs-12
+              .pull-left
+                = link_to root_url, class: 'site-logo-link' do
+                  .title.lobster
+                    CanaryClip
+              .pull-right
+                %ul.list-inline
+                  - if current_user.blank?
+                    %li= link_to 'Sign In', new_user_session_url
+                  %li= link_to 'Discover', schematics_path
+      .container
+        .row.text-center.slogan-text
+          .col-xs-12
+            %h1 Minecraft Creation Community
+
+%br
+-# .container
+-#   .row
+-#     .col-xs-12
+-#       .alert.alert-info
+-#         %h1 Discover and Share Minecraft Creations
+-#         %p= "New here? Read the #{link_to('Quick Start Guide', quick_start_path)}. Connect to Minecraft server <strong>#{@server.hostname}</strong> to try it out!".html_safe
+-#         %p
+-#           %small
+-#             = "Want to add CanaryClip to your server? Read the #{link_to('Server Setup Guide', server_setup_path)} to get started.".html_safe
+
+.container
+  .row
+    .col-xs-12
+      %h2 Discover and Share Minecraft Creations
+      %p Download or share Minecraft creations directly from the game.
+      %br
+
+    - @schematics.each do |schematic|
+      .col-xs-12.col-sm-4
+        .schematic-preview-card= link_to image_tag(schematic.primary_render.file.url, class: 'img-responsive'), schematic_path(schematic)
+        %br
+
+- content_for :script do
+  :javascript
+    $(document).ready(function(){
+      var granimInstance = new Granim({
+        element: '#canvas-image',
+        direction: 'top-bottom',
+        opacity: [1, .5, 0],
+        isPausedWhenNotInView: true,
+        states : {
+            "default-state": {
+                gradients: [
+                    ['#485563', '#29323c', '#29323c'],
+                    ['#00c6ff', '#0072ff', '#0072ff']
+                ],
+                transitionSpeed: 10000
+            }
+        }
+      });
+    });
