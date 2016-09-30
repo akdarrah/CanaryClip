@@ -2,8 +2,8 @@
   .grid
     - schematics.each do |schematic|
       .grid-item.col-xs-12.col-sm-6.col-lg-4
-        .schematic-card
-          = link_to image_tag(schematic.primary_render.file.url, class: 'img-responsive'), schematic_path(schematic)
+        .schematic-card.rounded
+          = link_to image_tag(schematic.primary_render.file.url, class: 'img-responsive semi-gray-scale'), schematic_path(schematic)
           .card-info
             .row
               .col-xs-6

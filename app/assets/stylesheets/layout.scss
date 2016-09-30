@@ -1,19 +1,36 @@
 html, body {
   padding-bottom: 25px;
-  // background-image: image-url("square_bg.png")
   background: #2a3139;
   color: white;
+}
+
+.semi-gray-scale {
+  -webkit-filter: grayscale(40%); /* Chrome, Safari, Opera */
+  filter: grayscale(40%);
+}
+
+.white-background {
+  background: white;
+}
+
+.rounded {
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px; /* future proofing */
+  -khtml-border-radius: 5px; /* for old Konqueror browsers */
+}
+
+.squared-stripe {
+  background-image: image-url("square_bg.png");
+  color: #495057;
+  padding: 45px 0;
+  margin: 45px 0;
 }
 
 .schematic-preview-card {
   img {
     -webkit-filter: grayscale(100%); /* Chrome, Safari, Opera */
     filter: grayscale(100%);
-
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px; /* future proofing */
-    -khtml-border-radius: 5px; /* for old Konqueror browsers */
   }
 
   img:hover {
@@ -81,6 +98,7 @@ html, body {
   .schematic-view {
     .schematic-sidebar {
       background: #e9ecef;
+      color: #495057;
       padding-top: 15px;
       padding-bottom: 15px;
     }
@@ -112,7 +130,7 @@ html, body {
     top: 50%;
     width: 9999px;
     height: 1px;
-    background: #eeeeee;
+    background: #ddd;
 }
 
 .strike > span:before {

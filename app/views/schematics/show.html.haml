@@ -5,9 +5,9 @@
         .col-xs-12.col-md-8.gradient-wrap.schematic-column{'data-match-height' => "schematic-column-group"}
           .slick-slider
             - @schematic.renders.standard_resolution.completed.camera_angle_order.each_with_index do |render, index|
-              = image_tag render.file.url
+              = image_tag render.file.url, class: "semi-gray-scale rounded"
           %br
-        .col-xs-12.col-md-4.schematic-sidebar.schematic-column{'data-match-height' => "schematic-column-group"}
+        .col-xs-12.col-md-4.schematic-sidebar.schematic-column.rounded{'data-match-height' => "schematic-column-group"}
           %span
             = image_tag(@schematic.character.avatar.url, class: 'small-character-avatar')
             = link_to @schematic.character, character_path(@schematic.character)
