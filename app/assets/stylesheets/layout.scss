@@ -4,6 +4,18 @@ html, body {
   color: white;
 }
 
+a {
+  color: #fa5252;
+
+  &:hover {
+    color: #fa5252;
+  }
+}
+
+.giant-fa-icon {
+  font-size: 80px;
+}
+
 .semi-gray-scale {
   -webkit-filter: grayscale(40%); /* Chrome, Safari, Opera */
   filter: grayscale(40%);
