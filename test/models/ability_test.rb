@@ -84,6 +84,16 @@ class AbilityTest < ActiveSupport::TestCase
 
   # Server
 
+  test "All users cannot index Server" do
+    @ability = Ability.new(nil)
+    refute @ability.can?(:index, @server)
+  end
+
+  test 'Registered users can index Server' do
+    @ability = Ability.new(@user)
+    assert @ability.can?(:index, @server)
+  end
+
   test "All users cannot show Server" do
     @ability = Ability.new(nil)
     refute @ability.can?(:show, @server)

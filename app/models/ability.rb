@@ -22,7 +22,7 @@ class Ability
 
   def server_abilities_for(user)
     if user
-      can [:new, :create], Server
+      can [:index, :new, :create], Server
       can [:show, :download], Server do |server|
         server.owner_user == user
       end
