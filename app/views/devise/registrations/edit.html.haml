@@ -3,31 +3,32 @@
     .col-xs-12.col-sm-3
       = render partial: "user/shared/menu"
     .col-xs-12.col-sm-9
-      = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "form-horizontal" }) do |f|
-        = devise_error_messages!
-        .form-group
-          = f.label :email
-          = f.email_field :email, autofocus: true, class: "form-control"
-        -# - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-        -#   %div
-        -#     Currently waiting confirmation for: #{resource.unconfirmed_email}
-        .form-group
-          = f.label :password
-          = f.password_field :password, autocomplete: "off", class: "form-control"
-          %span.help-block Leave blank if you don't want to change it
-        .form-group
-          = f.label :password_confirmation
-          = f.password_field :password_confirmation, autocomplete: "off", class: "form-control"
-        .form-group
-          = f.label :current_password
-          = f.password_field :current_password, autocomplete: "off", class: "form-control"
-          %span.help-block We need your current password to confirm your changes
-        .form-group
-          = f.submit "Update", class: 'btn btn-primary'
+      .well.well-lg.light-background
+        = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "form-horizontal" }) do |f|
+          = devise_error_messages!
+          .form-group
+            = f.label :email
+            = f.email_field :email, autofocus: true, class: "form-control"
+          -# - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+          -#   %div
+          -#     Currently waiting confirmation for: #{resource.unconfirmed_email}
+          .form-group
+            = f.label :password
+            = f.password_field :password, autocomplete: "off", class: "form-control"
+            %span.help-block Leave blank if you don't want to change it
+          .form-group
+            = f.label :password_confirmation
+            = f.password_field :password_confirmation, autocomplete: "off", class: "form-control"
+          .form-group
+            = f.label :current_password
+            = f.password_field :current_password, autocomplete: "off", class: "form-control"
+            %span.help-block We need your current password to confirm your changes
+          .form-group
+            = f.submit "Update", class: 'btn btn-primary'
 
-      %br
-      .panel.panel-danger
-        .panel-heading
-          %h3.panel-title Cancel my account
-        .panel-body
-          = button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-danger'
+        %br
+        .panel.panel-danger
+          .panel-heading
+            %h3.panel-title Cancel my account
+          .panel-body
+            = button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-danger'

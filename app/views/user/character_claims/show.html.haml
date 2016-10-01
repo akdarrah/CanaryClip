@@ -3,24 +3,24 @@
     .col-xs-12.col-sm-3
       = render partial: "user/shared/menu"
     .col-xs-12.col-sm-9
-      .row
-
-        .col-xs-12.col-md-3
-          = image_tag(@character_claim.character.avatar.url)
-        .col-xs-12.col-md-9
-          %table.table
-            %tbody
-              %tr
-                %td
-                  %strong= CharacterClaim.human_attribute_name(:character_username)
-                %td= @character_claim.character.username
-              %tr
-                %td
-                  %strong= CharacterClaim.human_attribute_name(:state)
-                %td= @character_claim.state
-              %tr
-                %td
-                  %strong= CharacterClaim.human_attribute_name(:token)
-                %td= @character_claim.token
-          %p= t('.connect_to_server')
-          %p= t('.verify_your_character', token: @character_claim.token)
+      .well.well-lg.light-background
+        .row
+          .col-xs-12.col-md-3
+            = image_tag(@character_claim.character.avatar.url)
+          .col-xs-12.col-md-9
+            %table.table
+              %tbody
+                %tr
+                  %td
+                    %strong= CharacterClaim.human_attribute_name(:character_username)
+                  %td= @character_claim.character.username
+                %tr
+                  %td
+                    %strong= CharacterClaim.human_attribute_name(:state)
+                  %td= @character_claim.state
+                %tr
+                  %td
+                    %strong= CharacterClaim.human_attribute_name(:token)
+                  %td= @character_claim.token
+            %p= t('.connect_to_server')
+            %p= t('.verify_your_character', token: @character_claim.token)

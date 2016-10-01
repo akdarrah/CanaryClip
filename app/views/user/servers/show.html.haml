@@ -3,23 +3,24 @@
     .col-xs-12.col-sm-3
       = render partial: "user/shared/menu"
     .col-xs-12.col-sm-9
+      .well.well-lg.light-background
 
-      %table.table
-        %tbody
-          %tr
-            %td
-              %strong= Server.human_attribute_name(:name)
-            %td= @server.name
-          %tr
-            %td
-              %strong= Server.human_attribute_name(:hostname)
-            %td= @server.hostname
-          %tr
-            %td
-              %strong= Server.human_attribute_name(:description)
-            %td= @server.description
-          %tr
-            %td
-              %strong= Server.human_attribute_name(:authenticity_token)
-            %td= @server.authenticity_token
-      = link_to "Download the plugin", download_user_server_path(@server)
+        %table.table
+          %tbody
+            %tr
+              %td
+                %strong= Server.human_attribute_name(:name)
+              %td= @server.name
+            %tr
+              %td
+                %strong= Server.human_attribute_name(:hostname)
+              %td= @server.hostname
+            %tr
+              %td
+                %strong= Server.human_attribute_name(:description)
+              %td= @server.description
+            %tr
+              %td
+                %strong= Server.human_attribute_name(:authenticity_token)
+              %td= @server.authenticity_token
+        = link_to "Download the plugin", download_user_server_path(@server)

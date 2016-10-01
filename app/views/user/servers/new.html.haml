@@ -3,8 +3,9 @@
     .col-xs-12.col-sm-3
       = render partial: "user/shared/menu"
     .col-xs-12.col-sm-9
-      = simple_form_for [:user, @server] do |f|
-        = f.input :name
-        = f.input :hostname
-        = f.input :description
-        = f.button :submit, 'Save', class: "btn-primary"
+      .well.well-lg.light-background
+        = simple_form_for [:user, @server] do |f|
+          = f.input :name
+          = f.input :hostname
+          = f.input :description
+          = f.button :submit, 'Save', class: "btn btn-primary"

@@ -3,15 +3,16 @@
     .col-xs-12.col-sm-3
       = render partial: "user/shared/menu"
     .col-xs-12.col-sm-9
+      .well.well-lg.light-background
 
-      %table.table
-        %thead
-          %tr
-            %th= Server.human_attribute_name(:name)
-            %th= Server.human_attribute_name(:hostname)
-        %tbody
-          - @servers.each do |server|
+        %table.table
+          %thead
             %tr
-              %td= link_to server.name, user_server_path(server)
-              %td= server.hostname
-      = link_to 'Add a server', new_user_server_path
+              %th= Server.human_attribute_name(:name)
+              %th= Server.human_attribute_name(:hostname)
+          %tbody
+            - @servers.each do |server|
+              %tr
+                %td= link_to server.name, user_server_path(server)
+                %td= server.hostname
+        = link_to 'Add a server', new_user_server_path
