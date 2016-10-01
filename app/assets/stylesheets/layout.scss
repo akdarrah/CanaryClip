@@ -29,6 +29,7 @@ html, body {
 
 .schematic-preview-card {
   img {
+    margin: 0 auto;
     -webkit-filter: grayscale(100%); /* Chrome, Safari, Opera */
     filter: grayscale(100%);
   }
