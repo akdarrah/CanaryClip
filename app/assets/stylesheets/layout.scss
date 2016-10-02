@@ -8,6 +8,11 @@ textarea {
   resize: vertical; /* user can resize vertically, but width is fixed */
 }
 
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+  background: #fa5252;
+}
+
+
 /* Sticky footer styles
 https://getbootstrap.com/examples/sticky-footer/
 -------------------------------------------------- */
