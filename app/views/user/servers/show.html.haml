@@ -4,23 +4,32 @@
       = render partial: "user/shared/menu"
     .col-xs-12.col-sm-9
       .well.well-lg.light-background
+        %h2= @server.name
+        %samp= @server.hostname
+        %br
+        %br
+        %br
+        %blockquote
+          %p
+            - if @server.description.present?
+              = @server.description
+            - else
+              No description
 
-        %table.table
-          %tbody
-            %tr
-              %td
-                %strong= Server.human_attribute_name(:name)
-              %td= @server.name
-            %tr
-              %td
-                %strong= Server.human_attribute_name(:hostname)
-              %td= @server.hostname
-            %tr
-              %td
-                %strong= Server.human_attribute_name(:description)
-              %td= @server.description
-            %tr
-              %td
-                %strong= Server.human_attribute_name(:authenticity_token)
-              %td= @server.authenticity_token
-        = link_to "Download the plugin", download_user_server_path(@server)
+        %br
+        %label= Server.human_attribute_name(:authenticity_token)
+        .input-group
+          %input{type: 'text', readonly: 'readonly', id: 'server-authenticity-token-input', class: "form-control select-all-to-copy", value: @server.authenticity_token}
+          %span.input-group-btn
+            %button.btn.btn-secondary.btn-clipboard{type: "button", 'data-clipboard-target' => "#server-authenticity-token-input", title: 'Click to copy to clipboard'}= fa_icon('clipboard')
+        %p.help-block= "This token is used to authenticate your server with CanaryClip when using the plugin. Without it, CanaryClip will not work properly. <strong>Treat your Authenticity Token as if it were a password. Do not reuse the Authenticity Token for more than one Minecraft server.</strong> If you have multiple Minecraft servers, simply register each one for a unique Authenticity Token.".html_safe
+
+- content_for :script do
+  :javascript
+    $(document).ready(function(){
+      new Clipboard('.btn-clipboard');
+
+      $(".select-all-to-copy").on("click", function () {
+        $(this).select();
+      });
+    });
