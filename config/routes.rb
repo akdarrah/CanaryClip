@@ -20,7 +20,7 @@ CanaryClip::Application.routes.draw do
       end
     end
 
-    resources :servers, only: [:index, :show, :new, :create] do
+    resources :servers, only: [:index, :show, :new, :create, :edit, :update] do
       member do
         get :download
       end

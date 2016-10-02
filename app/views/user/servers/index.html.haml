@@ -5,14 +5,20 @@
     .col-xs-12.col-sm-9
       .well.well-lg.light-background
 
-        %table.table
-          %thead
-            %tr
-              %th= Server.human_attribute_name(:name)
-              %th= Server.human_attribute_name(:hostname)
+        .row
+          .span.col-xs-12.col-md-6.text-center
+            .giant-fa-icon= fa_icon "server"
+            = link_to 'Add a Minecraft Server', new_user_server_path
+          .span.col-xs-12.col-md-6.text-center
+            .giant-fa-icon= fa_icon "download"
+            = link_to 'Download CanaryClip Minecraft Plugin', new_user_server_path
+        %hr
+        %table.table.table-condensed.table-hover.table-striped
           %tbody
             - @servers.each do |server|
               %tr
-                %td= link_to server.name, user_server_path(server)
-                %td= server.hostname
-        = link_to 'Add a server', new_user_server_path
+                %td
+                  .lead.no-margin= link_to server.name, user_server_path(server)
+                  %samp= server.hostname
+                %td.text-center
+                  = link_to 'Edit', edit_user_server_path(server)
