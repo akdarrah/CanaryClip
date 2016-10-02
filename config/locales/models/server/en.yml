@@ -8,7 +8,7 @@ en:
         owner_character_id: Owner Character
         authenticity_token: Authenticity Token
         description: Description
-        hostname: Hostname
+        hostname: Server IP
         claims_allowed: Claims Allowed
         created_at: Created
         updated_at: Updated
@@ -22,3 +22,10 @@ en:
           attributes:
             owner_character:
               must_belong_to_user: "must belong to owner user"
+
+  simple_form:
+    hints:
+      server:
+        name: 'If your Minecraft community has multiple servers, each one must be named differently.'
+        hostname: 'IP Address & Port for this Minecraft server (e.g. mc.flamesurvival.com, 142.4.200.221, or 108.170.17.74:39941)'
+        description: 'Give a brief overview of what users can expect while playing on your server. This description will be helpful to new players who are first introduced to your server.'
