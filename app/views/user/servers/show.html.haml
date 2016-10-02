@@ -4,6 +4,9 @@
       = render partial: "user/shared/menu"
     .col-xs-12.col-sm-9
       .well.well-lg.light-background
+        %ol.breadcrumb
+          %li= link_to "Servers", user_servers_path
+          %li.active= @server.name
         %h2= @server.name
         %samp= @server.hostname
         %br
