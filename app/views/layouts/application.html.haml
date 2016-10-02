@@ -18,14 +18,7 @@
                     .title.lobster
                       CanaryClip
                 .pull-right
-                  %ul.list-inline
-                    - if current_user.blank?
-                      %li= link_to 'Sign In', new_user_session_url
-                    - else
-                      %li= link_to 'Sign Out', destroy_user_session_url, method: :delete
-                    - if current_user.present?
-                      %li= link_to 'Settings', edit_user_registration_path
-                    %li= link_to 'Discover', schematics_path
+                  = render partial: "layouts/menu"
     = yield
     .footer
       .container

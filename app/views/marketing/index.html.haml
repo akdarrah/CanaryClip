@@ -17,10 +17,7 @@
                   .title.lobster
                     CanaryClip
               .pull-right
-                %ul.list-inline
-                  - if current_user.blank?
-                    %li= link_to 'Sign In', new_user_session_url
-                  %li= link_to 'Discover', schematics_path
+                = render partial: "layouts/menu"
       .container
         .row.text-center.slogan-text
           .col-xs-12
