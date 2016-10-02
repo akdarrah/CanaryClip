@@ -6,19 +6,24 @@
       .well.well-lg.light-background
 
         .row
-          .span.col-xs-12.col-md-6.text-center
+          .span.col-xs-12.col-md-4.text-center
+            .giant-fa-icon= fa_icon "leaf"
+            = link_to 'Server Setup Guide', server_setup_path
+          .span.col-xs-12.col-md-4.text-center
             .giant-fa-icon= fa_icon "server"
             = link_to 'Add a Minecraft Server', new_user_server_path
-          .span.col-xs-12.col-md-6.text-center
+          .span.col-xs-12.col-md-4.text-center
             .giant-fa-icon= fa_icon "download"
             = link_to 'Download CanaryClip Minecraft Plugin', download_user_servers_path
-        %hr
-        %table.table.table-condensed.table-hover.table-striped
-          %tbody
-            - @servers.each do |server|
-              %tr
-                %td
-                  .lead.no-margin= link_to server.name, user_server_path(server)
-                  %samp= server.hostname
-                %td.text-center
-                  = link_to 'Edit', edit_user_server_path(server)
+
+        - if @servers.present?
+          %hr
+          %table.table.table-condensed.table-hover.table-striped
+            %tbody
+              - @servers.each do |server|
+                %tr
+                  %td
+                    .lead.no-margin= link_to server.name, user_server_path(server)
+                    %samp= server.hostname
+                  %td.text-center
+                    = link_to 'Edit', edit_user_server_path(server)
