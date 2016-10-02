@@ -4,6 +4,10 @@ html, body {
   color: white;
 }
 
+textarea {
+  resize: vertical; /* user can resize vertically, but width is fixed */
+}
+
 /* Sticky footer styles
 https://getbootstrap.com/examples/sticky-footer/
 -------------------------------------------------- */
