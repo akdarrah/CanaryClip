@@ -4,6 +4,9 @@
       = render partial: "user/shared/menu"
     .col-xs-12.col-sm-9
       .well.well-lg.light-background
+        %h2 Add CanaryClip to your Minecraft Server
+        %p Read the #{link_to('Server Setup Guide', server_setup_path, target: '_blank')} for full instructions.
+        %br
         = simple_form_for [:user, @server] do |f|
           = f.input :name
           = f.input :hostname
