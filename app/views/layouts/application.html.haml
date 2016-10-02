@@ -27,6 +27,17 @@
                       %li= link_to 'Settings', edit_user_registration_path
                     %li= link_to 'Discover', schematics_path
     = yield
+    .footer
+      .container
+        .row
+          .col-xs-12
+            .title.lobster
+              CanaryClip
+            %br
+            %small
+              %span © #{Time.now.year} CanaryClip
+              %br
+              %span This site is not affiliated with Minecraft or Mojang
     = render partial: "layouts/analytics"
     = javascript_include_tag "application"
     = yield :script
