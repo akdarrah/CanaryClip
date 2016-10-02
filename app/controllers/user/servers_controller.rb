@@ -16,12 +16,26 @@ class User::ServersController < ApplicationController
   end
 
   def create
-    @server = current_user.owned_servers.new(create_params)
+    @server = current_user.owned_servers.new
+    @server.attributes = editable_params
 
     if @server.save
       redirect_to user_server_path @server
     else
       render action: :new
+    end
+  end
+
+  def edit
+  end
+
+  def update
+    @server.attributes = editable_params
+
+    if @server.save
+      redirect_to user_server_path @server
+    else
+      render action: :edit
     end
   end
 
@@ -31,7 +45,7 @@ class User::ServersController < ApplicationController
 
   private
 
-  def create_params
+  def editable_params
     params.require(:server)
       .permit(:name, :hostname, :description)
   end

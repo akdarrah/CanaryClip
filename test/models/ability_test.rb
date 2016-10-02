@@ -141,4 +141,38 @@ class AbilityTest < ActiveSupport::TestCase
     assert @ability.can?(:download, @server)
   end
 
+  test 'All users cannot edit Server' do
+    @ability = Ability.new(nil)
+    refute @ability.can?(:edit, @server)
+  end
+
+  test 'Registered users cannot edit Server' do
+    @ability = Ability.new(@user)
+    refute @ability.can?(:edit, @server)
+  end
+
+  test "Owner user can edit Server" do
+    @user    = @server.owner_user
+    @ability = Ability.new(@user)
+
+    assert @ability.can?(:edit, @server)
+  end
+
+  test 'All users cannot update Server' do
+    @ability = Ability.new(nil)
+    refute @ability.can?(:update, @server)
+  end
+
+  test 'Registered users cannot update Server' do
+    @ability = Ability.new(@user)
+    refute @ability.can?(:update, @server)
+  end
+
+  test "Owner user can update Server" do
+    @user    = @server.owner_user
+    @ability = Ability.new(@user)
+
+    assert @ability.can?(:update, @server)
+  end
+
 end
