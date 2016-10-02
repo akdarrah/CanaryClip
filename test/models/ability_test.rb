@@ -138,13 +138,6 @@ class AbilityTest < ActiveSupport::TestCase
 
   test "Non-owner registered users cannot download Server" do
     @ability = Ability.new(@user)
-    refute @ability.can?(:download, @server)
-  end
-
-  test "Owner user can download Server" do
-    @user    = @server.owner_user
-    @ability = Ability.new(@user)
-
     assert @ability.can?(:download, @server)
   end
 

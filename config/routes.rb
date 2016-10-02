@@ -21,7 +21,7 @@ CanaryClip::Application.routes.draw do
     end
 
     resources :servers, only: [:index, :show, :new, :create, :edit, :update] do
-      member do
+      collection do
         get :download
       end
     end
