@@ -7,6 +7,7 @@ class User::CharacterClaimsController < ApplicationController
 
   def show
     @character_claim = current_user.character_claims.find_by_token!(params[:id])
+    @server          = Server.official
   end
 
   def new

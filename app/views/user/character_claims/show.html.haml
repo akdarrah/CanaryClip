@@ -9,22 +9,28 @@
           %li.active= "Character Claim #{@character_claim.token}"
 
         .row
-          .col-xs-12.col-md-3
-            = image_tag(@character_claim.character.avatar.url)
-          .col-xs-12.col-md-9
-            %table.table
-              %tbody
-                %tr
-                  %td
-                    %strong= CharacterClaim.human_attribute_name(:character_username)
-                  %td= @character_claim.character.username
-                %tr
-                  %td
-                    %strong= CharacterClaim.human_attribute_name(:state)
-                  %td= @character_claim.state
-                %tr
-                  %td
-                    %strong= CharacterClaim.human_attribute_name(:token)
-                  %td= @character_claim.token
-            %p= t('.connect_to_server')
-            %p= t('.verify_your_character', token: @character_claim.token)
+          .col-xs-12
+            %h2
+              = image_tag(@character_claim.character.avatar.url, class: 'small-character-avatar')
+              = @character_claim.character.username
+              %span.label{class: character_claim_state_label_class(@character_claim.state)}
+                = @character_claim.state
+          .col-xs-12
+            %br
+            %label= CharacterClaim.human_attribute_name(:token)
+            .input-group
+              %input{type: 'text', readonly: 'readonly', id: 'server-authenticity-token-input', class: "form-control select-all-to-copy", value: @character_claim.token}
+              %span.input-group-btn
+                %button.btn.btn-secondary.btn-clipboard{type: "button", 'data-clipboard-target' => "#server-authenticity-token-input", title: 'Click to copy to clipboard'}= fa_icon('clipboard')
+            %p.help-block
+              = "Verify you own this character by connecting to server <samp>#{@server.hostname}</samp> in Minecraft. Once connected to the verification server, use the command <code>//mb claim #{@character_claim.token}</code> to prove you own this character.".html_safe
+
+- content_for :script do
+  :javascript
+    $(document).ready(function(){
+      new Clipboard('.btn-clipboard');
+
+      $(".select-all-to-copy").on("click", function () {
+        $(this).select();
+      });
+    });

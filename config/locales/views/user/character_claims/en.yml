@@ -5,6 +5,3 @@ en:
         add_character_claim: "Claim your Character"
       new:
         claim_your_character: "Claim your Character"
-      show:
-        connect_to_server: "Verify you own this character by connecting to server 45.35.171.145:25654 in Minecraft."
-        verify_your_character: "Once connected to the verification server, use the command `//mb claim %{token}` to prove you own this character."
