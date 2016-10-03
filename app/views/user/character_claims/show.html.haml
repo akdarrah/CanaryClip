@@ -23,7 +23,9 @@
               %span.input-group-btn
                 %button.btn.btn-secondary.btn-clipboard{type: "button", 'data-clipboard-target' => "#server-authenticity-token-input", title: 'Click to copy to clipboard'}= fa_icon('clipboard')
             %p.help-block
-              = "Verify you own this character by connecting to server <samp>#{@server.hostname}</samp> in Minecraft. Once connected to the verification server, use the command <code>//mb claim #{@character_claim.token}</code> to prove you own this character.".html_safe
+              = "Verify you own this character by connecting to server <samp>#{@server.hostname}</samp> in Minecraft. Once connected to the verification server, use the command <code>//can claim #{@character_claim.token}</code> to prove you own this character.".html_safe
+            %p.help-block
+              = "Verified Characters appear under #{link_to('Characters', user_character_claims_path)} settings.".html_safe
 
 - content_for :script do
   :javascript
