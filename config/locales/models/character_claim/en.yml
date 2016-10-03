@@ -13,3 +13,8 @@ en:
       character_claim:
         one: Character Claim
         other: Character Claims
+
+  simple_form:
+    hints:
+      character_claim:
+        character_username: "Enter your Minecraft character's username"

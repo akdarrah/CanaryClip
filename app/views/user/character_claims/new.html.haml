@@ -9,7 +9,9 @@
           %li.active= t('.claim_your_character')
 
         %h1= t('.claim_your_character')
+        %p= "Read the #{link_to('Character Claim Guide', character_claims_path)} for full instructions.".html_safe
+        %br
 
         = simple_form_for [:user, @character_claim] do |f|
           = f.input :character_username
-          = f.button :submit, class: 'btn btn-primary'
+          = f.button :submit, value: "Claim your Character", class: 'btn btn-primary'

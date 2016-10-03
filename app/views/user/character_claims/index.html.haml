@@ -4,43 +4,27 @@
       = render partial: "user/shared/menu"
     .col-xs-12.col-sm-9
       .well.well-lg.light-background
+        .row
+          .span.col-xs-12.col-md-6.text-center
+            .giant-fa-icon= fa_icon "leaf"
+            = link_to 'Character Claim Guide', character_claims_path
+          .span.col-xs-12.col-md-6.text-center
+            .giant-fa-icon= fa_icon "plus-square"
+            = link_to t('.add_character_claim'), new_user_character_claim_path
 
-        %h3 Characters
-
-        %table.table
-          %thead
-            %tr
-              %th &nbsp;
-              %th &nbsp;
-              %th= Character.human_attribute_name(:character)
-              %th= Character.human_attribute_name(:uuid)
-          %tbody
-            - current_user.characters.each do |character|
-              %tr{class: (current_character == character ? 'info' : '')}
-                %td
-                  - if current_character == character
-                    &dash;
-                  - else
-                    = link_to 'Switch', switch_user_character_path(character), method: :post
-                %td= image_tag(character.avatar.url, class: 'small-character-avatar')
-                %td= link_to character.username, character_path(character)
-                %td= character.uuid
-
-        %hr
-        %h3 Character Claims
-
-        %table.table
-          %thead
-            %tr
-              %th &nbsp;
-              %th= CharacterClaim.human_attribute_name(:character_username)
-              %th= CharacterClaim.human_attribute_name(:token)
-              %th= CharacterClaim.human_attribute_name(:state)
-          %tbody
-            - @character_claims.each do |character_claim|
-              %tr
-                %td= image_tag(character_claim.character.avatar.url, class: 'small-character-avatar')
-                %td= link_to character_claim.character.username, user_character_claim_path(character_claim)
-                %td= character_claim.token
-                %td= character_claim.state
-        = link_to t('.add_character_claim'), new_user_character_claim_path
+        - if current_user.characters.present?
+          %hr
+          %table.table.table-condensed.table-hover.table-striped.character-management-table
+            %tbody
+              - current_user.characters.each do |character|
+                %tr{class: (current_character == character ? 'info' : '')}
+                  %td.text-center
+                    = image_tag(character.avatar.url, class: 'small-character-avatar')
+                  %td
+                    .lead.no-margin= link_to character.username, character_path(character)
+                    %samp= character.uuid
+                  %td.text-center
+                    - if current_character == character
+                      &dash;
+                    - else
+                      = link_to 'Switch', switch_user_character_path(character), method: :post

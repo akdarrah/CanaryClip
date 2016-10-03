@@ -42,6 +42,7 @@ CanaryClip::Application.routes.draw do
 
   get 'quick_start', to: "documentation#quick_start"
   get 'server_setup', to: "documentation#server_setup"
+  get 'character_claims', to: "documentation#character_claims"
 
   resources :blocks, only: [:show]
   resources :characters, only: [:show]

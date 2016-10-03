@@ -9,4 +9,7 @@ class DocumentationController < ApplicationController
     @uuid = UUID.generate(:compact)
   end
 
+  def character_claims
+  end
+
 end
