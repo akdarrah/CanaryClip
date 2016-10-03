@@ -4,6 +4,10 @@
       = render partial: "user/shared/menu"
     .col-xs-12.col-sm-9
       .well.well-lg.light-background
+        %ol.breadcrumb
+          %li= link_to "Characters", user_character_claims_path
+          %li.active= "Character Claim #{@character_claim.token}"
+
         .row
           .col-xs-12.col-md-3
             = image_tag(@character_claim.character.avatar.url)
