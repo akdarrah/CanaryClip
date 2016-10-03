@@ -4,5 +4,5 @@
   - else
     %li= link_to 'Sign Out', destroy_user_session_url, method: :delete
   - if current_user.present?
-    %li= link_to 'Settings', edit_user_registration_path
+    %li= link_to 'Settings', user_character_claims_path
   %li= link_to 'Discover', schematics_path

@@ -1,9 +1,9 @@
 .well.well-sm.light-background
   %ul.nav.nav-pills.nav-stacked
-    %li{role: "presentation", class: (current_page?(edit_user_registration_path) ? "active" : "")}
-      = link_to 'Account', edit_user_registration_path
     %li{role: "presentation", class: (params[:controller] == 'user/character_claims' ? "active" : "")}
       = link_to 'Characters', user_character_claims_path
     %li{role: "presentation", class: (params[:controller] == 'user/servers' ? "active" : "")}
       = link_to 'Servers', user_servers_path
+    %li{role: "presentation", class: (current_page?(edit_user_registration_path) ? "active" : "")}
+      = link_to 'Account', edit_user_registration_path
 %br
