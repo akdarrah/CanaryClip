@@ -135,6 +135,11 @@ a {
 
 .small-character-avatar {
   width: 28px;
+
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px; /* future proofing */
+  -khtml-border-radius: 3px; /* for old Konqueror browsers */
 }
 
 .block-icon {
