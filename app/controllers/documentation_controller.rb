@@ -10,6 +10,9 @@ class DocumentationController < ApplicationController
   end
 
   def character_claims
+    @server     = Server.official
+    @claim_code = CHARACTER_CLAIM_HASHIDS.encode(0)
+    @character  = Character.find_by_username "onebert"
   end
 
 end

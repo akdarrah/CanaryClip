@@ -3,3 +3,18 @@
     .row
       .col-xs-12
         %h1 CanaryClip Character Claims
+        %p Associate your Minecraft Characters to your CanaryClip user account.
+        %br
+        %h4 Step 1: Start a Character Claim by entering your character's username
+        %p Once logged into your CanaryClip account, fill out the #{link_to('Character Claim Form', new_user_character_claim_path)} to begin the process. Once submitted, you will be given a Character Claim Code to continue.
+        %br
+        %h4 Step 2: Prove Character Ownership
+        %p= "In order to verify you are the owner of the character username entered, you will need to verify your character by connecting to the #{@server.name} at <samp>#{@server.hostname}</samp>. <strong>You must be logged in as the character you are claiming.</strong> This is the only Minecraft server where characters can be claimed.".html_safe
+        %p= "For the purpose of this guide, let's assume you're claiming the character username <var>#{@character.username}</var> with Claim Code is <var>#{@claim_code}</var>. Once logged in to the #{@server.name}, issue the following command:".html_safe
+        %pre= "//can claim #{@claim_code}"
+        %p For a successful Character Claim, you should see the the message:
+        %samp= I18n.t('plugin.character_claims.claimed', username: @character.username)
+        %br
+        %br
+        %h4 Step 3: Configure the Character on CanaryClip
+        %p After a successful Character Claim, your character should be listed on the #{link_to('Character Settings Page', user_character_claims_path)}. You have successfully claimed the character to your account, and you can now participate in the community as that character!
