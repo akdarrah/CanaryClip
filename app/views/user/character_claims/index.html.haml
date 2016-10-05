@@ -12,8 +12,29 @@
             .giant-fa-icon= fa_icon "plus-square"
             = link_to t('.add_character_claim'), new_user_character_claim_path
 
-        - if current_user.characters.present?
-          %hr
+        - if current_character.present?
+          %br
+          %br
+          %h3 Currently, Known As&hellip;
+          .well
+            .row
+              .span.col-xs-4
+                = image_tag(current_character.avatar.url, class: "rounded img-responsive")
+              .span.col-xs-8
+                %h3= current_character.username
+                %samp= current_character.uuid
+                %br
+                %br
+                %p= "#{current_character.schematics.count} Creations, #{current_character.favorites.count} Favorites, #{current_character.tracked_downloads.count} Downloadeds"
+          %p.help-block
+            You're currently signed in as #{current_character.username}. That means you can manage creations owned by #{current_character.username}, and all interactions (such as downloads and favorites) on CanaryClip will be tracked back to #{current_character.username}.
+            - if current_user.characters.count > 1
+              %strong You can change the character you are known as below.
+
+        - if current_user.characters.count > 1
+          %br
+          .strike
+            %span #{current_user.characters.count} Characters
           %table.table.table-condensed.table-hover.table-striped.character-management-table
             %tbody
               - current_user.characters.each do |character|
