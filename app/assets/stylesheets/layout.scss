@@ -17,8 +17,12 @@ textarea {
 }
 
 .character-management-table {
-  .small-character-avatar {
+  .small-character-avatar, .switch-control {
     margin-top: 8px;
+  }
+
+  .picked-character {
+    color: #40c057;
   }
 }
 

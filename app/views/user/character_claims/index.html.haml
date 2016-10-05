@@ -24,7 +24,9 @@
                     .lead.no-margin= link_to character.username, character_path(character)
                     %samp= character.uuid
                   %td.text-center
-                    - if current_character == character
-                      &dash;
-                    - else
-                      = link_to 'Switch', switch_user_character_path(character), method: :post
+                    .switch-control
+                      - if current_character == character
+                        .picked-character= fa_icon "check-circle"
+                      - else
+                        = link_to switch_user_character_path(character), class: "btn btn-primary", method: :post, title: "Switch to #{character.username}" do
+                          = fa_icon('sign-in')
