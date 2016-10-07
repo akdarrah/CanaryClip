@@ -21,24 +21,14 @@
       .container
         .row.text-center.slogan-text
           .col-xs-12
-            %h1 The Minecraft Creation Community
+            %h1 The Minecraft Build Community
+            .lead Copy and Paste for Minecraft
 
 %br
--# .container
--#   .row
--#     .col-xs-12
--#       .alert.alert-info
--#         %h1 Discover and Share Minecraft Creations
--#         %p= "New here? Read the #{link_to('Quick Start Guide', quick_start_path)}. Connect to Minecraft server <strong>#{@server.hostname}</strong> to try it out!".html_safe
--#         %p
--#           %small
--#             = "Want to add CanaryClip to your server? Read the #{link_to('Server Setup Guide', server_setup_path)} to get started.".html_safe
-
 .container
   .row
     .col-xs-12
-      %h2 Discover and Share Minecraft Creations
-      %p Download or share creations without leaving Minecraft.
+      %h2 Showcase Your Minecraft Builds
       %br
 
     - @schematics.each do |schematic|

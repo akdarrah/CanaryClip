@@ -25,9 +25,9 @@
                 %samp= current_character.uuid
                 %br
                 %br
-                %p= "#{current_character.schematics.count} Creations, #{current_character.favorites.count} Favorites, #{current_character.tracked_downloads.count} Downloadeds"
+                %p= "#{current_character.schematics.count} Builds, #{current_character.favorites.count} Favorites, #{current_character.tracked_downloads.count} Downloadeds"
           %p.help-block
-            You're currently signed in as #{current_character.username}. That means you can manage creations owned by #{current_character.username}, and all interactions (such as downloads and favorites) on CanaryClip will be tracked back to #{current_character.username}.
+            You're currently signed in as #{current_character.username}. That means you can manage builds owned by #{current_character.username}, and all interactions (such as downloads and favorites) on CanaryClip will be tracked back to #{current_character.username}.
             - if current_user.characters.count > 1
               %strong You can change the character you are known as below.
 
