@@ -48,7 +48,10 @@ CanaryClip::Application.routes.draw do
   resources :characters, only: [:show]
   resources :servers, only: [:show]
 
-  resources :schematics, only: [:index, :show, :update, :destroy] do
+  get '/schematics', to: redirect('/builds')
+  get '/schematics/:id', to: redirect('/builds/%{id}')
+
+  resources :schematics, :path => :builds, only: [:index, :show, :update, :destroy] do
     resources :favorites, only: [:create, :destroy]
 
     member do
