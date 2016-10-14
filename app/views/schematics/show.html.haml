@@ -60,9 +60,10 @@
                 = simple_form_for @schematic do |f|
                   = f.input :description, label: false
                   = f.button :submit, 'Save', class: "btn-primary"
-            - else
-              .description-text
-                = simple_format @schematic.description
+            - elsif @schematic.description.present?
+              .well.well-sm
+                .description-text
+                  = simple_format @schematic.description
           .strike
             %span= "#{number_with_delimiter(@schematic.total_block_count)} Blocks"
           - @schematic.block_counts.visible.most_used_order.each do |block_count|
