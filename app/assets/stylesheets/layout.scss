@@ -4,6 +4,9 @@ html, body {
   color: white;
 }
 
+// https://github.com/kenwheeler/slick/issues/771
+.slick-slide { height: auto; }
+
 textarea {
   resize: vertical; /* user can resize vertically, but width is fixed */
 }
