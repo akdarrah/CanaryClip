@@ -48,7 +48,6 @@ CanaryClip::Application.routes.draw do
   resources :characters, only: [:show]
   resources :servers, only: [:show]
 
-  get '/:id', to: redirect('/builds/%{id}')
   get '/schematics', to: redirect('/builds')
   get '/schematics/:id', to: redirect('/builds/%{id}')
 
@@ -59,4 +58,6 @@ CanaryClip::Application.routes.draw do
       get :download
     end
   end
+  
+  get '/:id', to: redirect('/builds/%{id}')
 end
