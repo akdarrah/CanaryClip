@@ -4,7 +4,11 @@
     %meta{:charset => "utf-8"}
     %meta{:'http-equiv' => "X-UA-Compatible", :content => "IE=edge"}
     %meta{:name => "viewport", :content => "width=device-width, initial-scale=1"}
-    %title CanaryClip
+    %meta{:name => "description", :content => "The Minecraft Build Community. Find and share Minecraft builds without leaving Minecraft."}
+    %meta{:name => "subject", :content => "Discover Minecraft Builds (Schematics)"}
+    %title
+      = if content_for?(:title) then yield(:title) + ' | ' end
+      = "CanaryClip - The Minecraft Build Community: Copy and Paste for Minecraft"
     = stylesheet_link_tag 'application', media: 'all'
     = csrf_meta_tags
     = yield :head

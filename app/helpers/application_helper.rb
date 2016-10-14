@@ -1,5 +1,9 @@
 module ApplicationHelper
 
+  def title(text)
+    content_for :title, text
+  end
+
   def dimensions(schematic)
     width  = schematic.width
     length = schematic.length
