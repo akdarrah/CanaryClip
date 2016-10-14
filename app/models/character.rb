@@ -13,7 +13,7 @@ class Character < ActiveRecord::Base
   validates :permalink, :username, presence: true
 
   has_attached_file :avatar,
-    :default_url => "/assets/default_avatar.png"
+    :default_url => "/images/default_avatar.png"
   validates_attachment :avatar,
     content_type: { content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif"] }
 
