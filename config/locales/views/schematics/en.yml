@@ -1,4 +1,4 @@
 en:
   schematics:
     show:
-      social_share_title: "%{name} by %{character_name} - "
+      social_share_title: "%{name} by %{character_name} -via @CanaryClip"
