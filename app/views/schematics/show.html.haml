@@ -6,7 +6,7 @@
   %meta{name: "twitter:url", content: schematic_url(@schematic)}
   %meta{name: "twitter:title", content: "Build ##{@schematic.permalink} By #{@schematic.character.username}"}
   %meta{name: "twitter:description", content: "Minecraft Build ##{@schematic.permalink} By #{@schematic.character.username} via CanaryClip. View and Download this build to your Minecraft world!"}
-  %meta{name: "twitter:image", content: @schematic.primary_render.file.url}
+  %meta{name: "twitter:image", content: asset_url(@schematic.primary_render.file.url)}
 
 .container-fluid.schematic-stripe
   .row
