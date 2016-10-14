@@ -9,7 +9,7 @@ CanaryClip::Application.routes.draw do
 
   ActiveAdmin.routes(self)
 
-  devise_for :users
+  devise_for :users, controllers: { registrations: "registrations" }
 
   namespace :user do
     resources :character_claims, only: [:index, :show, :new, :create]
@@ -58,6 +58,6 @@ CanaryClip::Application.routes.draw do
       get :download
     end
   end
-  
+
   get '/:id', to: redirect('/builds/%{id}')
 end
