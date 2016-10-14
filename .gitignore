@@ -18,7 +18,6 @@ system/*
 *.DS_Store
 tmp/restart.txt
 public/system/*
-public/images/*
 public/system/*
 public/assets/*
 config.ru
