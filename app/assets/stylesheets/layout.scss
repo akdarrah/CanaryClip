@@ -53,6 +53,10 @@ body {
   width: 100%;
   /* Set the fixed height of the footer here */
   height: 100px;
+
+  ul {
+    list-style-type: none;
+  }
 }
 
 .pagination-wrapper {
