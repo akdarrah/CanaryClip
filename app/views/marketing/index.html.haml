@@ -31,28 +31,43 @@
 %br
 .container
   .row
-    .col-xs-12
-      %h2 Showcase Your Minecraft Builds
+    .col-xs-12.col-md-6
+      %h2 Getting Started with CanaryClip
+      %p CanaryClip is a mod for Minecraft that allows you to upload and download builds without leaving your Minecraft server. Follow these guides to get started!
       %br
-
-    - @schematics.each do |schematic|
-      .col-xs-12.col-sm-4
-        .schematic-preview-card= link_to image_tag(schematic.primary_render.file.url, class: 'img-responsive rounded'), schematic_path(schematic)
-        %br
+      = link_to quick_start_path, class: 'btn btn-primary btn-lg btn-block' do
+        = fa_icon 'bolt'
+        &nbsp;
+        = "Quick Start Guide"
+      %br
+      = link_to server_setup_path, class: 'btn btn-primary btn-lg btn-block' do
+        = fa_icon 'server'
+        &nbsp;
+        = "Add CanaryClip To Your Server"
+      %br
+      = link_to character_claims_path, class: 'btn btn-primary btn-lg btn-block' do
+        = fa_icon 'sign-in'
+        &nbsp;
+        = "Claim Your Minecraft Character"
+      %br
+      %br
+    .col-xs-12.col-md-6
+      .embed-responsive.embed-responsive-16by9
+        %iframe{class: "embed-responsive-item", width: "560", height: "315", src: "https://www.youtube.com/embed/FbE3eVabLX8", frameborder: "0", allowfullscreen: true}
 
 .white-background
   .container-fluid.squared-stripe
-    .row
-      .container
-        .row
-          .col-xs-12
-            %h2 Claim your Minecraft Character!
-            %br
+    .container
+      .row
+        .col-xs-12
+          %h2 Showcase Your Minecraft Builds
+          %p Check out a few examples of what other builders have uploaded.
+          %br
 
-          - @characters.each do |character|
-            .col-xs-6.col-sm-2.text-center
-              .schematic-preview-card= link_to image_tag(character.avatar.url, class: 'img-responsive rounded'), character_path(character)
-              %br
+        - @schematics.each do |schematic|
+          .col-xs-12.col-sm-4
+            .schematic-preview-card= link_to image_tag(schematic.primary_render.file.url, class: 'img-responsive rounded'), schematic_path(schematic)
+            %br
 
 - content_for :script do
   :javascript
