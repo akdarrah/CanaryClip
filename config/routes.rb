@@ -40,6 +40,7 @@ CanaryClip::Application.routes.draw do
     end
   end
 
+  get 'about', to: "documentation#about"
   get 'quick_start', to: "documentation#quick_start"
   get 'server_setup', to: "documentation#server_setup"
   get 'character_claims', to: "documentation#character_claims"

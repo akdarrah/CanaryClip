@@ -1,5 +1,9 @@
 class DocumentationController < ApplicationController
 
+  def about
+    @server = Server.official
+  end
+
   def quick_start
     @server    = Server.official
     @schematic = Schematic.order('random()').first

@@ -1,0 +1,87 @@
+= title "CanaryClip Character Claims"
+
+.container
+  .well.well-lg.light-background
+    .row
+      .col-xs-12
+        %h1 About CanaryClip
+        %br
+        %p CanaryClip is a Minecraft mod built on top of WorldEdit. It allows you to upload and download builds directly from Minecraft.
+        %p
+          %strong Did you build something amazing in Minecraft? Share it on CanaryClip!
+        %p CanaryClip is a new way to share your Minecraft builds online. Your friends will be able to see everything about your build including:
+        %ul
+          %li Automatically rendered images
+          %li Your Build’s dimensions
+          %li Minecraft blocks used in the build
+          %li How many people viewed, favorited, and downloaded your build
+          %li The Minecraft server was the build uploaded from
+        %p In addition to all this, every build is automatically given a download short code where other people can easily download the build to their.
+        %p
+          %strong If you’ve ever used WorldEdit, you’ll be uploading your builds in no time!
+        %p= "Need help with the site? #{mail_to('adam@canaryclip.com', 'Feel free to send over an email.')}".html_safe
+
+        %hr
+        %h2 Credits
+        %p CanaryClip was built using many existing Minecraft projects. Without these projects, CanaryClip would not be possible.
+        %br
+      .col-xs-12.col-md-6.col-md-offset-3
+        %h2 WorldEdit
+        = link_to image_tag("credit/WorldEdit_Logo_New.png", class: 'img-responsive'), "https://wiki.sk89q.com/wiki/WorldEdit"
+        %br
+        %br
+        %blockquote
+          %p The CanaryClip plugin is built on top of WorldEdit, so WorldEdit is truly the backbone of CanaryClip.
+        %p
+          = link_to "https://wiki.sk89q.com/wiki/WorldEdit", "https://wiki.sk89q.com/wiki/WorldEdit"
+        %p
+          WorldEdit is an easy-to-use in-game world editor for Minecraft, supporting both single player and multiplayer, that lets you:
+        %ul
+          %li Change thousands of blocks in an area at once by selecting regions.
+          %li Use over 100 functions to modify the world or remove problems.
+          %li Remove large chunks of land as you wish.
+          %li Sculpt the world and build mountains with brushes.
+          %li Fix annoyances such as broken water, missing snow, raging fires, and more.
+        %br
+
+        %hr
+        %h2 Chunky
+        = link_to image_tag("credit/chunky.png", class: 'img-responsive'), "http://chunky.llbit.se/index.html"
+        %br
+        %br
+        %blockquote
+          %p= "Chunky's #{link_to("\"Headless Rendering\"", 'http://chunky.llbit.se/headless.html')} feature is a critical component of CanaryClip. All build images on CanaryClip were rendered using Chunky.".html_safe
+        %p
+          = link_to "http://chunky.llbit.se/index.html", "http://chunky.llbit.se/index.html"
+        %p
+          = "Chunky is a Minecraft mapping and rendering tool. Check out the #{link_to('gallery', 'http://chunky.llbit.se/gallery.html')} for examples of what Chunky can do!".html_safe
+        %br
+
+        %hr
+        %h2 Faithful
+        = link_to image_tag("credit/faithful.png", class: 'img-responsive'), "https://minecraft-resourcepacks.com/faithful-32x32-resource-pack/"
+        %br
+        %br
+        %blockquote
+          %p Faithful Resource Pack is exactly what we were looking for when rendering builds on CanaryClip.
+        %p
+          = link_to "https://minecraft-resourcepacks.com/faithful-32x32-resource-pack/", "https://minecraft-resourcepacks.com/faithful-32x32-resource-pack/"
+        %p
+          Faithful 32×32 Resource Pack is one of the most popular Minecraft Resourcepacks. The textures of Faithful are similar to Minecraft's default resources. Minecraft's default ones have a 16x16 resolution while Faithful (The pack has this name because it stays 'faithful' to Minecraft's original textures.) is based on a 32x32 version.
+        %br
+
+        %hr
+        %h2 Pymclevel
+        %br
+        %br
+        %blockquote
+          %p Pymclevel plays a critical role when processing builds once uploaded from the plugin.
+        %p
+          = link_to "https://github.com/mcedit/pymclevel", "https://github.com/mcedit/pymclevel"
+        %p
+          %strong
+            Minecraft Levels for Python
+        %p
+          mce.py is a command-line editor for SMP maps. It can be used interactively from a terminal, accept editing commands on standard input, or run a single editing command from the shell.
+        %br
+        %br
