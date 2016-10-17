@@ -40,10 +40,6 @@ class Schematic < ActiveRecord::Base
   scope :published, -> { where(state: :published) }
   scope :chronological, -> { order(:created_at) }
 
-  def self.public
-    published.chronological
-  end
-
   attr_accessor :temporary_file
 
   after_create :delete_temporary_file

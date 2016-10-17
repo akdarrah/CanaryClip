@@ -6,7 +6,7 @@ class SchematicsController < ApplicationController
 
   def index
     @marketing_render = Render.high_resolution.order('random()').first
-    @schematics       = Schematic.order("created_at desc").public.page(params[:page])
+    @schematics       = Schematic.order("created_at desc").published.page(params[:page])
   end
 
   def show

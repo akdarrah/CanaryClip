@@ -8,7 +8,6 @@ class User::ServersController < ApplicationController
   end
 
   def show
-    @schematics = @server.schematics.public.page(params[:page])
   end
 
   def new
