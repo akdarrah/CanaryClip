@@ -18,8 +18,10 @@
 //= require readmore.min
 //= require clipboard.min
 //= require jquery.matchHeight
+//= require jquery.scrollTo.min.js
 //= require grade
 //= require granim.min.js
 //= require imagesloaded.pkgd.min.js
 //= require masonry.pkgd.min
+//= require particles.min
 //= require_tree .
