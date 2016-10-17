@@ -19,6 +19,7 @@
 //= require clipboard.min
 //= require jquery.matchHeight
 //= require jquery.scrollTo.min.js
+//= require bounce.min.js
 //= require grade
 //= require granim.min.js
 //= require imagesloaded.pkgd.min.js

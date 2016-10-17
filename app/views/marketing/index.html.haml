@@ -72,7 +72,28 @@
 
 - content_for :script do
   :javascript
+
+    var bounce = new Bounce();
+      bounce
+        .scale({
+          from: { x: 0, y: 1 },
+          to: { x: 1, y: 1 },
+          easing: "bounce",
+          duration: 1000,
+          stiffness: 1
+        })
+        .scale({
+          from: { x: 1, y: 0 },
+          to: { x: 1, y: 1 },
+          easing: "bounce",
+          duration: 1000,
+          stiffness: 1,
+          bounces: 6
+        });
+
     $(document).ready(function(){
+
+      bounce.applyTo($('.start-magic'));
 
       $('.start-magic').on('click', function(){
         $.scrollTo($("#getting-started").offset().top-100, 350);
