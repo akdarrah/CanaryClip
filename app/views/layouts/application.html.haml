@@ -26,6 +26,8 @@
                       CanaryClip
                 .pull-right
                   = render partial: "layouts/menu"
+    .container
+      = render partial: "layouts/flash_messages", flash: flash
     = yield
     .footer
       .container
