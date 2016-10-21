@@ -7,7 +7,9 @@
         %h1 Upload Minecraft Build
 
         %br
-        %p Do you play single player Minecraft? You can get export your Minecraft build as a .schematic file using #{link_to('WorldEdit', 'https://wiki.sk89q.com/wiki/WorldEdit')} or #{link_to('MCEdit', 'http://www.mcedit.net/')}. Or, if you're a Minecraft server admin, consider using the #{link_to('CanaryClip Minecraft Plugin', server_setup_path)}.
+        %p
+          Do you play single player Minecraft? You can get export your Minecraft build as a .schematic file using #{link_to('WorldEdit', 'https://wiki.sk89q.com/wiki/WorldEdit')} or #{link_to('MCEdit', 'http://www.mcedit.net/')}.
+          %strong Or, if you're a Minecraft server admin, consider using the #{link_to('CanaryClip Minecraft Plugin', server_setup_path)}.
 
         %br
         = simple_form_for @schematic, url: "/builds" do |f|
