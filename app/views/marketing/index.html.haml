@@ -32,43 +32,61 @@
 %br
 .container#getting-started
   .row
+    .col-xs-12
     .col-xs-12.col-md-6
-      %h2 Getting Started with CanaryClip
-      %p= "CanaryClip is a mod for Minecraft that allows you to upload and download builds <i>without</i> leaving your Minecraft server. Follow these guides to get started!".html_safe
-      %br
-      = link_to quick_start_path, class: 'btn btn-primary btn-lg btn-block' do
-        = fa_icon 'bolt'
-        &nbsp;
-        = "Quick Start Guide"
-      %br
-      = link_to server_setup_path, class: 'btn btn-primary btn-lg btn-block' do
-        = fa_icon 'server'
-        &nbsp;
-        = "Add CanaryClip To Your Server"
-      %br
-      = link_to character_claims_path, class: 'btn btn-primary btn-lg btn-block' do
-        = fa_icon 'sign-in'
-        &nbsp;
-        = "Claim Your Minecraft Character"
+      %h2 Showcase Your Minecraft Builds
+      %p
+        %strong You built something awesome in Minecraft. Now share it with the world!
+      %p CanaryClip is a platform to publish your Minecraft builds. Use it to share your builds with your friends, or get inspired by what others have built.
+      %p Here are a few ideas to get you started...
+      %ul
+        %li Getting noticed in the Minecraft community is difficult! Share your Minecraft build on CanaryClip so others can find your work.
+        %li Find inspiration for your next project. If you like a build, download it to use in your next build. After all, imitation is the highest form of flattery!
+        %li Working on a large project with many builders? CanaryClip can help your team collaborate. Every builder can work on their part independently. Then bring all the pieces back together to build something amazing!
+      - if current_character.blank?
+        %p Ready now? First step, Claim your Minecraft Character!
+        %br
+        = link_to new_user_character_claim_path, class: 'btn btn-primary btn-lg btn-block' do
+          = fa_icon 'sign-in'
+          &nbsp;
+          = "Claim Your Minecraft Character"
+      - else
+        %p Ready now? Next step, upload a Minecraft build!
+        %br
+        = link_to new_schematic_path, class: 'btn btn-primary btn-lg btn-block' do
+          = fa_icon 'upload'
+          &nbsp;
+          = "Upload Minecraft Build"
       %br
       %br
     .col-xs-12.col-md-6
-      .embed-responsive.embed-responsive-16by9
-        %iframe{class: "embed-responsive-item", width: "560", height: "315", src: "https://www.youtube.com/embed/FbE3eVabLX8", frameborder: "0", allowfullscreen: true}
+      .schematic-preview-card= link_to image_tag(@schematic.primary_render.file.url, class: 'img-responsive rounded'), schematic_path(@schematic)
+      %br
 
 .white-background
   .container-fluid.squared-stripe
     .container
       .row
-        .col-xs-12
-          %h2 Showcase Your Minecraft Builds
-          %p Check out a few examples of what other builders have uploaded.
+        .col-xs-12.col-md-6
+          .embed-responsive.embed-responsive-16by9
+            %iframe{class: "embed-responsive-item", width: "560", height: "315", src: "https://www.youtube.com/embed/FbE3eVabLX8", frameborder: "0", allowfullscreen: true}
           %br
-
-        - @schematics.each do |schematic|
-          .col-xs-12.col-sm-4
-            .schematic-preview-card= link_to image_tag(schematic.primary_render.file.url, class: 'img-responsive rounded'), schematic_path(schematic)
-            %br
+          %br
+        .col-xs-12.col-md-6
+          %h2 CanaryClip Minecraft Mod
+          %p= "The CanaryClip Minecraft Mod allows you to upload and download builds <strong><i>without</i></strong> leaving your Minecraft server. Follow these guides to get started!".html_safe
+          %br
+          = link_to quick_start_path, class: 'btn btn-primary btn-lg btn-block' do
+            = fa_icon 'bolt'
+            &nbsp;
+            = "Player Quick Start Guide"
+          %br
+          = link_to server_setup_path, class: 'btn btn-primary btn-lg btn-block' do
+            = fa_icon 'server'
+            &nbsp;
+            = "Add CanaryClip To Your Server"
+          %br
+          %br
 
 - content_for :script do
   :javascript
