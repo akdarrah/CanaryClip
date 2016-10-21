@@ -50,10 +50,11 @@
             .col-xs-2
               .schematic-download-question-mark
                 = link_to fa_icon('question-circle'), quick_start_path
-          .row
-            .col-xs-12
-              &nbsp;
-              = "#{fa_icon('arrow-circle-right')} via #{link_to(@schematic.server, server_path(@schematic.server))}".html_safe
+          - if @schematic.server.present?
+            .row
+              .col-xs-12
+                &nbsp;
+                = "#{fa_icon('arrow-circle-right')} via #{link_to(@schematic.server, server_path(@schematic.server))}".html_safe
           %br
           .row.small
             .col-xs-12
