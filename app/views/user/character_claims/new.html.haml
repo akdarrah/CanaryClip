@@ -10,6 +10,13 @@
           %li= link_to "Characters", user_character_claims_path
           %li.active= t('.claim_your_character')
 
+        - if current_character.blank?
+          .alert.alert-warning{role: "alert"}
+            %p
+              = fa_icon "exclamation-triangle"
+              %strong WARNING:
+              You must claim your Minecraft character before you can participate on CanaryClip.
+
         %h1= t('.claim_your_character')
         %p= "Read the #{link_to('Character Claim Guide', character_claims_path)} for full instructions.".html_safe
         %br
