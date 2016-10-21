@@ -1,6 +1,7 @@
 class SchematicsController < ApplicationController
   load_and_authorize_resource find_by: :permalink
 
+  before_filter :require_current_character, only: [:new, :create]
   before_filter :log_impression, only: [:show, :download]
   before_filter :track_downloads, only: [:download]
 
@@ -11,6 +12,21 @@ class SchematicsController < ApplicationController
 
   def show
     @favorite = @schematic.favorites.for_character(current_character)
+  end
+
+  def new
+    @schematic = current_character.schematics.new
+  end
+
+  def create
+    @schematic = current_character.schematics.new(create_params)
+
+    if @schematic.save
+      @schematic.collect_metadata!
+      redirect_to schematics_path
+    else
+      render action: :new
+    end
   end
 
   def download
@@ -47,6 +63,11 @@ class SchematicsController < ApplicationController
   def update_params
     params.require(:schematic)
       .permit(:description)
+  end
+
+  def create_params
+    params.require(:schematic)
+      .permit(:file)
   end
 
 end

@@ -1,0 +1,17 @@
+= title "Upload Your Minecraft Build"
+
+.container
+  .row
+    .col-xs-12.col-md-6.col-md-offset-3
+      .well.well-lg.light-background
+        %h1 Upload Minecraft Build
+
+        %br
+        %p Do you play single player Minecraft? You can get export your Minecraft build as a .schematic file using #{link_to('WorldEdit', 'https://wiki.sk89q.com/wiki/WorldEdit')} or #{link_to('MCEdit', 'http://www.mcedit.net/')}. Or, if you're a Minecraft server admin, consider using the #{link_to('CanaryClip Minecraft Plugin', server_setup_path)}.
+
+        %br
+        = simple_form_for @schematic, url: "/builds" do |f|
+          = f.input :file, label: 'Minecraft Schematic File'
+          %p.help-block Builds take 5-10 minutes once uploaded before they are published.
+          %br
+          = f.button :submit, value: "Upload Build", class: 'btn btn-primary btn-lg btn-block'

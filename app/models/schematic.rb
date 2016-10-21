@@ -27,7 +27,7 @@ class Schematic < ActiveRecord::Base
     :size         => { in: 0..10.megabytes }
 
   # TODO: Why do we have to disable in initializers/paperclip.rb?
-  validates_attachment_content_type :file, content_type: ['application/x-gzip', 'application/gzip']
+  validates_attachment_content_type :file, content_type: ['application/x-gzip', 'application/gzip', 'application/octet-stream']
   validates_attachment_file_name :file, :matches => [/schematic\Z/]
 
   validates :character, presence: true
