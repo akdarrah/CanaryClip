@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
 
   def require_current_character
     if current_character.blank?
-      redirect_to root_url
+      redirect_to new_user_character_claim_path
     end
   end
 end
