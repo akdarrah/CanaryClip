@@ -11,12 +11,12 @@
           %li.active Edit #{@schematic.permalink}
         %h2 Edit #{@schematic.permalink}
         %br
-        - if @schematic.renders.completed.exists?
+        - if @schematic.renders.standard_resolution.completed.exists?
           %label Change Render Position
           .well.well-sm.field-inline
             .row.sortable-images
               .col-md-1
-              - @schematic.renders.completed.each do |render|
+              - @schematic.renders.standard_resolution.completed.each do |render|
                 .col-xs-12.col-sm-2.render-image-container
                   = image_tag render.file.url, class: "img-responsive rounded sortable-render-image", data: {:"render-id" => render.id}
           %p.help-block= "Drag and drop build images to change the order they will be publicly displayed. <strong>The first build image will be used as the build's thumbnail image.</strong>".html_safe
