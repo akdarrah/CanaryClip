@@ -1,4 +1,5 @@
 class User::ServersController < ApplicationController
+  before_action :authenticate_user!
   load_and_authorize_resource find_by: :permalink
 
   DOWNLOAD_PATH = "#{Rails.root}/private/worldedit-bukkit-6.1.4-canary_clip.jar"

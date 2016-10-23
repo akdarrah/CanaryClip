@@ -12,6 +12,7 @@ CanaryClip::Application.routes.draw do
   devise_for :users, controllers: { registrations: "registrations" }
 
   namespace :user do
+    resources :schematics, :path => :builds, only: [:index, :edit, :update, :destroy]
     resources :character_claims, only: [:index, :show, :new, :create]
 
     resources :characters, only: [] do
@@ -52,7 +53,7 @@ CanaryClip::Application.routes.draw do
   get '/schematics', to: redirect('/builds')
   get '/schematics/:id', to: redirect('/builds/%{id}')
 
-  resources :schematics, :path => :builds, only: [:index, :show, :update, :destroy, :new, :create] do
+  resources :schematics, :path => :builds, only: [:index, :show, :new, :create] do
     resources :favorites, only: [:create, :destroy]
 
     member do

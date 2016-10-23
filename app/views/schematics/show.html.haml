@@ -29,6 +29,10 @@
           %span
             = image_tag(@schematic.character.avatar.url, class: 'small-character-avatar')
             = link_to @schematic.character, character_path(@schematic.character)
+            - if can?(:edit, @schematic)
+              .pull-right.edit-schematic-link
+                = link_to edit_user_schematic_path(@schematic), title: "Edit Build" do
+                  = fa_icon 'cog'
           .strike
             %span= formatted_date @schematic.created_at
           .row
@@ -60,24 +64,16 @@
             .col-xs-12
               = dimensions(@schematic)
           .description
-            - if can?(:update, @schematic)
-              .description-form
-                = simple_form_for @schematic do |f|
-                  = f.input :description, label: false
-                  = f.button :submit, 'Save', class: "btn-primary"
-            - elsif @schematic.description.present?
-              .well.well-sm
-                .description-text
-                  = simple_format @schematic.description
+            - if @schematic.description.present?
+              %br
+              %blockquote
+                %p= simple_format @schematic.description
           .strike
             %span= "#{number_with_delimiter(@schematic.total_block_count)} Blocks"
           - @schematic.block_counts.visible.most_used_order.each do |block_count|
             = link_to block_icon_with_title(block_count), block_path(block_count.block)
           %hr
             .text-center= social_share_button_tag t('.social_share_title', name: @schematic.permalink, character_name: @schematic.character.username)
-          - if can?(:destroy, @schematic)
-            %hr
-            = link_to "Delete".html_safe, schematic_path(@schematic), class: 'btn btn-danger', title: 'Delete this schematic', method: :delete, confirm: "Are you sure?"
 
 - content_for :script do
   :javascript

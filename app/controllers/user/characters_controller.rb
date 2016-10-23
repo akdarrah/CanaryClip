@@ -1,4 +1,5 @@
 class User::CharactersController < ApplicationController
+  before_action :authenticate_user!
 
   def switch
     @character = current_user.characters.find_by_permalink!(params[:id])

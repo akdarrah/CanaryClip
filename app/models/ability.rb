@@ -15,7 +15,7 @@ class Ability
 
     if user
       can [:new, :create], Schematic
-      can [:update, :destroy], Schematic do |schematic|
+      can [:edit, :update, :destroy], Schematic do |schematic|
         schematic.admin_access?(user)
       end
     end

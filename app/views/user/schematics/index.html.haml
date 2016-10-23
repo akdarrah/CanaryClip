@@ -1,0 +1,27 @@
+= title "Manage Your Uploaded Builds"
+
+.container
+  .row
+    .col-xs-12.col-sm-3
+      = render partial: "user/shared/menu"
+    .col-xs-12.col-sm-9
+      .well.well-lg.light-background.clearfix
+        - if @schematics.blank?
+          .col-xs-12.text-center
+            .giant-fa-icon= fa_icon 'terminal'
+            .lead No Builds Found
+            %p Get started by #{link_to('uploading your Minecraft build', new_schematic_path)}.
+        - else
+          %h2 Manage Your Uploaded Builds
+          %hr
+          %table.table.table-condensed.table-hover.table-striped
+            %tbody
+              - @schematics.each do |schematic|
+                %tr
+                  %td
+                    .lead.no-margin= schematic.permalink
+                    %span= formatted_date schematic.created_at
+                  %td.text-center
+                    = link_to 'Edit', edit_user_schematic_path(schematic)
+          .text-center
+            = will_paginate @schematics, renderer: BootstrapPagination::Rails

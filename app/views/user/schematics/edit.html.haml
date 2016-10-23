@@ -1,0 +1,22 @@
+= title "Edit #{@schematic.permalink}"
+
+.container
+  .row
+    .col-xs-12.col-sm-3
+      = render partial: "user/shared/menu"
+    .col-xs-12.col-sm-9
+      .well.well-lg.light-background
+        %ol.breadcrumb
+          %li= link_to "Builds", user_schematics_path
+          %li.active Edit #{@schematic.permalink}
+        %h2 Edit #{@schematic.permalink}
+        %br
+        = simple_form_for [:user, @schematic] do |f|
+          = f.input :description
+          = f.button :submit, 'Save', class: "btn btn-primary"
+        %br
+        .panel.panel-danger
+          .panel-heading
+            %h3.panel-title Delete This Build
+          .panel-body
+            = button_to "Delete This Build", user_schematic_path(@schematic), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-danger'

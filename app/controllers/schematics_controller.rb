@@ -34,18 +34,6 @@ class SchematicsController < ApplicationController
     send_file @schematic.file.path
   end
 
-  def update
-    @schematic.attributes = update_params
-    @schematic.save!
-
-    redirect_to schematic_path(@schematic)
-  end
-
-  def destroy
-    @schematic.destroy
-    redirect_to schematics_path
-  end
-
   private
 
   def log_impression
@@ -59,11 +47,6 @@ class SchematicsController < ApplicationController
         :schematic => @schematic
       )
     end
-  end
-
-  def update_params
-    params.require(:schematic)
-      .permit(:description)
   end
 
   def create_params

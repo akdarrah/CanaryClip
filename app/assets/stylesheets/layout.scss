@@ -4,6 +4,10 @@ html, body {
   color: white;
 }
 
+blockquote {
+  border-left: 5px solid #ccc;
+}
+
 .particles-js-canvas-el {
   position: absolute;
   margin: 0;
@@ -17,7 +21,7 @@ hr {
   border-top: 1px solid #ddd;
 }
 
-.schematic-download-question-mark {
+.schematic-download-question-mark, .edit-schematic-link {
   font-size: 22px;
   margin-left: -15px;
 }
