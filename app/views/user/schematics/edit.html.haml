@@ -11,7 +11,18 @@
           %li.active Edit #{@schematic.permalink}
         %h2 Edit #{@schematic.permalink}
         %br
+        %label Change Render Position
+        .well.well-sm.field-inline
+          .row.sortable-images
+            .col-md-1
+            - @schematic.renders.each do |render|
+              .col-xs-12.col-sm-2.render-image-container
+                = image_tag render.file.url, class: "img-responsive rounded sortable-render-image", data: {:"render-id" => render.id}
+        %p.help-block= "Drag and drop build images to change the order they will be publicly displayed. <strong>The first build image will be used as the build's thumbnail image.</strong>".html_safe
+        %br
         = simple_form_for [:user, @schematic] do |f|
+          = f.simple_fields_for :renders do |builder|
+            = builder.input :position, as: :hidden, input_html: {class: "render-position-field-#{builder.object.id}"}
           = f.input :description
           = f.button :submit, 'Save', class: "btn btn-primary"
         %br
@@ -20,3 +31,20 @@
             %h3.panel-title Delete This Build
           .panel-body
             = button_to "Delete This Build", user_schematic_path(@schematic), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-danger'
+
+- content_for :script do
+  :javascript
+    $(document).ready(function(){
+      $('.sortable-images').sortable({
+        containment: "parent",
+        forcePlaceholderSize: true,
+        handle: "img",
+        helper: "clone",
+        update: function( event, ui ) {
+          $(".sortable-render-image").each(function(index, el){
+            var renderId = $(el).data('renderId');
+            $(".render-position-field-" + renderId).val(index + 1);
+          });
+        }
+      });
+    });

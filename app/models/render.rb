@@ -27,14 +27,6 @@ class Render < ActiveRecord::Base
   before_validation :set_samples_per_pixel
   before_validation :set_resolution
 
-  scope :camera_angle_order, (lambda do
-    order(CameraAngle::AVAILABLE.map{|angle| "renders.camera_angle = '#{angle}' DESC"}.join(', '))
-  end)
-
-  scope :position_order, (lambda do
-    order(position: :asc)
-  end)
-
   scope :standard_resolution, -> { where(resolution: STANDARD_RESOLUTION) }
   scope :high_resolution, -> { where(resolution: HIGH_RESOLUTION) }
 

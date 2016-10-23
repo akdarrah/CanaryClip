@@ -15,10 +15,12 @@ class Schematic < ActiveRecord::Base
   has_many :tracked_downloads, dependent: :destroy
   has_many :downloaded_by_characters, through: :tracked_downloads, source: :character
 
-  has_many :renders, dependent: :destroy
+  has_many :renders, -> { order(position: :asc) }, dependent: :destroy
   has_one :primary_render,
     -> { standard_resolution.where(camera_angle: CameraAngle::PRIMARY) },
     class_name: "Render"
+
+  accepts_nested_attributes_for :renders
 
   has_attached_file :file
 

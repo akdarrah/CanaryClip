@@ -25,7 +25,7 @@ class User::SchematicsController < ApplicationController
 
   def update_params
     params.require(:schematic)
-      .permit(:description)
+      .permit(:description, renders_attributes: [:id, :position])
   end
 
 end

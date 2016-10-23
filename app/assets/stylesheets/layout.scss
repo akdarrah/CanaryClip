@@ -317,3 +317,15 @@ a {
     }
   }
 }
+
+.well.field-inline {
+  margin-bottom: 0px;
+}
+
+.sortable-images {
+  img {
+    max-height: 100px;
+    margin: 5px 0;
+    cursor: move;
+  }
+}
