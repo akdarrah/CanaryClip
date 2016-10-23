@@ -14,6 +14,8 @@ class Render < ActiveRecord::Base
   validates :schematic, :resolution, :camera_angle, :samples_per_pixel, presence: true
   validates :samples_per_pixel, numericality: { only_integer: true }
 
+  acts_as_list scope: :schematic
+
   validates :camera_angle, inclusion: {in: CameraAngle::AVAILABLE}
   validates :resolution, inclusion: {in: RESOLUTIONS.keys}
 
@@ -27,6 +29,10 @@ class Render < ActiveRecord::Base
 
   scope :camera_angle_order, (lambda do
     order(CameraAngle::AVAILABLE.map{|angle| "renders.camera_angle = '#{angle}' DESC"}.join(', '))
+  end)
+
+  scope :position_order, (lambda do
+    order(position: :asc)
   end)
 
   scope :standard_resolution, -> { where(resolution: STANDARD_RESOLUTION) }

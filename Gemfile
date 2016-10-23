@@ -26,6 +26,7 @@ gem "attr_encrypted", "~> 3.0.3"
 gem 'regexy'
 
 gem 'activeadmin', github: 'activeadmin'
+gem 'acts_as_list'
 
 gem 'will_paginate', '~> 3.1.0'
 gem 'will_paginate-bootstrap'
