@@ -14,7 +14,7 @@ class Render < ActiveRecord::Base
   validates :schematic, :resolution, :camera_angle, :samples_per_pixel, presence: true
   validates :samples_per_pixel, numericality: { only_integer: true }
 
-  acts_as_list scope: :schematic
+  acts_as_list scope: [:schematic, :resolution]
 
   validates :camera_angle, inclusion: {in: CameraAngle::AVAILABLE}
   validates :resolution, inclusion: {in: RESOLUTIONS.keys}
