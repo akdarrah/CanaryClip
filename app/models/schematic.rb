@@ -16,8 +16,11 @@ class Schematic < ActiveRecord::Base
   has_many :downloaded_by_characters, through: :tracked_downloads, source: :character
 
   has_many :renders, -> { order(position: :asc) }, dependent: :destroy
+
+  # Initially, this will be Standard Resolution with CameraAngle::PRIMARY
+  # But users can change this by re-ordering
   has_one :primary_render,
-    -> { standard_resolution.where(camera_angle: CameraAngle::PRIMARY) },
+    -> { where(position: 1) },
     class_name: "Render"
 
   accepts_nested_attributes_for :renders

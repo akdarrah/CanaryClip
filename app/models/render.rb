@@ -57,7 +57,7 @@ class Render < ActiveRecord::Base
     camera_angle == CameraAngle::PRIMARY &&
       resolution == STANDARD_RESOLUTION
   end
-  alias :primary_render? primary_render
+  alias :primary_render? :primary_render
 
   def schedule_job
     if primary_render?

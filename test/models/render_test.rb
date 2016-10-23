@@ -60,7 +60,7 @@ class RenderTest < ActiveSupport::TestCase
     @schematic.send(:create_renders)
     assert @schematic.rendering?
 
-    renders = @schematic.renders.to_a
+    renders = @schematic.renders.to_a.reverse
     assert_equal renders.count, 5
 
     4.times do

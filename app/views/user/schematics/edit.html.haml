@@ -11,15 +11,16 @@
           %li.active Edit #{@schematic.permalink}
         %h2 Edit #{@schematic.permalink}
         %br
-        %label Change Render Position
-        .well.well-sm.field-inline
-          .row.sortable-images
-            .col-md-1
-            - @schematic.renders.each do |render|
-              .col-xs-12.col-sm-2.render-image-container
-                = image_tag render.file.url, class: "img-responsive rounded sortable-render-image", data: {:"render-id" => render.id}
-        %p.help-block= "Drag and drop build images to change the order they will be publicly displayed. <strong>The first build image will be used as the build's thumbnail image.</strong>".html_safe
-        %br
+        - if @schematic.renders.completed.exists?
+          %label Change Render Position
+          .well.well-sm.field-inline
+            .row.sortable-images
+              .col-md-1
+              - @schematic.renders.completed.each do |render|
+                .col-xs-12.col-sm-2.render-image-container
+                  = image_tag render.file.url, class: "img-responsive rounded sortable-render-image", data: {:"render-id" => render.id}
+          %p.help-block= "Drag and drop build images to change the order they will be publicly displayed. <strong>The first build image will be used as the build's thumbnail image.</strong>".html_safe
+          %br
         = simple_form_for [:user, @schematic] do |f|
           = f.simple_fields_for :renders do |builder|
             = builder.input :position, as: :hidden, input_html: {class: "render-position-field-#{builder.object.id}"}
