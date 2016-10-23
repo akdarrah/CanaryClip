@@ -24,7 +24,10 @@
         = simple_form_for [:user, @schematic] do |f|
           = f.simple_fields_for :renders do |builder|
             = builder.input :position, as: :hidden, input_html: {class: "render-position-field-#{builder.object.id}"}
-          = f.input :description
+          = f.input :description, input_html: {rows: 5}
+          = f.input :tag_list, input_html: {class: "tag-list"}, wrapper_html: {class: "no-margin"}
+          %p.help-block Add keywords as tags to help other builders find your build.
+          %br
           = f.button :submit, 'Save', class: "btn btn-primary"
         %br
         .panel.panel-danger
@@ -36,6 +39,12 @@
 - content_for :script do
   :javascript
     $(document).ready(function(){
+      $('.tag-list').tagsInput({
+        width       : '100%',
+        defaultText : 'Add a tag',
+        placeholderColor : '#999'
+      });
+
       $('.sortable-images').sortable({
         containment: "parent",
         forcePlaceholderSize: true,

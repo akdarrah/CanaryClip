@@ -30,6 +30,7 @@ gem 'acts_as_list'
 
 gem 'will_paginate', '~> 3.1.0'
 gem 'will_paginate-bootstrap'
+gem 'acts-as-taggable-on', '~> 4.0'
 
 group :development do
   gem "better_errors"

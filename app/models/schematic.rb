@@ -1,5 +1,6 @@
 class Schematic < ActiveRecord::Base
   is_impressionable
+  acts_as_taggable
 
   serialize :parsed_nbt_data, JSON
 
