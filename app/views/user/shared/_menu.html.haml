@@ -8,4 +8,11 @@
       = link_to 'Servers', user_servers_path
     %li{role: "presentation", class: (current_page?(edit_user_registration_path) ? "active" : "")}
       = link_to 'Account', edit_user_registration_path
+- if current_user.admin?
+  .well.well-sm.light-background
+    %ul.nav.nav-pills.nav-stacked
+      %li{role: "presentation"}
+        = link_to 'Admin', admin_root_path
+      %li{role: "presentation"}
+        = link_to 'Sidekiq', sidekiq_web_path
 %br
