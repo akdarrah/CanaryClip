@@ -1,0 +1,10 @@
+= title "Builds Tagged with #{@tag_name}"
+= render partial: 'schematics/collection', locals: {schematics: @schematics}
+
+- if @schematics.total_pages > 1
+  .container-fluid.pagination-wrapper
+    .row
+      .container
+        .row
+          .col-xs-12.text-center
+            = will_paginate @schematics, renderer: BootstrapPagination::Rails

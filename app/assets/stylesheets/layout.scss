@@ -338,10 +338,6 @@ a {
 
   cursor: text;
 
-  a {
-    color: white !important;
-  }
-
   .tag {
     line-height: 20px;
   }
@@ -353,4 +349,9 @@ a {
   background: #fa5252 !important;
   border: none !important;
   color: white !important;
+  margin-right: 3px;
+
+  a {
+    color: white !important;
+  }
 }

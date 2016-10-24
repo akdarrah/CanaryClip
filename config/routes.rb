@@ -49,6 +49,7 @@ CanaryClip::Application.routes.draw do
   resources :blocks, only: [:show]
   resources :characters, only: [:show]
   resources :servers, only: [:show]
+  resources :tags, only: [:show]
 
   get '/schematics', to: redirect('/builds')
   get '/schematics/:id', to: redirect('/builds/%{id}')
