@@ -71,6 +71,11 @@ class Schematic < ActiveRecord::Base
     end
   end
 
+  # Sanitize?
+  def pipelined_description
+    SocialPipeline.call(description.to_s)[:output].to_s
+  end
+
   def admin_access?(user)
     user.characters.where(id: character).exists?
   end
