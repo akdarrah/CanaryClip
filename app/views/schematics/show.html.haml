@@ -68,6 +68,10 @@
               %br
               %blockquote
                 %p= simple_format @schematic.description
+          - if @schematic.tags.present?
+            %br
+            - @schematic.tags.each do |tag|
+              %span.tag.rounded= tag.name
           .strike
             %span= "#{number_with_delimiter(@schematic.total_block_count)} Blocks"
           - @schematic.block_counts.visible.most_used_order.each do |block_count|

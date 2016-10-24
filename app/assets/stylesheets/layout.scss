@@ -343,8 +343,14 @@ a {
   }
 
   .tag {
-    background: #fa5252 !important;
-    border: none !important;
-    color: white !important;
+    line-height: 20px;
   }
+}
+
+.tag {
+  padding: 5px;
+  line-height: 30px;
+  background: #fa5252 !important;
+  border: none !important;
+  color: white !important;
 }

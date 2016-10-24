@@ -19,6 +19,10 @@
                 .col-xs-6.text-right
                   = "#{fa_icon('download')} #{number_with_delimiter(schematic.total_download_impressions)}".html_safe
                   = "#{fa_icon('heart')} #{number_with_delimiter(schematic.favorited_by_characters.count)}".html_safe
+              - if schematic.tags.present?
+                %br
+                - schematic.tags.each do |tag|
+                  %span.tag.rounded= tag.name
               .strike
                 %span= "#{number_with_delimiter(schematic.total_block_count)} Blocks"
               - schematic.block_counts.visible.most_used_order.each do |block_count|
