@@ -81,6 +81,17 @@
           %hr
             .text-center= social_share_button_tag t('.social_share_title', name: @schematic.permalink, character_name: @schematic.character.username)
 
+.container-fluid.pagination-wrapper
+  %br
+  .row
+    .container
+      .row
+        .col-xs-12.text-center
+          %h5.uppercase Discover More Builds
+  %br
+  = render partial: 'schematics/collection', locals: {schematics: @schematics}
+
+
 - content_for :script do
   :javascript
 

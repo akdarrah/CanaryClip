@@ -11,7 +11,8 @@ class SchematicsController < ApplicationController
   end
 
   def show
-    @favorite = @schematic.favorites.for_character(current_character)
+    @favorite   = @schematic.favorites.for_character(current_character)
+    @schematics = Schematic.order("random()").published.where.not(id: @schematic).limit(6)
   end
 
   def new
