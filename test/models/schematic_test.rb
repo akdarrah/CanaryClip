@@ -76,4 +76,22 @@ class SchematicTest < ActiveSupport::TestCase
     assert @schematic.admin_access?(@user)
   end
 
+  # Schematic#destroyable
+
+  test "cannot be destroyed if destroyable is false" do
+    refute @schematic.destroyable
+    @schematic.destroy
+
+    assert @schematic.reload
+  end
+
+  test "can be destroyed if destroyable is true" do
+    @schematic.stubs(:destroyable).returns(true)
+    @schematic.destroy
+
+    assert_raises ActiveRecord::RecordNotFound do
+      assert @schematic.reload
+    end
+  end
+
 end

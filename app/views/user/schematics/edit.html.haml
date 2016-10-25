@@ -30,11 +30,12 @@
           %br
           = f.button :submit, 'Save', class: "btn btn-primary"
         %br
-        .panel.panel-danger
-          .panel-heading
-            %h3.panel-title Delete This Build
-          .panel-body
-            = button_to "Delete This Build", user_schematic_path(@schematic), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-danger'
+        - if @schematic.destroyable?
+          .panel.panel-danger
+            .panel-heading
+              %h3.panel-title Delete This Build
+            .panel-body
+              = button_to "Delete This Build", user_schematic_path(@schematic), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-danger'
 
 - content_for :script do
   :javascript

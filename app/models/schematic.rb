@@ -48,6 +48,7 @@ class Schematic < ActiveRecord::Base
 
   attr_accessor :temporary_file
 
+  before_destroy :verify_destroyable
   after_create :delete_temporary_file
   after_create :set_permalink
   after_create :sync_permalink_to_file
@@ -70,6 +71,11 @@ class Schematic < ActiveRecord::Base
       transition :rendering => :published
     end
   end
+
+  def destroyable
+    published?
+  end
+  alias :destroyable? :destroyable
 
   # Sanitize?
   def pipelined_description
@@ -134,6 +140,13 @@ class Schematic < ActiveRecord::Base
   end
 
   private
+
+  def verify_destroyable
+    if !destroyable
+      errors.add(:base, "cannot be destroyed")
+      return false
+    end
+  end
 
   def delete_temporary_file
     if temporary_file.present?
