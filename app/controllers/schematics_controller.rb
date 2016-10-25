@@ -25,7 +25,7 @@ class SchematicsController < ApplicationController
     if @schematic.save
       @schematic.collect_metadata!
       flash[:success] = "Your build was uploaded successfully! It will be published once rendered (approximately 5-10 minutes)."
-      redirect_to schematics_path
+      redirect_to edit_user_schematic_path(@schematic)
     else
       render action: :new
     end
