@@ -9,7 +9,12 @@
         %ol.breadcrumb
           %li= link_to "Builds", user_schematics_path
           %li.active Edit #{@schematic.permalink}
-        %h2 Edit #{@schematic.permalink}
+        %h2
+          Edit #{@schematic.permalink}
+          %span.label{class: schematic_state_label_class(@schematic.state)}
+            = I18n.t("activerecord.attributes.schematic.states.#{@schematic.state}")
+        %br
+        = schematic_state_description(@schematic.state)
         %br
         - if @schematic.renders.standard_resolution.completed.exists?
           %label Change Render Position

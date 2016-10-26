@@ -2,6 +2,11 @@ en:
   activerecord:
     attributes:
       schematic:
+        states:
+          new: "New"
+          collecting_metadata: "Analyzing"
+          rendering: "Rendering"
+          published: "Published"
         character_id: Character
         permalink: Short Code
         state: State
