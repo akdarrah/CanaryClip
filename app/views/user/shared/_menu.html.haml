@@ -1,18 +1,32 @@
 .well.well-sm.light-background
   %ul.nav.nav-pills.nav-stacked
     %li{role: "presentation", class: (params[:controller] == 'user/character_claims' ? "active" : "")}
-      = link_to 'Characters', user_character_claims_path
+      = link_to user_character_claims_path do
+        = "#{fa_icon('at')} Characters".html_safe
     %li{role: "presentation", class: (params[:controller] == 'user/schematics' ? "active" : "")}
-      = link_to 'Builds', user_schematics_path
+      = link_to user_schematics_path do
+        = "#{fa_icon('cubes')} Builds".html_safe
     %li{role: "presentation", class: (params[:controller] == 'user/servers' ? "active" : "")}
-      = link_to 'Servers', user_servers_path
+      = link_to user_servers_path do
+        = "#{fa_icon('server')} Servers".html_safe
     %li{role: "presentation", class: (current_page?(edit_user_registration_path) ? "active" : "")}
-      = link_to 'Account', edit_user_registration_path
+      = link_to edit_user_registration_path do
+        = "#{fa_icon('gear')} Account".html_safe
+
+.well.well-sm.light-background
+  %ul.nav.nav-pills.nav-stacked
+    %li{role: "presentation"}
+      %li
+        = link_to destroy_user_session_url, method: :delete do
+          = "#{fa_icon('sign-out')} Sign Out".html_safe
+
 - if current_user.admin?
   .well.well-sm.light-background
     %ul.nav.nav-pills.nav-stacked
       %li{role: "presentation"}
-        = link_to 'Admin', admin_root_path
+        = link_to admin_root_path do
+          = "#{fa_icon('wrench')} Admin".html_safe
       %li{role: "presentation"}
-        = link_to 'Sidekiq', sidekiq_web_path
+        = link_to sidekiq_web_path do
+          = "#{fa_icon('heartbeat')} Sidekiq".html_safe
 %br

@@ -2,7 +2,7 @@
   - if current_user.blank?
     %li= link_to 'Sign In', new_user_session_url
   - else
-    %li= link_to 'Sign Out', destroy_user_session_url, method: :delete
+    %li= link_to 'Upload', new_schematic_path
   - if current_user.present?
     %li= link_to 'Settings', user_character_claims_path
   %li= link_to 'Discover', schematics_path
