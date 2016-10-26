@@ -1,4 +1,6 @@
 class Schematic < ActiveRecord::Base
+  self.per_page = 15
+
   is_impressionable
   acts_as_taggable
 
