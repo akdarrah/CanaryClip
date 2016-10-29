@@ -1,6 +1,7 @@
 //= require social-share-button
 //= require font-awesome
 //= require jquery.tagsinput.min
+//= require chardinjs.css
 
 // "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
 @import "bootstrap-sprockets";
@@ -10,3 +11,4 @@
 @import 'slick-theme';
 
 @import "layout";
+@import "chardin-overrides";

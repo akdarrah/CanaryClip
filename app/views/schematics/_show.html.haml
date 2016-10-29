@@ -1,0 +1,96 @@
+:ruby
+  single_column     = local_assigns.fetch(:single_column, false)
+  slide_show_medium = (single_column ? "col-md-12" : "col-md-8")
+  menu_medium       = (single_column ? "col-md-12" : "col-md-4")
+
+.row.schematic-view
+  .col-xs-12.gradient-wrap.schematic-column{:class => slide_show_medium, 'data-match-height' => "schematic-column-group"}
+    .slick-slider{"data-intro" => t('schematics.features.renders_html'), "data-position" => "left"}
+      - schematic.renders.standard_resolution.completed.each_with_index do |render, index|
+        = image_tag render.file.url, class: "semi-gray-scale rounded"
+    %br
+  .col-xs-12.schematic-sidebar.schematic-column.light-background.rounded{:class => menu_medium, 'data-match-height' => "schematic-column-group"}
+    %span
+      = image_tag(schematic.character.avatar.url, class: 'small-character-avatar')
+      = link_to schematic.character, character_path(schematic.character)
+      - if can?(:edit, schematic)
+        .pull-right.edit-schematic-link
+          = link_to edit_user_schematic_path(schematic), title: "Edit Build" do
+            = fa_icon 'cog'
+    .strike
+      %span= formatted_date schematic.created_at
+    .row{"data-intro" => t('schematics.features.download_favorite_views_html'), "data-position" => "left"}
+      .col-xs-12
+        .row
+          .col-xs-12
+            = link_to "#{fa_icon('download')} #{number_with_delimiter(schematic.total_download_impressions)}".html_safe, download_schematic_path(schematic), class: 'btn btn-primary', title: 'Download schematic file to your computer'
+            - if @favorite.present?
+              = link_to "#{fa_icon('heart')} #{number_with_delimiter(schematic.favorited_by_characters.count)}".html_safe, schematic_favorite_path(schematic, @favorite), class: 'btn btn-danger', method: :delete, title: 'Click to unfavorite'
+            - else
+              = link_to "#{fa_icon('heart-o')} #{number_with_delimiter(schematic.favorited_by_characters.count)}".html_safe, schematic_favorites_path(schematic), class: 'btn btn-danger', method: :post, title: 'Click to favorite'
+            &nbsp;
+            %span= "#{number_with_delimiter(schematic.total_show_impressions)} Views"
+        %br
+        .row
+          .col-xs-10
+            .input-group
+              %input{type: 'text', readonly: 'readonly', id: 'schematic-permalink-input', class: "form-control select-all-to-copy", value: schematic.permalink}
+              %span.input-group-btn
+                %button.btn.btn-secondary.btn-clipboard{type: "button", 'data-clipboard-target' => "#schematic-permalink-input", title: 'Click to copy to clipboard'}= fa_icon('clipboard')
+          .col-xs-2
+            .schematic-download-question-mark
+              = link_to fa_icon('question-circle'), quick_start_path
+        - if schematic.server.present?
+          .row
+            .col-xs-12
+              &nbsp;
+              = "#{fa_icon('arrow-circle-right')} via #{link_to(schematic.server, server_path(schematic.server))}".html_safe
+    %br
+    .row.small
+      .col-xs-12
+        = dimensions(schematic)
+    .row{"data-intro" => t('schematics.features.description_and_tags_html'), "data-position" => "left"}
+      .col-xs-12
+        .description
+          - if schematic.description.present?
+            %br
+            %blockquote
+              %small
+                %p= simple_format schematic.pipelined_description
+        - if schematic.tags.present?
+          %br
+          - schematic.tags.each do |tag|
+            %span.tag.rounded
+              = link_to tag.name, tag_path(tag.name)
+    .strike
+      %span= "#{number_with_delimiter(schematic.total_block_count)} Blocks"
+    .row{"data-intro" => t('schematics.features.blocks_html'), "data-position" => "left"}
+      .col-xs-12
+        - schematic.block_counts.visible.most_used_order.each do |block_count|
+          = link_to block_icon_with_title(block_count), block_path(block_count.block)
+    %hr
+      .text-center= social_share_button_tag t('.social_share_title', name: schematic.permalink, character_name: schematic.character.username)
+
+- content_for :script do
+  :javascript
+
+    $(document).ready(function(){
+      new Clipboard('.btn-clipboard');
+
+      $('.schematic-column').matchHeight();
+
+      $(".select-all-to-copy").on("click", function () {
+        $(this).select();
+      });
+
+      $('.slick-slider').slick({
+        dots: true,
+        accessibility: true,
+        autoplay: true,
+        arrows: false
+      });
+
+      $('.description-text').readmore({
+        collapsedHeight: 100
+      });
+    });

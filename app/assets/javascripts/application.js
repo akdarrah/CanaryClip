@@ -10,6 +10,7 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require underscore-min.js
 //= require jquery
 //= require jquery_ujs
 //= require jquery.slick
@@ -27,6 +28,7 @@
 //= require imagesloaded.pkgd.min.js
 //= require masonry.pkgd.min
 //= require particles.min
+//= require chardinjs.min.js
 //= require_tree .
 //= require_self
 

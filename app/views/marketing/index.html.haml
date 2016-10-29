@@ -63,6 +63,26 @@
       .schematic-preview-card= link_to image_tag(@schematic.primary_render.file.url, class: 'img-responsive rounded'), schematic_path(@schematic)
       %br
 
+.container-fluid.pagination-wrapper.schematic-stripe
+  .row
+    .col-xs-12.text-center
+      %h2 Build Anatomy
+      %br
+      %br
+      %br
+  .row
+    .col-xs-12.col-md-4.col-md-offset-5.col-sm-5.col-sm-offset-6
+      = render partial: 'schematics/show', locals: {schematic: @anatomy_schematic, single_column: true}
+  %br
+  .row.visible-xs-inline-block
+    .col-xs-12
+      %br
+      %ul
+        %li= t('schematics.features.renders_html')
+        %li= t('schematics.features.download_favorite_views_html')
+        %li= t('schematics.features.description_and_tags_html')
+        %li= t('schematics.features.blocks_html')
+
 .white-background
   .container-fluid.squared-stripe
     .container
@@ -90,6 +110,10 @@
 
 - content_for :script do
   :javascript
+
+    _.defer(function(){
+      $('body').chardinJs('start');
+    });
 
     var bounce = new Bounce();
       bounce
