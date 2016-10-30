@@ -1,6 +1,19 @@
 require 'sidekiq/web'
 
+class SubdomainMatcher
+  def self.matches?(request)
+    request.subdomain.present?
+  end
+end
+
 CanaryClip::Application.routes.draw do
+
+  constraints(SubdomainMatcher) do
+    constraints subdomain: "www" do
+      get "/" => redirect { |params| "http://canaryclip.com" }
+    end
+  end
+
   root :to => 'marketing#index'
 
   authenticate :user, lambda { |u| u.admin? } do
