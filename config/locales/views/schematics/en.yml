@@ -3,7 +3,7 @@ en:
     show:
       social_share_title: "%{name} by %{character_name} -via @CanaryClip"
     features:
-      renders_html: "<strong>Build Images:</strong> Every build is automatically rendered for five camera angles: Player POV, Front, Left, Right, and Back"
+      renders_html: "<strong>Build Images:</strong> Every build is automatically rendered for four camera angles: Front, Left, Right, and Back"
       download_favorite_views_html: "<strong>Track Community Interactions:</strong> Keep tabs on people downloading, favoriting, or viewing your build. The build 'short code' can be used to download the build directly into Minecraft using the CanaryClip Minecraft Plugin."
       description_and_tags_html: "<strong>Description & Tags:</strong> Add a description and tags to your build to help other builders find what they're looking for. Use emoji to give your build some personality!"
       blocks_html: "<strong>Minecraft Blocks:</strong> View the full list of blocks used in the build along with how many were used. Click the block to see all builds that use that block."

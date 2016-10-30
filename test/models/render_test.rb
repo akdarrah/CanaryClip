@@ -61,9 +61,9 @@ class RenderTest < ActiveSupport::TestCase
     assert @schematic.rendering?
 
     renders = @schematic.renders.to_a.reverse
-    assert_equal renders.count, 5
+    assert_equal renders.count, 4
 
-    4.times do
+    3.times do
       render = renders.shift
       refute render.send(:primary_render?)
 

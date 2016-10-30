@@ -20,9 +20,8 @@
           %label Change Render Position
           .well.well-sm.field-inline
             .row.sortable-images
-              .col-md-1
               - @schematic.renders.standard_resolution.completed.each do |render|
-                .col-xs-12.col-sm-2.render-image-container
+                .col-xs-12.col-sm-3.render-image-container
                   = image_tag render.file.url, class: "img-responsive rounded sortable-render-image", data: {:"render-id" => render.id}
           %p.help-block= "Drag and drop build images to change the order they will be publicly displayed. <strong>The first build image will be used as the build's thumbnail image.</strong>".html_safe
           %br

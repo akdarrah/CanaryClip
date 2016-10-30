@@ -8,9 +8,9 @@ class CameraAngle
 
   CAPTURE_PERCENTAGE = 0.85
 
-  PRIMARY   = 'player_front'
+  PRIMARY   = 'full_front'
   SECONDARY = [
-    'full_front', 'full_left', 'full_right', 'full_back'
+    'full_left', 'full_right', 'full_back'
   ]
   AVAILABLE = Array(PRIMARY) + SECONDARY
 
