@@ -19,6 +19,6 @@ class Block < ActiveRecord::Base
   private
 
   def set_permalink
-    self.permalink = name.parameterize
+    self.permalink = display_name.parameterize
   end
 end
