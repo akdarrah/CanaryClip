@@ -14,8 +14,8 @@
             .card-info.light-background
               .row
                 .col-xs-6
-                  = image_tag(schematic.character.avatar.url, class: 'small-character-avatar')
-                  = link_to schematic.character, character_path(schematic.character)
+                  .roboto
+                    = link_to schematic.permalink, schematic_path(schematic)
                 .col-xs-6.text-right
                   = "#{fa_icon('download')} #{number_with_delimiter(schematic.total_download_impressions)}".html_safe
                   = "#{fa_icon('heart')} #{number_with_delimiter(schematic.favorited_by_characters.count)}".html_safe

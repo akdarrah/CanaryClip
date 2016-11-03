@@ -10,15 +10,29 @@
         = image_tag render.file.url, class: "semi-gray-scale rounded"
     %br
   .col-xs-12.schematic-sidebar.schematic-column.light-background.rounded{:class => menu_medium, 'data-match-height' => "schematic-column-group"}
-    %span
-      = image_tag(schematic.character.avatar.url, class: 'small-character-avatar')
-      = link_to schematic.character, character_path(schematic.character)
-      - if can?(:edit, schematic)
-        .pull-right.edit-schematic-link
-          = link_to edit_user_schematic_path(schematic), title: "Edit Build" do
-            = fa_icon 'cog'
+    %h1.roboto
+      = schematic.permalink
+      .pull-right
+        %ul.list-inline
+          %li
+            = link_to quick_start_path, title: "Learn how to use the short code" do
+              = fa_icon('question-circle')
+          - if can?(:edit, schematic)
+            %li
+              = link_to edit_user_schematic_path(schematic), title: "Edit Build" do
+                = fa_icon 'cog'
     .strike
       %span= formatted_date schematic.created_at
+    - if schematic.character.present?
+      .row.character-with-possible-server-row
+        .col-xs-12
+          .pull-left
+            = image_tag(schematic.character.avatar.url, class: 'two-row-character-avatar')
+          .pull-left.character-and-server
+            %span= link_to schematic.character, character_path(schematic.character)
+            - if schematic.server.present?
+              %p= link_to(schematic.server, server_path(schematic.server))
+    %br
     .row{"data-intro" => t('schematics.features.download_favorite_views_html'), "data-position" => "left"}
       .col-xs-12
         .row
@@ -30,21 +44,6 @@
               = link_to "#{fa_icon('heart-o')} #{number_with_delimiter(schematic.favorited_by_characters.count)}".html_safe, schematic_favorites_path(schematic), class: 'btn btn-danger', method: :post, title: 'Click to favorite'
             &nbsp;
             %span= "#{number_with_delimiter(schematic.total_show_impressions)} Views"
-        %br
-        .row
-          .col-xs-10
-            .input-group
-              %input{type: 'text', readonly: 'readonly', id: 'schematic-permalink-input', class: "form-control select-all-to-copy", value: schematic.permalink}
-              %span.input-group-btn
-                %button.btn.btn-secondary.btn-clipboard{type: "button", 'data-clipboard-target' => "#schematic-permalink-input", title: 'Click to copy to clipboard'}= fa_icon('clipboard')
-          .col-xs-2
-            .schematic-download-question-mark
-              = link_to fa_icon('question-circle'), quick_start_path
-        - if schematic.server.present?
-          .row
-            .col-xs-12
-              &nbsp;
-              = "#{fa_icon('arrow-circle-right')} via #{link_to(schematic.server, server_path(schematic.server))}".html_safe
     %br
     .row.small
       .col-xs-12
@@ -69,7 +68,7 @@
         - schematic.block_counts.visible.most_used_order.each do |block_count|
           = link_to block_icon_with_title(block_count), block_path(block_count.block)
     %hr
-      .text-center= social_share_button_tag t('.social_share_title', name: schematic.permalink, character_name: schematic.character.username)
+      .text-center= social_share_button_tag t('.social_share_title', name: schematic.permalink)
 
 - content_for :script do
   :javascript

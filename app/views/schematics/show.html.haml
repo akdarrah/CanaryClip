@@ -1,18 +1,18 @@
-= title "Build ##{@schematic.permalink} By #{@schematic.character.username}"
+= title "Build ##{@schematic.permalink}"
 
 - content_for :head do
   %meta{name: "twitter:card", content: "summary_large_image"}
   %meta{name: "twitter:site", content: "@CanaryClip"}
   %meta{name: "twitter:url", content: schematic_url(@schematic)}
-  %meta{name: "twitter:title", content: "Build ##{@schematic.permalink} By #{@schematic.character.username}"}
-  %meta{name: "twitter:description", content: "Minecraft Build ##{@schematic.permalink} By #{@schematic.character.username} via CanaryClip. View and Download this build to your Minecraft world!"}
+  %meta{name: "twitter:title", content: "Build ##{@schematic.permalink}"}
+  %meta{name: "twitter:description", content: "Minecraft Build ##{@schematic.permalink} via CanaryClip. View and Download this build to your Minecraft world!"}
   %meta{name: "twitter:image", content: asset_url(@schematic.primary_render.file.url)}
 
   %meta{property: "og:url", content: schematic_url(@schematic)}
   %meta{property: "og:type", content: "website"}
-  %meta{property: "og:title", content: "Build ##{@schematic.permalink} By #{@schematic.character.username}"}
+  %meta{property: "og:title", content: "Build ##{@schematic.permalink}"}
   %meta{property: "og:image", content: asset_url(@schematic.primary_render.file.url)}
-  %meta{property: "og:description", content: "Minecraft Build ##{@schematic.permalink} By #{@schematic.character.username} via CanaryClip. View and Download this build to your Minecraft world!"}
+  %meta{property: "og:description", content: "Minecraft Build ##{@schematic.permalink} via CanaryClip. View and Download this build to your Minecraft world!"}
   %meta{property: "og:site_name", content: "CanaryClip"}
   %meta{property: "og:locale", content: "en_US"}
 

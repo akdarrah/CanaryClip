@@ -38,7 +38,6 @@ class Schematic < ActiveRecord::Base
   validates_attachment_content_type :file, content_type: ['application/x-gzip', 'application/gzip', 'application/octet-stream']
   validates_attachment_file_name :file, :matches => [/schematic\Z/]
 
-  validates :character, presence: true
   validates :permalink, uniqueness: true, allow_blank: true
 
   validates :width, :length, :height,

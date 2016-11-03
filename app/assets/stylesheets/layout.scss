@@ -172,6 +172,10 @@ a {
   font-family: 'Pacifico', cursive;
 }
 
+.roboto {
+  font-family: 'Roboto', sans-serif;
+}
+
 .small-character-avatar {
   width: 28px;
 
@@ -179,6 +183,25 @@ a {
   -webkit-border-radius: 3px;
   border-radius: 3px; /* future proofing */
   -khtml-border-radius: 3px; /* for old Konqueror browsers */
+}
+
+.two-row-character-avatar {
+  width: 56px;
+
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px; /* future proofing */
+  -khtml-border-radius: 3px; /* for old Konqueror browsers */
+}
+
+.character-with-possible-server-row {
+  img {
+    margin-right: 10px;
+  }
+
+  .character-and-server {
+    margin-top: 5px;
+  }
 }
 
 .block-icon {
