@@ -13,6 +13,7 @@
 
         %br
         = simple_form_for @schematic, url: "/builds" do |f|
+          = f.input :texture_pack_id, collection: TexturePack.all, include_blank: false
           = f.input :file, label: 'Minecraft Schematic File'
           %p.help-block Builds take 5-10 minutes once uploaded before they are published.
           %br

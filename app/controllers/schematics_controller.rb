@@ -52,7 +52,7 @@ class SchematicsController < ApplicationController
 
   def create_params
     params.require(:schematic)
-      .permit(:file)
+      .permit(:file, :texture_pack_id)
   end
 
 end
