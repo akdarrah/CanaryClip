@@ -1,5 +1,6 @@
 FactoryGirl.define do
   factory :schematic do
+    texture_pack
     character
     server
     state 'new'

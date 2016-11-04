@@ -5,8 +5,9 @@ class PluginSchematicsControllerTest < ActionController::TestCase
   tests Plugin::SchematicsController
 
   def setup
-    @server    = create(:server)
-    @character = create(:character)
+    @server       = create(:server)
+    @character    = create(:character)
+    @texture_pack = create(:texture_pack, default: true)
   end
 
   # Plugin::SchematicsController#create

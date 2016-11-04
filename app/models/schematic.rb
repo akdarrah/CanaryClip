@@ -8,6 +8,7 @@ class Schematic < ActiveRecord::Base
 
   belongs_to :character
   belongs_to :server
+  belongs_to :texture_pack
 
   has_many :block_counts, dependent: :destroy
   has_many :blocks, through: :block_counts
@@ -38,6 +39,7 @@ class Schematic < ActiveRecord::Base
   validates_attachment_content_type :file, content_type: ['application/x-gzip', 'application/gzip', 'application/octet-stream']
   validates_attachment_file_name :file, :matches => [/schematic\Z/]
 
+  validates :texture_pack, presence: true
   validates :permalink, uniqueness: true, allow_blank: true
 
   validates :width, :length, :height,
@@ -49,6 +51,7 @@ class Schematic < ActiveRecord::Base
 
   attr_accessor :temporary_file
 
+  before_validation :set_default_texture_pack
   before_destroy :verify_destroyable
   after_create :delete_temporary_file
   after_create :set_permalink
@@ -142,6 +145,10 @@ class Schematic < ActiveRecord::Base
 
   private
 
+  def set_default_texture_pack
+    self.texture_pack ||= TexturePack.default
+  end
+
   def verify_destroyable
     if !destroyable
       errors.add(:base, "cannot be destroyed")
@@ -173,7 +180,8 @@ class Schematic < ActiveRecord::Base
     CameraAngle::AVAILABLE.each do |camera_angle|
       renders.create!(
         :schematic    => self,
-        :camera_angle => camera_angle
+        :camera_angle => camera_angle,
+        :texture_pack => texture_pack
       )
     end
 

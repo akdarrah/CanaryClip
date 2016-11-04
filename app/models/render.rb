@@ -11,7 +11,9 @@ class Render < ActiveRecord::Base
   }
 
   belongs_to :schematic
-  validates :schematic, :resolution, :camera_angle, :samples_per_pixel, presence: true
+  belongs_to :texture_pack
+
+  validates :schematic, :resolution, :camera_angle, :samples_per_pixel, :texture_pack, presence: true
   validates :samples_per_pixel, numericality: { only_integer: true }
 
   acts_as_list scope: [:schematic, :resolution]

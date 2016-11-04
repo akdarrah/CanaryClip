@@ -1,6 +1,4 @@
 class SceneRenderer
-  TEXTURE_PATH = Rails.root + "private/Faithful.zip"
-
   TEMPLATE_WORLD_PATH = Rails.root + "private/Blank188"
   MCE_PY_PATH         = Rails.root + "private/pymclevel/mce.py"
 
@@ -8,17 +6,19 @@ class SceneRenderer
   CHUNKY_LAUNCHER_PATH = Rails.root + "private/ChunkyLauncher.jar"
   CONFIG_FILE_NAME     = "Blank188.json"
 
-  attr_accessor :render, :schematic, :tmp_world_path, :tmp_scene_path
+  attr_accessor :render, :schematic, :tmp_world_path,
+    :tmp_scene_path, :texture_pack_path
 
   def initialize(render)
     if !File.exists?(MCE_PY_PATH)
       raise "Pymclevel must be installed to #{MCE_PY_PATH}"
     end
 
-    self.render         = render
-    self.schematic      = render.schematic
-    self.tmp_world_path = Rails.root + "tmp/worlds/#{render.id}"
-    self.tmp_scene_path = Rails.root + "tmp/scenes/#{render.id}"
+    self.render            = render
+    self.schematic         = render.schematic
+    self.tmp_world_path    = Rails.root + "tmp/worlds/#{render.id}"
+    self.tmp_scene_path    = Rails.root + "tmp/scenes/#{render.id}"
+    self.texture_pack_path = render.texture_pack.zip_file.path
   end
 
   def render!
@@ -51,7 +51,7 @@ class SceneRenderer
     scene_director = SceneDirector.new(render, tmp_world_path, template_json, camera_angle)
 
     File.open(config_path, "w"){|f| f.write(scene_director.to_json)}
-    system "java -jar #{CHUNKY_LAUNCHER_PATH} -texture #{TEXTURE_PATH} -scene-dir #{tmp_scene_path} -render Blank188"
+    system "java -jar #{CHUNKY_LAUNCHER_PATH} -texture #{texture_pack_path} -scene-dir #{tmp_scene_path} -render Blank188"
 
     File.open(image_path)
   end
