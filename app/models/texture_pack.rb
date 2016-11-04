@@ -9,7 +9,7 @@ class TexturePack < ActiveRecord::Base
 
   validates_attachment :zip_file,
     :presence     => true,
-    :size         => { in: 0..50.megabytes }
+    :size         => { in: 0..100.megabytes }
   validates_attachment_content_type :zip_file,
     content_type: ['application/zip']
 
