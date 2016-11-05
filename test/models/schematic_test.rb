@@ -6,6 +6,32 @@ class SchematicTest < ActiveSupport::TestCase
     @schematic = create(:schematic)
   end
 
+  # Schematic#character_or_user_required
+
+  test "A user is required if character is blank" do
+    assert @schematic.character.present?
+    assert @schematic.user.blank?
+    assert @schematic.valid?
+
+    @schematic.character = nil
+    refute @schematic.valid?
+  end
+
+  test "A character is required if user is blank" do
+    @schematic.user      = create(:user)
+    @schematic.character = nil
+
+    assert @schematic.user.present?
+    assert @schematic.character.blank?
+    assert @schematic.valid?
+
+    @schematic.user = nil
+
+    refute @schematic.valid?
+  end
+
+  #Schematic#State Machine
+
   test "State machine life cycle" do
     assert @schematic.new?
     assert_raise(StateMachine::InvalidTransition){ @schematic.render! }

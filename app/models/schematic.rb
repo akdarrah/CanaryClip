@@ -42,6 +42,7 @@ class Schematic < ActiveRecord::Base
 
   validates :texture_pack, presence: true
   validates :permalink, uniqueness: true, allow_blank: true
+  validate :character_or_user_required
 
   validates :width, :length, :height,
     numericality: {greater_than_or_equal_to: 0, only_integer: true},
@@ -146,6 +147,12 @@ class Schematic < ActiveRecord::Base
   end
 
   private
+
+  def character_or_user_required
+    if character.blank? && user.blank?
+      errors.add(:base, "Character or user must be present")
+    end
+  end
 
   def set_default_texture_pack
     self.texture_pack ||= TexturePack.default
