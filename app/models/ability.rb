@@ -11,10 +11,10 @@ class Ability
   end
 
   def schematic_abilities_for(user)
-    can [:index, :show, :download], Schematic
+    can [:index, :show], Schematic
 
     if user
-      can [:new, :create], Schematic
+      can [:new, :create, :download], Schematic
       can [:edit, :update, :destroy], Schematic do |schematic|
         schematic.admin_access?(user)
       end

@@ -21,8 +21,15 @@ class AbilityTest < ActiveSupport::TestCase
     assert @ability.can?(:show, @schematic)
   end
 
-  test "All users can download Schematic" do
+  test "All users cannot download Schematic" do
     @ability = Ability.new(nil)
+    refute @ability.can?(:download, @schematic)
+  end
+
+  test "Registered users can download Schematic" do
+    @user    = create(:user)
+    @ability = Ability.new(@user)
+
     assert @ability.can?(:download, @schematic)
   end
 
