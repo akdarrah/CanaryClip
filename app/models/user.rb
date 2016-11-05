@@ -13,6 +13,4 @@ class User < ActiveRecord::Base
   belongs_to :current_character, class_name: "Character"
 
   accepts_nested_attributes_for :character_claims
-
-  validates :character_claims, presence: true
 end
