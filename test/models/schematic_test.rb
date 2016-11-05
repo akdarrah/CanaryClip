@@ -59,19 +59,16 @@ class SchematicTest < ActiveSupport::TestCase
 
   # Schematic#admin_access?
 
-  test "user does not have admin access if they do not own the character of the schematic" do
-    @user      = create(:user)
-    @character = @schematic.character
+  test "user does not have admin access if they do not own the schematic" do
+    @user = create(:user)
 
-    refute @user.characters.exists?
+    refute @user.schematics.exists?
     refute @schematic.admin_access?(@user)
   end
 
-  test "user does have admin access if they own the character of the schematic" do
-    @user      = create(:user)
-    @character = @schematic.character
-
-    @user.characters << @character
+  test "user does have admin access if they own the schematic" do
+    @user = create(:user)
+    @user.schematics << @schematic
 
     assert @schematic.admin_access?(@user)
   end
@@ -92,6 +89,56 @@ class SchematicTest < ActiveSupport::TestCase
     assert_raises ActiveRecord::RecordNotFound do
       assert @schematic.reload
     end
+  end
+
+  # Schematic#set_user_from_character
+
+  test "does not set a user if no user is available on character" do
+    @character = @schematic.character
+
+    assert @character.user.blank?
+    assert @schematic.user.blank?
+
+    @schematic.save!
+
+    assert @schematic.user.blank?
+  end
+
+  test "does set a user if no user is set on schematic, but the character has a user" do
+    @character = @schematic.character
+    @user      = create(:user)
+
+    @character.update_column :user_id, @user
+    @character.reload
+
+    assert @character.user.present?
+    assert @schematic.user.blank?
+
+    @schematic.save!
+
+    assert @schematic.user.present?
+    assert_equal @user, @schematic.user
+  end
+
+  test "does not override user if character has a user, but schematic already has a user" do
+    @character  = @schematic.character
+    @user       = create(:user)
+    @other_user = create(:user)
+
+    @character.update_column :user_id, @user
+    @character.reload
+
+    @schematic.update_column :user_id, @other_user
+    @schematic.reload
+
+    assert @character.user.present?
+    assert @schematic.user.present?
+
+    @schematic.save!
+
+    assert @schematic.user.present?
+    assert_equal @other_user, @schematic.user
+    assert_not_equal @user, @schematic.user
   end
 
 end

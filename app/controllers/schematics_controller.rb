@@ -1,7 +1,6 @@
 class SchematicsController < ApplicationController
   load_and_authorize_resource find_by: :permalink
 
-  before_filter :require_current_character, only: [:new, :create]
   before_filter :log_impression, only: [:show, :download]
   before_filter :track_downloads, only: [:download]
 
@@ -16,11 +15,13 @@ class SchematicsController < ApplicationController
   end
 
   def new
-    @schematic = current_character.schematics.new
+    @schematic = current_user.schematics.new
+    @schematic.character = current_character
   end
 
   def create
-    @schematic = current_character.schematics.new(create_params)
+    @schematic = current_user.schematics.new(create_params)
+    @schematic.character = current_character
 
     if @schematic.save
       @schematic.collect_metadata!

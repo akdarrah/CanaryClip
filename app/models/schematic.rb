@@ -9,6 +9,7 @@ class Schematic < ActiveRecord::Base
   belongs_to :character
   belongs_to :server
   belongs_to :texture_pack
+  belongs_to :user
 
   has_many :block_counts, dependent: :destroy
   has_many :blocks, through: :block_counts
@@ -52,6 +53,7 @@ class Schematic < ActiveRecord::Base
   attr_accessor :temporary_file
 
   before_validation :set_default_texture_pack
+  before_validation :set_user_from_character
   before_destroy :verify_destroyable
   after_create :delete_temporary_file
   after_create :set_permalink
@@ -87,7 +89,7 @@ class Schematic < ActiveRecord::Base
   end
 
   def admin_access?(user)
-    user.characters.where(id: character).exists?
+    user.schematics.where(id: self).exists?
   end
 
   def to_param
@@ -147,6 +149,10 @@ class Schematic < ActiveRecord::Base
 
   def set_default_texture_pack
     self.texture_pack ||= TexturePack.default
+  end
+
+  def set_user_from_character
+    self.user ||= character.try(:user)
   end
 
   def verify_destroyable

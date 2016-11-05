@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   has_many :character_claims, inverse_of: :user
   has_many :owned_servers, foreign_key: :owner_user_id, class_name: "Server"
 
-  has_many :schematics, through: :characters
+  has_many :schematics
 
   belongs_to :current_character, class_name: "Character"
 

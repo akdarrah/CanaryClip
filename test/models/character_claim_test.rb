@@ -51,6 +51,10 @@ class CharacterClaimTest < ActiveSupport::TestCase
     assert @character.user.blank?
     refute @user.characters.exists?
 
+    CharacterClaimBuildMigrationWorker.expects(:perform_async)
+      .with(@character.id)
+      .once
+
     assert @character_claim.claim!
 
     assert_equal @user, @character.user

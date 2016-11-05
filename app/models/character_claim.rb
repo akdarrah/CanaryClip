@@ -46,5 +46,7 @@ class CharacterClaim < ActiveRecord::Base
     if user.current_character.blank?
       user.update_column :current_character_id, character
     end
+
+    CharacterClaimBuildMigrationWorker.perform_async(character.id)
   end
 end
