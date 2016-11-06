@@ -31,14 +31,4 @@ CanaryClip::Application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   config.action_mailer.default_url_options = {host: 'canaryclip.dev'}
-
-  s3_config = YAML.load_file("#{Rails.root.to_s}/config/s3.yml")[Rails.env].with_indifferent_access
-  config.paperclip_defaults = {
-    storage: :s3,
-    s3_credentials: {
-      :bucket            => s3_config[:bucket],
-      :access_key_id     => s3_config[:access_key_id],
-      :secret_access_key => s3_config[:secret_access_key]
-    }
-  }
 end

@@ -98,17 +98,7 @@ class Schematic < ActiveRecord::Base
   end
 
   def s3_file
-    @temporary = Tempfile.new(UUID.generate)
-    @temporary.binmode
-    
-    file.copy_to_local_file(:original, @temporary.path)
-
-    begin
-      yield(@temporary)
-    ensure
-      @temporary.close
-      @temporary.unlink
-    end
+    open(file.url)
   end
 
   def region_paster

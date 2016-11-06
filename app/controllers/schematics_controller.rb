@@ -33,8 +33,7 @@ class SchematicsController < ApplicationController
   end
 
   def download
-    data = open(@schematic.file.url)
-    send_data data.read, :filename => @schematic.file_file_name, :type => data.content_type, :x_sendfile => true
+    send_data @schematic.s3_file, filename: @schematic.file_file_name, type: @schematic.file_content_type
   end
 
   private
