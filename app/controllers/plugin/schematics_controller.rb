@@ -17,7 +17,11 @@ class Plugin::SchematicsController < Plugin::BaseController
   end
 
   def download
-    send_file @schematic.file.path
+    send_file(Paperclip.io_adapters.for(@schematic.file).path, {
+      :type        => @schematic.file_content_type,
+      :disposition => "attachment",
+      :filename    => @schematic.file_file_name
+    })
   end
 
   private

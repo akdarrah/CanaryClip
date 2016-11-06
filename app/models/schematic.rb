@@ -97,6 +97,20 @@ class Schematic < ActiveRecord::Base
     permalink
   end
 
+  def s3_file
+    @temporary = Tempfile.new(UUID.generate)
+    @temporary.binmode
+
+    file.copy_to_local_file(:original, @temporary.path)
+
+    begin
+      yield(@temporary)
+    ensure
+      @temporary.close
+      @temporary.unlink
+    end
+  end
+
   def region_paster
     @region_paster ||= RegionPaster.new(self)
   end
@@ -119,10 +133,6 @@ class Schematic < ActiveRecord::Base
     end
 
     "#<#{self.class} #{inspection}>"
-  end
-
-  def escaped_file_path
-    Shellwords.escape file.path
   end
 
   def raw_schematic_data=(data)

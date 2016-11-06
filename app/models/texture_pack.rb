@@ -5,7 +5,9 @@ class TexturePack < ActiveRecord::Base
   validates :name, :permalink, presence: true
   validates :name, :permalink, uniqueness: true
 
-  has_attached_file :zip_file
+  # These files are way too large to be transferring
+  # back and fourth between s3
+  has_attached_file :zip_file, :storage => :filesystem
 
   validates_attachment :zip_file,
     :presence     => true,
