@@ -5,7 +5,7 @@ class Schematic::CollectMetadataWorker
     @schematic = Schematic.find schematic_id
 
     ActiveRecord::Base.transaction do
-      @schematic.parsed_nbt_data = JSON.parse(`nbtv #{@schematic.s3_file.path}`)
+      @schematic.parsed_nbt_data = JSON.parse(`nbtv #{@schematic.s3_file}`)
 
       @schematic.width  = @schematic.parsed_nbt_data["Schematic"]["Width"]
       @schematic.length = @schematic.parsed_nbt_data["Schematic"]["Length"]
