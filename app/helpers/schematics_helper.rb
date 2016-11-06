@@ -25,7 +25,7 @@ module SchematicsHelper
       end
     when 'rendering'
       content_tag :div, class: "alert alert-warning" do
-        "This build is being rendered&hellip; Rendering usually takes 10-15 minutes.".html_safe
+        "This build is being rendered&hellip; Rendering usually takes 5-10 minutes.".html_safe
       end
     when 'published'
       content_tag :div, class: "alert alert-success" do
