@@ -100,7 +100,7 @@ class Schematic < ActiveRecord::Base
   def s3_file
     @temporary = Tempfile.new(UUID.generate)
     @temporary.binmode
-    
+
     file.copy_to_local_file(:original, @temporary.path)
 
     begin
@@ -133,10 +133,6 @@ class Schematic < ActiveRecord::Base
     end
 
     "#<#{self.class} #{inspection}>"
-  end
-
-  def escaped_file_path
-    Shellwords.escape file.path
   end
 
   def raw_schematic_data=(data)
