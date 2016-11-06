@@ -97,6 +97,10 @@ class Schematic < ActiveRecord::Base
     permalink
   end
 
+  def s3_file
+    open(file.url)
+  end
+
   def region_paster
     @region_paster ||= RegionPaster.new(self)
   end
