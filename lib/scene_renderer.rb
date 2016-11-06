@@ -38,7 +38,10 @@ class SceneRenderer
 
   def create_world!
     FileUtils.cp_r TEMPLATE_WORLD_PATH, tmp_world_path
-    system "python #{MCE_PY_PATH} #{tmp_world_path} import #{schematic.file.path} #{schematic.paste_coordinates}"
+
+    schematic.s3_file do |file|
+      system "python #{MCE_PY_PATH} #{tmp_world_path} import #{file.path} #{schematic.paste_coordinates}"
+    end
   end
 
   def rendered_image_file
