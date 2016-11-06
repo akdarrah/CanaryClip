@@ -33,8 +33,11 @@ class SchematicsController < ApplicationController
   end
 
   def download
-    data = open(@schematic.file.url)
-    send_data data.read, :filename => @schematic.file_file_name, :type => @schematic.file_content_type, :x_sendfile => true
+    send_file(Paperclip.io_adapters.for(@schematic.file).path, {
+      :type        => @schematic.file_content_type,
+      :disposition => "attachment",
+      :filename    => @schematic.file_file_name
+    })
   end
 
   private
