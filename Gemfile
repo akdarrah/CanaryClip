@@ -35,7 +35,6 @@ gem 'acts-as-taggable-on', '~> 4.0'
 gem 'rinku'
 gem 'gemoji'
 gem 'html-pipeline'
-gem 'aws-sdk', '~> 2'
 
 group :development do
   gem "better_errors"

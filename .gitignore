@@ -6,7 +6,6 @@
 db/schema.rb
 config/database.yml
 config/secrets.yml
-config/s3.yml
 log/*
 tmp/cache/*
 tmp/uploads/*
