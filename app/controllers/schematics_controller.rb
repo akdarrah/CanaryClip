@@ -56,8 +56,14 @@ class SchematicsController < ApplicationController
   end
 
   def create_params
+    permitted = [:file, :texture_pack_id]
+
+    if current_user.try(:admin?)
+      permitted.push(:character_username)
+    end
+
     params.require(:schematic)
-      .permit(:file, :texture_pack_id)
+      .permit(permitted)
   end
 
 end

@@ -13,6 +13,12 @@
 
         %br
         = simple_form_for @schematic, url: "/builds" do |f|
+          - if current_user.admin?
+            = f.input :character_username, label: 'Minecraft Character Username', wrapper_html: {class: "no-margin"}
+            %p.help-block
+              %strong Admin Only:
+              Clears user and associates to the Character with this username.
+            %br
           = f.input :texture_pack_id, collection: TexturePack.all, include_blank: false
           = f.input :file, label: 'Minecraft Schematic File'
           %p.help-block Builds take 5-10 minutes once uploaded before they are published.

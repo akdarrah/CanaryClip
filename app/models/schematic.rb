@@ -51,9 +51,10 @@ class Schematic < ActiveRecord::Base
   scope :published, -> { where(state: :published) }
   scope :chronological, -> { order(:created_at) }
 
-  attr_accessor :temporary_file
+  attr_accessor :temporary_file, :character_username
 
   before_validation :set_default_texture_pack
+  before_validation :set_character_from_character_username
   before_validation :set_user_from_character
   before_destroy :verify_destroyable
   after_create :delete_temporary_file
@@ -166,6 +167,14 @@ class Schematic < ActiveRecord::Base
 
   def set_default_texture_pack
     self.texture_pack ||= TexturePack.default
+  end
+
+  # This should realistically be an admin-only feature
+  def set_character_from_character_username
+    if character_username.present?
+      self.user      = nil
+      self.character = Character.find_or_create_by!(username: character_username)
+    end
   end
 
   def set_user_from_character
