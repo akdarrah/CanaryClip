@@ -15,8 +15,7 @@
             .col-xs-12
               .pull-left
                 = link_to root_url, class: 'site-logo-link' do
-                  .title.lobster
-                    CanaryClip
+                  .title= image_tag('canary.png')
               .pull-right
                 = render partial: "layouts/menu"
       .container
