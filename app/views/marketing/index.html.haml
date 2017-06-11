@@ -82,30 +82,30 @@
         %li= t('schematics.features.description_and_tags_html')
         %li= t('schematics.features.blocks_html')
 
-.white-background
-  .container-fluid.squared-stripe
-    .container
-      .row
-        .col-xs-12.col-md-6
-          .embed-responsive.embed-responsive-16by9
-            %iframe{class: "embed-responsive-item", width: "560", height: "315", src: "https://www.youtube.com/embed/FbE3eVabLX8", frameborder: "0", allowfullscreen: true}
-          %br
-          %br
-        .col-xs-12.col-md-6
-          %h2 CanaryClip Minecraft Mod
-          %p= "The CanaryClip Minecraft Mod allows you to upload and download builds <strong><i>without</i></strong> leaving your Minecraft server. Follow these guides to get started!".html_safe
-          %br
-          = link_to quick_start_path, class: 'btn btn-primary btn-lg btn-block' do
-            = fa_icon 'bolt'
-            &nbsp;
-            = "Player Quick Start Guide"
-          %br
-          = link_to server_setup_path, class: 'btn btn-primary btn-lg btn-block' do
-            = fa_icon 'server'
-            &nbsp;
-            = "Add CanaryClip To Your Server"
-          %br
-          %br
+-# .white-background
+-#   .container-fluid.squared-stripe
+-#     .container
+-#       .row
+-#         .col-xs-12.col-md-6
+-#           .embed-responsive.embed-responsive-16by9
+-#             %iframe{class: "embed-responsive-item", width: "560", height: "315", src: "https://www.youtube.com/embed/FbE3eVabLX8", frameborder: "0", allowfullscreen: true}
+-#           %br
+-#           %br
+-#         .col-xs-12.col-md-6
+-#           %h2 CanaryClip Minecraft Mod
+-#           %p= "The CanaryClip Minecraft Mod allows you to upload and download builds <strong><i>without</i></strong> leaving your Minecraft server. Follow these guides to get started!".html_safe
+-#           %br
+-#           = link_to quick_start_path, class: 'btn btn-primary btn-lg btn-block' do
+-#             = fa_icon 'bolt'
+-#             &nbsp;
+-#             = "Player Quick Start Guide"
+-#           %br
+-#           = link_to server_setup_path, class: 'btn btn-primary btn-lg btn-block' do
+-#             = fa_icon 'server'
+-#             &nbsp;
+-#             = "Add CanaryClip To Your Server"
+-#           %br
+-#           %br
 
 - content_for :script do
   :javascript
