@@ -57,6 +57,6 @@ group :development, :test do
 end
 
 group :assets do
-  gem 'therubyracer'
+  # gem 'therubyracer'
   gem 'uglifier'
 end
