@@ -36,4 +36,4 @@ Create an account on CanaryClip.com in order to download the Bukkit Plugin and R
 
 **Note:** This project has many dependencies from other Bukkit/Minecraft Projects. Full credit is on my about page: http://canaryclip.com/about
 
-!(Example Render)[http://i.imgur.com/51k2cj4.jpg]
+![Example Render](http://i.imgur.com/51k2cj4.jpg)
