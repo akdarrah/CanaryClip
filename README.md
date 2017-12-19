@@ -36,4 +36,16 @@ Create an account on CanaryClip.com in order to download the Bukkit Plugin and R
 
 **Note:** This project has many dependencies from other Bukkit/Minecraft Projects. Full credit is on my about page: http://canaryclip.com/about
 
+### Server Management
+
+![Add New Server](https://i.imgur.com/DqhVuRv.png)
+![Server Settings](https://i.imgur.com/qYWEEMI.png)
+
+### Character Claim System
+![Character Settings](https://i.imgur.com/TUVkAhy.png)
+![New Character Claim](https://i.imgur.com/lzjENbX.png)
+
+### Build Management
+![Configure Uploaded Build](https://i.imgur.com/8sIWkKE.png)
+![Build Show View](https://i.imgur.com/0p2DACu.jpg)
 ![Example Render](http://i.imgur.com/51k2cj4.jpg)
